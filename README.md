@@ -21,7 +21,7 @@ NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2026-04-09
 ```
 
-`studio/.env` dosyasi olusturun:
+`studio/.env` dosyasi olusturun (`studio/.env.example` dosyasini kopyalayip doldurun):
 
 ```env
 SANITY_STUDIO_PROJECT_ID=your_project_id
@@ -47,6 +47,35 @@ npm run dev
 ```
 
 Studio varsayilan olarak `http://localhost:3333` adresinde acilir.
+
+### Studio’yu internete almak (`sanity deploy`)
+
+Bu adim **sizin hesabinizla tarayicida oturum** gerektirir; baska bir makineden otomatik yapilamaz.
+
+```bash
+cd studio
+npm install
+npx sanity login
+npm run deploy
+```
+
+- Ilk seferde bir **alt alan adi** secmeniz istenebilir (or. `kefder` → `https://kefder.sanity.studio`).
+- CI veya otomasyon icin: [sanity.io/manage](https://www.sanity.io/manage) → **Account** → **API** → token olusturup `SANITY_AUTH_TOKEN` olarak kullanabilirsiniz; sonra yine `npm run deploy`.
+
+### Ornek icerik (istege bagli, token ile)
+
+Arayuzu doldurmak icin `studio/scripts/seed-content.mjs` kullanilir.
+
+1. [sanity.io/manage](https://www.sanity.io/manage) → projeniz → **API** → **Tokens** → **Editor** yetkili token olusturun.
+2. `studio/.env` icine ekleyin: `SANITY_API_WRITE_TOKEN=...` (bu dosyayi repoya eklemeyin).
+3. Calistirin:
+
+```bash
+cd studio
+npm run seed
+```
+
+Ayni `_id` ile tekrar calistirirsaniz kayitlar uzerine yazilir.
 
 ## 5) Vercel (Next.js — `frontend` root)
 
