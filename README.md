@@ -48,7 +48,20 @@ npm run dev
 
 Studio varsayilan olarak `http://localhost:3333` adresinde acilir.
 
-## 5) Kritik demo adimlari
+## 5) Vercel (Next.js — `frontend` root)
+
+Proje ayarlari:
+
+- **Root Directory:** `frontend`
+- **Framework Preset:** Next.js
+- **Build Command:** `npm run build` (varsayilan)
+- **Output Directory:** **bos birakin** — Next.js ciktisi `.next` altinda; `public` yazmayin.
+
+Dashboard’da **Output Directory = `public`** ise build su hatayi verir: *No Output Directory named "public" found*. Bunu silip tekrar deploy edin.
+
+Ortam degiskenleri: `NEXT_PUBLIC_SANITY_*` (bkz. `frontend/.env.example`).
+
+## 6) Kritik demo adimlari
 
 1. Studio'da `projects` tipinde 2-3 kayit olusturun.
 2. Kayitlara `title`, `summary`, `status`, `coverImage` ve en az bir `relatedLinks` girin.
