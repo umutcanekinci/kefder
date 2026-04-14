@@ -9,7 +9,7 @@ function statusText(status: Project["status"]) {
   return "Planlaniyor";
 }
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({ project }: Readonly<{ project: Project }>) {
   const imageUrl = project.coverImage?.asset ? urlFor(project.coverImage)?.width(800).height(500).url() : null;
   const href = project.relatedLinks?.[0]?.url || "#";
 

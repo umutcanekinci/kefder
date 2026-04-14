@@ -2,10 +2,10 @@ import type { Project } from "@/lib/sanity/types";
 import { ProjectCard } from "./ProjectCard";
 
 type ProjectsGridProps = {
-  projects: Project[];
+  readonly projects: ReadonlyArray<Project>;
 };
 
-export function ProjectsGrid({ projects }: ProjectsGridProps) {
+export function ProjectsGrid({ projects }: Readonly<ProjectsGridProps>) {
   if (!projects.length) {
     return (
       <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
