@@ -19,7 +19,8 @@ export const projectsQuery = `*[_type == "projects"] | order(startDate desc) {
 export async function getProjects(): Promise<Project[]> {
   try {
     return await fetchSanity<Project[]>(projectsQuery);
-  } catch {
+  } catch (error) {
+    console.error("Failed to fetch projects from Sanity:", error);
     return [];
   }
 }

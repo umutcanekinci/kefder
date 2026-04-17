@@ -19,6 +19,11 @@ Bu workspace iki uygulamadan olusur:
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2026-04-09
+
+# Vercel Sanity integration ile gelen server-side adlar da desteklenir
+SANITY_PROJECT_ID=your_project_id
+SANITY_DATASET=production
+SANITY_API_VERSION=2026-04-09
 ```
 
 `studio/.env` dosyasi olusturun (`studio/.env.example` dosyasini kopyalayip doldurun):
@@ -26,7 +31,19 @@ NEXT_PUBLIC_SANITY_API_VERSION=2026-04-09
 ```env
 SANITY_STUDIO_PROJECT_ID=your_project_id
 SANITY_STUDIO_DATASET=production
+
+# Alternatif (Vercel entegrasyonu):
+SANITY_PROJECT_ID=your_project_id
+SANITY_DATASET=production
 ```
+
+### Vercel entegrasyonu kullaniyorsaniz
+
+1. `vercel link`
+2. `vercel env pull frontend/.env.local`
+3. Gerekirse `studio/.env` icine de ayni `SANITY_PROJECT_ID` / `SANITY_DATASET` degiskenlerini ekleyin.
+
+Bu repoda Studio ayri uygulama olarak `http://localhost:3333` adresinde calisir. Embedded Studio (`/studio`) adimi bu yapida zorunlu degildir.
 
 ## 3) Frontend calistirma
 
@@ -88,7 +105,7 @@ Proje ayarlari:
 
 Dashboard’da **Output Directory = `public`** ise build su hatayi verir: *No Output Directory named "public" found*. Bunu silip tekrar deploy edin.
 
-Ortam degiskenleri: `NEXT_PUBLIC_SANITY_*` (bkz. `frontend/.env.example`).
+Ortam degiskenleri: `NEXT_PUBLIC_SANITY_*` ve/veya `SANITY_*`.
 
 ## 6) Kritik demo adimlari
 

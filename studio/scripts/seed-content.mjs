@@ -1,6 +1,6 @@
 /**
  * Ornek icerik ekler (projeler, yazilar, etkinlikler, yonetim kurulu).
- * Gereksinim: studio/.env icinde SANITY_STUDIO_PROJECT_ID + SANITY_API_WRITE_TOKEN
+ * Gereksinim: studio/.env icinde SANITY_STUDIO_PROJECT_ID (veya SANITY_PROJECT_ID) + SANITY_API_WRITE_TOKEN
  * Token: https://www.sanity.io/manage -> proje -> API -> Tokens (Editor)
  */
 import { createClient } from "@sanity/client";
@@ -8,13 +8,13 @@ import { randomUUID } from "node:crypto";
 
 import "dotenv/config";
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
-const dataset = process.env.SANITY_STUDIO_DATASET || "production";
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || process.env.SANITY_PROJECT_ID;
+const dataset = process.env.SANITY_STUDIO_DATASET || process.env.SANITY_DATASET || "production";
 const apiVersion = process.env.SANITY_API_VERSION || "2026-04-09";
 const token = process.env.SANITY_API_WRITE_TOKEN;
 
 function k() {
-  return randomUUID().replace(/-/g, "").slice(0, 12);
+  return randomUUID().replaceAll("-", "").slice(0, 12);
 }
 
 function blockParagraph(text) {
@@ -32,7 +32,7 @@ function blockParagraph(text) {
 async function main() {
   if (!projectId || !token) {
     console.error(
-      "Eksik ortam: SANITY_STUDIO_PROJECT_ID ve SANITY_API_WRITE_TOKEN studio/.env dosyasinda tanimli olmali.\n" +
+      "Eksik ortam: SANITY_STUDIO_PROJECT_ID (veya SANITY_PROJECT_ID) ve SANITY_API_WRITE_TOKEN studio/.env dosyasinda tanimli olmali.\n" +
         "Token olustur: sanity.io/manage -> Proje -> API -> Tokens (Editor)."
     );
     process.exit(1);
@@ -111,7 +111,9 @@ async function main() {
   console.log("\nTamamlandi. Studio veya API ile kontrol edin; Vercel sitesi bir sure icinde (ISR) guncellenecektir.");
 }
 
-main().catch((err) => {
+try {
+  await main();
+} catch (err) {
   console.error(err);
   process.exit(1);
-});
+}
