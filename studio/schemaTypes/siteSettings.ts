@@ -1,0 +1,57 @@
+﻿import {defineField, defineType} from 'sanity'
+import {CogIcon} from '@sanity/icons'
+
+export const siteSettingsType = defineType({
+  name: 'siteSettings',
+  title: 'Genel Ayarlar',
+  type: 'document',
+  icon: CogIcon,
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'Site Başlığı (SEO)',
+      type: 'string',
+    }),
+    defineField({
+      name: 'isMaintenanceMode',
+      title: 'Bakım Modu',
+      type: 'boolean',
+      description: 'Site bakımda mı değil mi?',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'socialLinks',
+      title: 'Sosyal Medya Linkleri',
+      type: 'object',
+      fields: [
+        defineField({name: 'facebook', title: 'Facebook URL', type: 'url'}),
+        defineField({name: 'instagram', title: 'Instagram URL', type: 'url'}),
+        defineField({name: 'youtube', title: 'Youtube URL', type: 'url'}),
+      ],
+    }),
+    defineField({
+      name: 'contactInfo',
+      title: 'İletişim Bilgileri',
+      type: 'object',
+      fields: [
+        defineField({name: 'email', title: 'E-posta Adresi', type: 'string'}),
+        defineField({name: 'phone', title: 'Telefon Numarası', type: 'string'}),
+        defineField({name: 'address', title: 'Adres', type: 'text'}),
+      ],
+    }),
+    defineField({
+      name: 'logo',
+      title: 'Site Logosu',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'description',
+      title: 'Genel SEO Açıklaması',
+      type: 'text',
+      description: 'Arama motorları için genel site özeti.',
+    }),
+  ],
+})

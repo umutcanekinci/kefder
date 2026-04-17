@@ -1,6 +1,13 @@
-import { boardMemberType } from "./boardMemberType";
-import { eventType } from "./eventType";
-import { postType } from "./postType";
-import { projectType } from "./projectType";
+﻿import {eventType} from './event'
+import {newsType} from './news'
+import {teamMemberType} from './teamMember'
+import {documentType} from './document'
+import {siteSettingsType} from './siteSettings'
 
-export const schemaTypes = [postType, projectType, boardMemberType, eventType];
+export const schemaTypes = [
+  eventType,
+  newsType,
+  teamMemberType,
+  documentType,
+  siteSettingsType,
+]
