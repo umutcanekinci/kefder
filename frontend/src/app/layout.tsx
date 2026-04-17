@@ -1,15 +1,25 @@
 import type { Metadata } from "next";
+import Providers from "./Providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "KefDer Prototip",
-  description: "KefDer icin Next.js + Sanity prototip sitesi"
+  title: "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği",
+  description: "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.",
+  icons: {
+    icon: "/images/logo.png",
+    apple: "/images/logo.png"
+  },
+  openGraph: {
+    images: ["/images/logo.png"]
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr">
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
