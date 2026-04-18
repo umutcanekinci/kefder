@@ -48,6 +48,26 @@ module.exports = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        kefder: {
+          orange: {
+            DEFAULT: '#F97316',
+            light: '#FB923C',
+            dark: '#EA580C',
+          },
+          teal: {
+            DEFAULT: '#0D9488',
+            light: '#14B8A6',
+            dark: '#0F766E',
+          },
+          yellow: {
+            DEFAULT: '#EAB308',
+          },
+          gray: {
+            DEFAULT: '#374151',
+            dark: '#1F2937',
+            light: '#F3F4F6',
+          }
+        }
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",

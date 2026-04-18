@@ -62,7 +62,7 @@ export default function Header({ settings }: { settings?: any }) {
   const currentLang = mounted ? language : 'tr'
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-kefder-gray-light shadow-sm">
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo - Left Side */}
@@ -76,8 +76,8 @@ export default function Header({ settings }: { settings?: any }) {
                 />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl lg:text-2xl font-black text-[#333333] leading-tight whitespace-nowrap">KEFDER</h1>
-                <p className="text-xs lg:text-sm text-gray-500 font-medium leading-tight whitespace-nowrap">
+                <h1 className="text-xl lg:text-2xl font-black text-kefder-gray-dark leading-tight whitespace-nowrap">KEFDER</h1>
+                <p className="text-xs lg:text-sm text-kefder-gray font-medium leading-tight whitespace-nowrap">
                   {currentLang === 'tr'
                     ? 'Kültürel Etkileşim ve Farkındalık Derneği'
                     : 'Cultural Interaction and Awareness Association'}
@@ -92,7 +92,7 @@ export default function Header({ settings }: { settings?: any }) {
               <div key={item.label} className="relative group h-full flex items-center">
                 <Link
                   href={item.href}
-                  className={"px-3 xl:px-4 h-full flex items-center gap-1.5 text-base font-bold transition-colors whitespace-nowrap " + (pathname === item.href ? 'text-primary' : 'text-[#333333] hover:text-primary')}
+                  className={"px-3 xl:px-4 h-full flex items-center gap-1.5 text-base font-bold transition-colors whitespace-nowrap " + (pathname === item.href ? 'text-kefder-orange' : 'text-kefder-gray-dark hover:text-kefder-orange')}
                 >
                   {item.label}
                   {item.dropdown && <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform" />}
@@ -101,15 +101,15 @@ export default function Header({ settings }: { settings?: any }) {
                 {/* Desktop Dropdown */}
                 {item.dropdown && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2 z-50 cursor-default">
-                    <div className={"bg-white shadow-xl rounded-xl border border-gray-100 p-2 flex gap-4 " + (item.label === t('nav.activities') ? 'w-[450px] p-4' : 'w-60')}>
+                    <div className={"bg-white shadow-xl rounded-xl border border-kefder-gray-light p-2 flex gap-4 " + (item.label === t('nav.activities') ? 'w-[450px] p-4' : 'w-60')}>
                       <div className="flex-1 flex flex-col gap-1">
                         {item.dropdown.map(subItem => (
                           <Link 
                             key={subItem.label} 
                             href={subItem.href} 
-                            className="px-4 py-2.5 text-base text-[#333333] hover:text-primary hover:bg-orange-50 rounded-md transition-colors flex items-center gap-3 whitespace-nowrap group/item"
+                            className="px-4 py-2.5 text-base text-kefder-gray-dark hover:text-kefder-orange hover:bg-kefder-orange/10 rounded-md transition-colors flex items-center gap-3 whitespace-nowrap group/item"
                           >
-                            {subItem.icon && <subItem.icon className="w-4 h-4 text-gray-400 group-hover/item:text-primary transition-colors" />}
+                            {subItem.icon && <subItem.icon className="w-4 h-4 text-kefder-gray/40 group-hover/item:text-kefder-orange transition-colors" />}
                             {subItem.label}
                           </Link>
                         ))}
@@ -117,13 +117,13 @@ export default function Header({ settings }: { settings?: any }) {
 
                       {/* Graphic component for Activities mega-menu */}
                       {item.label === t('nav.activities') && (
-                        <div className="w-[180px] bg-orange-50/50 rounded-lg p-3 flex flex-col items-center text-center border border-orange-100">
+                        <div className="w-[180px] bg-kefder-orange/5 rounded-lg p-3 flex flex-col items-center text-center border border-kefder-orange/20">
                           <div className="w-full h-24 mb-3 relative rounded-md overflow-hidden bg-white flex items-center justify-center">
                             <img src="/images/asset_1.jpg" alt="Calendar Graphic" className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" />
-                            <CalendarDays className="relative z-10 w-8 h-8 text-primary drop-shadow-md" />
+                            <CalendarDays className="relative z-10 w-8 h-8 text-kefder-orange drop-shadow-md" />
                           </div>
-                          <span className="text-xs font-semibold text-[#333333]">Bu ayki etkinliklerimizi kaçırmayın!</span>
-                          <Link href="/activities#calendar" className="mt-3 text-[11px] font-medium bg-primary text-white px-3 py-1.5 rounded-full hover:bg-orange-600 transition-colors w-full">Takvime Git</Link>
+                          <span className="text-xs font-semibold text-kefder-gray-dark">Bu ayki etkinliklerimizi kaçırmayın!</span>
+                          <Link href="/activities#calendar" className="mt-3 text-[11px] font-medium bg-kefder-orange text-white px-3 py-1.5 rounded-full hover:bg-kefder-orange-dark transition-colors w-full">Takvime Git</Link>
                         </div>
                       )}
                     </div>
@@ -138,7 +138,7 @@ export default function Header({ settings }: { settings?: any }) {
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-4 py-2 text-base font-bold text-[#333333] hover:text-primary transition-colors border border-gray-200 rounded-full hover:border-orange-200 bg-white"
+              className="flex items-center gap-2 px-4 py-2 text-base font-bold text-kefder-gray-dark hover:text-kefder-orange transition-colors border border-kefder-gray-light rounded-full hover:border-kefder-orange/30 bg-white"
             >
               <Globe className="w-5 h-5" />
               <span>{currentLang === 'tr' ? 'English' : 'Türkçe'}</span>
@@ -147,17 +147,17 @@ export default function Header({ settings }: { settings?: any }) {
             {/* Social Icons */}
             <div className="hidden md:flex items-center gap-2">
               {socialLinks?.facebook && (
-                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-kefder-gray/40 hover:text-kefder-orange hover:bg-kefder-orange/10 rounded-full transition-all border border-kefder-gray-light">
                   <Facebook className="w-5 h-5" />
                 </a>
               )}
               {socialLinks?.instagram && (
-                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-kefder-gray/40 hover:text-kefder-orange hover:bg-kefder-orange/10 rounded-full transition-all border border-kefder-gray-light">
                   <Instagram className="w-5 h-5" />
                 </a>
               )}
               {socialLinks?.youtube && (
-                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-kefder-gray/40 hover:text-kefder-orange hover:bg-kefder-orange/10 rounded-full transition-all border border-kefder-gray-light">
                   <Youtube className="w-5 h-5" />
                 </a>
               )}
@@ -165,7 +165,7 @@ export default function Header({ settings }: { settings?: any }) {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden w-12 h-12 flex items-center justify-center text-gray-600 hover:text-primary hover:bg-orange-50 rounded-lg transition-all"
+              className="lg:hidden w-12 h-12 flex items-center justify-center text-kefder-gray hover:text-kefder-orange hover:bg-kefder-orange/10 rounded-lg transition-all"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -182,23 +182,23 @@ export default function Header({ settings }: { settings?: any }) {
                 <Link
                   href={item.href}
                   onClick={() => !item.dropdown && setMobileMenuOpen(false)}
-                  className={"flex items-center justify-between px-4 py-4 text-base font-bold rounded-lg transition-all " + (pathname === item.href ? 'text-primary bg-orange-50' : 'text-[#333333] hover:text-primary hover:bg-orange-50/50')}
+                  className={"flex items-center justify-between px-4 py-4 text-base font-bold rounded-lg transition-all " + (pathname === item.href ? 'text-kefder-orange bg-kefder-orange/10' : 'text-kefder-gray-dark hover:text-kefder-orange hover:bg-kefder-orange/5')}
                 >
                   {item.label}
-                  {item.dropdown && <ChevronDown className="w-5 h-5 text-gray-400" />}
+                  {item.dropdown && <ChevronDown className="w-5 h-5 text-kefder-gray/40" />}
                 </Link>
                 
                 {/* Mobile Dropdown Subitems */}
                 {item.dropdown && (
-                  <div className="pl-6 pr-4 py-2 flex flex-col gap-1 border-l-2 border-orange-100 ml-6 mt-1">
+                  <div className="pl-6 pr-4 py-2 flex flex-col gap-1 border-l-2 border-kefder-orange/20 ml-6 mt-1">
                     {item.dropdown.map(subItem => (
                       <Link 
                         key={subItem.label} 
                         href={subItem.href} 
                         onClick={() => setMobileMenuOpen(false)}
-                        className="py-3 text-base text-gray-500 hover:text-primary flex items-center gap-3"
+                        className="py-3 text-base text-kefder-gray hover:text-kefder-orange flex items-center gap-3"
                       >
-                        {subItem.icon && <subItem.icon className="w-5 h-5 text-gray-400" />}
+                        {subItem.icon && <subItem.icon className="w-5 h-5 text-kefder-gray/40" />}
                         {subItem.label}
                       </Link>
                     ))}
