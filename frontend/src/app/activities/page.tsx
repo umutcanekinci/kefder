@@ -77,7 +77,7 @@ function compareByDateDesc(a: EventItem, b: EventItem) {
 }
 
 export default function ActivitiesPage() {
-  const { language, t } = useLanguage()
+  const { language } = useLanguage()
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list')
   const [currentMonth, setCurrentMonth] = useState(() => new Date())
   const [hoveredDate, setHoveredDate] = useState<string | null>(null)
@@ -373,7 +373,7 @@ function EventCard({
   showRegister?: boolean
 }) {
   const { day, month } = formatCardDate(event.date)
-  const { language, t } = useLanguage()
+  const { language } = useLanguage()
 
   return (
     <div className="rounded-[24px] bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">

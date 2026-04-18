@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react'
-import { FaFacebook as Facebook, FaInstagram as Instagram, FaTwitter as Twitter, FaYoutube as Youtube } from 'react-icons/fa';
+import { FaFacebook as Facebook, FaInstagram as Instagram, FaYoutube as Youtube } from 'react-icons/fa';
 import { MapPin, Phone, Mail, MoreVertical } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 

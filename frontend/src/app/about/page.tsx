@@ -3,14 +3,10 @@ import { useEffect, useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 import { getAboutData } from './actions'
 import { 
-  Target, 
   Users, 
   FileText, 
-  Globe, 
-  ChevronRight, 
   Download,
-  ShieldCheck,
-  Heart
+  ShieldCheck
 } from 'lucide-react'
 
 export default function AboutPage() {

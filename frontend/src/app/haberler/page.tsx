@@ -9,7 +9,7 @@ export default function NewsPage() {
   const [news, setNews] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [mounted, setMounted] = useState(false)
-  const { t, language } = useLanguage()
+  const { language } = useLanguage()
 
   useEffect(() => {
     setMounted(true)

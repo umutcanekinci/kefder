@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
         images: ["/images/logo.png"]
       }
     };
-  } catch (error) {
+  } catch {
     return {
       title: "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği",
       description: "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.",

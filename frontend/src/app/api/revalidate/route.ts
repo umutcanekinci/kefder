@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const body = await req.text(); 
     
     // 2. Sanity'nin gönderdiği kriptografik imzayı oku
-    const signature = req.headers.get(SIGNATURE_HEADER_NAME);
+    const signature = req.headers.get(SIGNATURE_HEADER_NAME) || '';
     const secret = process.env.SANITY_WEBHOOK_SECRET || '';
 
     // 3. GÜVENLİK KONTROLÜ: İmza eşleşiyor mu?
