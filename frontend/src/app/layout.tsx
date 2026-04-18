@@ -5,17 +5,19 @@ import { sanity } from "@/lib/sanity";
 import { Wrench } from "lucide-react";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const query = `*[_type == "siteSettings"][0]{
-    title,
-    description
+  const query = `{
+    "settings": *[_type == "siteSettings"][0]{title},
+    "about": *[_type == "about"][0]{description}
   }`;
 
   try {
-    const settings = await sanity.fetch(query, {}, { next: { tags: ['siteSettings'] } });
+    const data = await sanity.fetch(query, {}, { next: { tags: ['siteSettings', 'about'] } });
+    const settings = data?.settings;
+    const about = data?.about;
     
     return {
       title: settings?.title?.tr || "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği",
-      description: settings?.description?.tr || "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.",
+      description: about?.description?.tr || "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.",
       icons: {
         icon: "/images/logo.png",
         apple: "/images/logo.png"

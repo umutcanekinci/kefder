@@ -42,7 +42,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-8 tracking-tight">{t('nav.about')}</h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
-            {data?.settings?.description?.[language] || data?.settings?.description?.tr || t('about.hero.subtitle')}
+            {data?.about?.description?.[language] || data?.about?.description?.tr || t('about.hero.subtitle')}
           </p>
         </div>
       </section>
@@ -61,13 +61,13 @@ export default function AboutPage() {
                 <div>
                   <h3 className="text-xl font-bold text-orange-500 mb-3 uppercase tracking-wider">{t('about.mission.label')}</h3>
                   <p className="text-gray-600 leading-relaxed text-lg">
-                    {data?.settings?.mission?.[language] || data?.settings?.mission?.tr || "KefDer olarak amacımız; bireylerin kültürel etkileşim kapasitelerini artırmak, toplumsal farkındalık düzeyini yükseltmek ve sürdürülebilir bir dayanışma ağı oluşturmaktır."}
+                    {data?.about?.mission?.[language] || data?.about?.mission?.tr || "KefDer olarak amacımız; bireylerin kültürel etkileşim kapasitelerini artırmak, toplumsal farkındalık düzeyini yükseltmek ve sürdürülebilir bir dayanışma ağı oluşturmaktır."}
                   </p>
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-orange-500 mb-3 uppercase tracking-wider">{t('about.vision.label')}</h3>
                   <p className="text-gray-600 leading-relaxed text-lg">
-                    {data?.settings?.vision?.[language] || data?.settings?.vision?.tr || "Kültürel farklılıkların zenginlik kabul edildiği, toplumsal barış ve farkındalığın en üst düzeyde olduğu bir gelecek hayal ediyoruz."}
+                    {data?.about?.vision?.[language] || data?.about?.vision?.tr || "Kültürel farklılıkların zenginlik kabul edildiği, toplumsal barış ve farkındalığın en üst düzeyde olduğu bir gelecek hayal ediyoruz."}
                   </p>
                 </div>
               </div>

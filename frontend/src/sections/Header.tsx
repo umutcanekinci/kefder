@@ -29,7 +29,14 @@ const getNavItems = (t: (key: string) => string) => [
       { label: t('nav.activities.gallery'), href: '/activities#gallery' },
     ]
   },
-  { label: t('nav.news'), href: '/haberler' },
+  { 
+    label: t('nav.news'), 
+    href: '/haberler',
+    dropdown: [
+      { label: t('nav.news.all'), href: '/haberler' },
+      { label: t('nav.news.press'), href: '/haberler#press' },
+    ]
+  },
   { label: t('nav.membership'), href: '/volunteer' },
   { label: t('nav.contact'), href: '/contact' },
 ]

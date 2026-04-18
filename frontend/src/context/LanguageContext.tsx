@@ -20,6 +20,8 @@ const translations: Record<Language, Translations> = {
     'nav.activities.archive': 'Dosya Arşivi',
     'nav.activities.gallery': 'Anlarımız',
     'nav.news': 'Haberler',
+    'nav.news.all': 'Haberler',
+    'nav.news.press': 'Basında Biz',
     'nav.membership': 'Üyelik ve Destekçilik',
     'nav.contact': 'İletişim',
 
@@ -110,6 +112,8 @@ const translations: Record<Language, Translations> = {
     'nav.activities.archive': 'Document Archive',
     'nav.activities.gallery': 'Our Memories',
     'nav.news': 'News',
+    'nav.news.all': 'News',
+    'nav.news.press': 'In the Press',
     'nav.membership': 'Membership & Support',
     'nav.contact': 'Contact',
 

@@ -38,6 +38,12 @@ export const siteSettingsType = defineType({
         defineField({name: 'phone', title: 'Telefon Numarası', type: 'string'}),
         defineField({name: 'address', title: 'Adres', type: 'text'}),
         defineField({
+          name: 'workingHours',
+          title: 'Çalışma Saatleri',
+          type: 'localeString',
+          description: 'Örn: Pazartesi - Cuma: 09:00 - 18:00',
+        }),
+        defineField({
           name: 'googleMapsUrl',
           title: 'Google Maps Paylaşım Linki (Embed)',
           type: 'string',
@@ -52,21 +58,6 @@ export const siteSettingsType = defineType({
       options: {
         hotspot: true,
       },
-    }),
-    defineField({
-      name: 'description',
-      title: 'Genel SEO Açıklaması',
-      type: 'localeString',
-    }),
-    defineField({
-      name: 'mission',
-      title: 'Misyonumuz',
-      type: 'localeString',
-    }),
-    defineField({
-      name: 'vision',
-      title: 'Vizyonumuz',
-      type: 'localeString',
     }),
   ],
   preview: {

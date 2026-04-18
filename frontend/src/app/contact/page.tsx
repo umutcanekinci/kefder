@@ -29,6 +29,15 @@ export default function ContactPage() {
   const { contactInfo, socialLinks } = data || {}
   const currentLang = mounted ? language : 'tr'
 
+  const getMapUrl = (url: string) => {
+    if (!url) return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3125.10123456789!2d27.1287!3d38.4237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd862a762cacd%3A0x628cbba1a59ce8!2s%C4%B0zmir!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str"
+    if (url.includes('<iframe')) {
+      const match = url.match(/src="([^"]+)"/)
+      return match ? match[1] : url
+    }
+    return url
+  }
+
   return (
     <div className="min-h-screen bg-[#FDF6F0]">
       {/* ÜST BAŞLIK ALANI */}
@@ -100,7 +109,9 @@ export default function ContactPage() {
                   icon={<Clock3 className="h-6 w-6" />}
                   title={t('contact.info.hours')}
                   lines={[
-                    t('contact.info.hours.detail'),
+                    contactInfo?.workingHours?.[currentLang] || 
+                    contactInfo?.workingHours?.tr || 
+                    t('contact.info.hours.detail')
                   ]}
                 />
               </div>
@@ -191,7 +202,7 @@ export default function ContactPage() {
       <section className="h-[400px] w-full bg-gray-200">
         <iframe
           title="KEFDER Konum"
-          src={contactInfo?.googleMapsUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3125.10123456789!2d27.1287!3d38.4237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd862a762cacd%3A0x628cbba1a59ce8!2s%C4%B0zmir!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str"}
+          src={getMapUrl(contactInfo?.googleMapsUrl)}
           width="100%"
           height="100%"
           style={{ border: 0 }}

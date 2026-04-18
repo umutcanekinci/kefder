@@ -3,7 +3,13 @@ import { sanity } from "@/lib/sanity"
 
 export async function getContactData() {
   const query = `*[_type == "siteSettings"][0] {
-    contactInfo,
+    contactInfo {
+      email,
+      phone,
+      address,
+      workingHours,
+      googleMapsUrl
+    },
     socialLinks
   }`
 

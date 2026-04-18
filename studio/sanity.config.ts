@@ -7,7 +7,7 @@ import { schemaTypes } from "./schemaTypes";
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 
 // Define the singleton document types
-const singletonTypes = new Set(["siteSettings"]);
+const singletonTypes = new Set(["siteSettings", "about"]);
 
 export default defineConfig({
   name: "default",
@@ -30,6 +30,15 @@ export default defineConfig({
                 S.document()
                   .schemaType("siteSettings")
                   .documentId("siteSettings")
+              ),
+            S.listItem()
+              .title("Hakkımızda")
+              .id("about")
+              .icon(schemaTypes.find(t => t.name === 'about')?.icon)
+              .child(
+                S.document()
+                  .schemaType("about")
+                  .documentId("about")
               ),
             S.divider(),
             // Regular document types

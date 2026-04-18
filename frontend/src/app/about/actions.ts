@@ -16,7 +16,7 @@ export async function getAboutData() {
       category,
       "fileUrl": file.asset->url
     },
-    "settings": *[_type == "siteSettings"][0] {
+    "about": *[_type == "about"][0] {
       description,
       mission,
       vision
@@ -26,7 +26,7 @@ export async function getAboutData() {
   try {
     const result = await sanity.fetch(query, {}, { 
       next: { 
-        tags: ['teamMember', 'kefderDocument', 'siteSettings'],
+        tags: ['teamMember', 'kefderDocument', 'about'],
         revalidate: 0 
       } 
     })

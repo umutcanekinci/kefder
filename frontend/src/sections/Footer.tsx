@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react'
 import { FaFacebook as Facebook, FaInstagram as Instagram, FaYoutube as Youtube } from 'react-icons/fa';
-import { MapPin, Phone, Mail, MoreVertical } from 'lucide-react'
+import { MapPin, Phone, Mail, MoreVertical, Clock } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
 interface FooterProps {
@@ -152,6 +152,14 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
                   {contactInfo?.email || 'info@kefder.org'}
                 </a>
               </li>
+              {contactInfo?.workingHours && (
+                <li className="flex items-start gap-3">
+                  <Clock className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm text-gray-400">
+                    {contactInfo.workingHours[currentLang] || contactInfo.workingHours.tr}
+                  </span>
+                </li>
+              )}
             </ul>
           </div>
         </div>
