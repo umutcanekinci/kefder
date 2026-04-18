@@ -23,4 +23,12 @@ export const aboutType = defineType({
       type: 'localeString',
     }),
   ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Hakkımızda Sayfası Ayarları',
+        subtitle: 'SEO, Misyon ve Vizyon yönetimi',
+      }
+    },
+  },
 })
