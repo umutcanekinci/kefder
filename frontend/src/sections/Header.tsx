@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { FaFacebook as Facebook, FaInstagram as Instagram, FaYoutube as Youtube } from 'react-icons/fa';
-import { Globe, ChevronDown, Menu, X, CalendarDays } from 'lucide-react'
+import { Globe, ChevronDown, Menu, X, CalendarDays, Target, Users, FileText, Scale, Network, History, Archive, Image as ImageIcon, Newspaper, Megaphone } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
 const getNavItems = (t: (key: string) => string) => [
@@ -12,29 +12,29 @@ const getNavItems = (t: (key: string) => string) => [
     label: t('nav.about'), 
     href: '/about', 
     dropdown: [
-      { label: t('nav.about.mission'), href: '/about#mission' },
-      { label: t('nav.about.team'), href: '/about#team' },
-      { label: t('nav.about.reports'), href: '/about#reports' },
-      { label: t('nav.about.rules'), href: '/about#rules' },
-      { label: t('nav.about.networks'), href: '/about#networks' },
+      { label: t('nav.about.mission'), href: '/about#mission', icon: Target },
+      { label: t('nav.about.team'), href: '/about#team', icon: Users },
+      { label: t('nav.about.reports'), href: '/about#reports', icon: FileText },
+      { label: t('nav.about.rules'), href: '/about#rules', icon: Scale },
+      { label: t('nav.about.networks'), href: '/about#networks', icon: Network },
     ]
   },
   { 
     label: t('nav.activities'), 
     href: '/activities', 
     dropdown: [
-      { label: t('nav.activities.calendar'), href: '/activities#calendar' },
-      { label: t('nav.activities.past'), href: '/activities#past' },
-      { label: t('nav.activities.archive'), href: '/activities#archive' },
-      { label: t('nav.activities.gallery'), href: '/activities#gallery' },
+      { label: t('nav.activities.calendar'), href: '/activities#calendar', icon: CalendarDays },
+      { label: t('nav.activities.past'), href: '/activities#past', icon: History },
+      { label: t('nav.activities.archive'), href: '/activities#archive', icon: Archive },
+      { label: t('nav.activities.gallery'), href: '/activities#gallery', icon: ImageIcon },
     ]
   },
   { 
     label: t('nav.news'), 
     href: '/haberler',
     dropdown: [
-      { label: t('nav.news.all'), href: '/haberler' },
-      { label: t('nav.news.press'), href: '/haberler#press' },
+      { label: t('nav.news.all'), href: '/haberler', icon: Newspaper },
+      { label: t('nav.news.press'), href: '/haberler#press', icon: Megaphone },
     ]
   },
   { label: t('nav.membership'), href: '/volunteer' },
@@ -104,7 +104,12 @@ export default function Header({ settings }: { settings?: any }) {
                     <div className={"bg-white shadow-xl rounded-xl border border-gray-100 p-2 flex gap-4 " + (item.label === t('nav.activities') ? 'w-[450px] p-4' : 'w-60')}>
                       <div className="flex-1 flex flex-col gap-1">
                         {item.dropdown.map(subItem => (
-                          <Link key={subItem.label} href={subItem.href} className="px-4 py-2.5 text-base text-[#333333] hover:text-primary hover:bg-orange-50 rounded-md transition-colors block whitespace-nowrap">
+                          <Link 
+                            key={subItem.label} 
+                            href={subItem.href} 
+                            className="px-4 py-2.5 text-base text-[#333333] hover:text-primary hover:bg-orange-50 rounded-md transition-colors flex items-center gap-3 whitespace-nowrap group/item"
+                          >
+                            {subItem.icon && <subItem.icon className="w-4 h-4 text-gray-400 group-hover/item:text-primary transition-colors" />}
                             {subItem.label}
                           </Link>
                         ))}
@@ -191,8 +196,9 @@ export default function Header({ settings }: { settings?: any }) {
                         key={subItem.label} 
                         href={subItem.href} 
                         onClick={() => setMobileMenuOpen(false)}
-                        className="py-3 text-base text-gray-500 hover:text-primary"
+                        className="py-3 text-base text-gray-500 hover:text-primary flex items-center gap-3"
                       >
+                        {subItem.icon && <subItem.icon className="w-5 h-5 text-gray-400" />}
                         {subItem.label}
                       </Link>
                     ))}

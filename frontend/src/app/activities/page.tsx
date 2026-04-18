@@ -145,18 +145,7 @@ export default function ActivitiesPage() {
 
   return (
     <div className="min-h-screen bg-[#FDF6F0]">
-      <section className="bg-[#F4F1EC] py-14 md:py-16">
-        <div className="mx-auto max-w-7xl px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[#1F2A44]">
-            Etkinlikler
-          </h1>
-          <div className="mt-3 flex items-center justify-center gap-2 text-sm">
-            <span className="font-medium text-orange-500">Ana Sayfa</span>
-            <span className="text-gray-400">/</span>
-            <span className="text-gray-500">Etkinlikler</span>
-          </div>
-        </div>
-      </section>
+
 
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
