@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { FaFacebook as Facebook, FaInstagram as Instagram, FaYoutube as Youtube } from 'react-icons/fa';
@@ -38,6 +38,11 @@ export default function Header({ settings }: { settings?: any }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { language, setLanguage, t } = useLanguage()
   const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const navItems = getNavItems(t)
   const { socialLinks } = settings || {}
@@ -45,6 +50,9 @@ export default function Header({ settings }: { settings?: any }) {
   const toggleLanguage = () => {
     setLanguage(language === 'tr' ? 'en' : 'tr')
   }
+
+  // Hydration safety
+  const currentLang = mounted ? language : 'tr'
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
@@ -61,7 +69,7 @@ export default function Header({ settings }: { settings?: any }) {
             <div className="hidden sm:block">
               <h1 className="text-lg lg:text-xl font-bold text-[#333333] leading-tight">KEFDER</h1>
               <p className="text-[10px] lg:text-xs text-gray-500 leading-tight">
-                {language === 'tr'
+                {currentLang === 'tr'
                   ? 'Kültürel Etkileşim ve Farkındalık Derneği'
                   : 'Cultural Interaction and Awareness Association'}
               </p>
@@ -70,7 +78,7 @@ export default function Header({ settings }: { settings?: any }) {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center h-full">
-            {navItems.map((item) => (
+            {mounted && navItems.map((item) => (
               <div key={item.label} className="relative group h-full flex items-center">
                 <Link
                   href={item.href}
@@ -117,7 +125,7 @@ export default function Header({ settings }: { settings?: any }) {
               className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-[#333333] hover:text-primary transition-colors border border-gray-200 rounded-full hover:border-orange-200 bg-white"
             >
               <Globe className="w-4 h-4" />
-              <span>{language === 'tr' ? 'English' : 'Türkçe'}</span>
+              <span>{currentLang === 'tr' ? 'English' : 'Türkçe'}</span>
             </button>
 
             {/* Social Icons */}
@@ -153,7 +161,7 @@ export default function Header({ settings }: { settings?: any }) {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl max-h-[80vh] overflow-y-auto">
           <nav className="px-4 py-4 flex flex-col gap-2">
-            {navItems.map((item) => (
+            {mounted && navItems.map((item) => (
               <div key={item.label}>
                 <Link
                   href={item.href}

@@ -1,4 +1,4 @@
-﻿import {defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 import {CogIcon} from '@sanity/icons'
 
 export const siteSettingsType = defineType({
@@ -10,7 +10,7 @@ export const siteSettingsType = defineType({
     defineField({
       name: 'title',
       title: 'Site Başlığı (SEO)',
-      type: 'string',
+      type: 'localeString',
     }),
     defineField({
       name: 'isMaintenanceMode',
@@ -37,6 +37,12 @@ export const siteSettingsType = defineType({
         defineField({name: 'email', title: 'E-posta Adresi', type: 'string'}),
         defineField({name: 'phone', title: 'Telefon Numarası', type: 'string'}),
         defineField({name: 'address', title: 'Adres', type: 'text'}),
+        defineField({
+          name: 'googleMapsUrl',
+          title: 'Google Maps Paylaşım Linki (Embed)',
+          type: 'string',
+          description: 'Google Haritalar -> Paylaş -> Harita Yerleştir kısmındaki iframe src adresini buraya yapıştırın.',
+        }),
       ],
     }),
     defineField({
@@ -50,8 +56,23 @@ export const siteSettingsType = defineType({
     defineField({
       name: 'description',
       title: 'Genel SEO Açıklaması',
-      type: 'text',
-      description: 'Arama motorları için genel site özeti.',
+      type: 'localeString',
+    }),
+    defineField({
+      name: 'mission',
+      title: 'Misyonumuz',
+      type: 'localeString',
+    }),
+    defineField({
+      name: 'vision',
+      title: 'Vizyonumuz',
+      type: 'localeString',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title.tr',
+      subtitle: 'description.tr',
+    },
+  },
 })

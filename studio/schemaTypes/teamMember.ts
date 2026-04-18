@@ -1,4 +1,4 @@
-﻿import {defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 import {UsersIcon} from '@sanity/icons'
 
 export const teamMemberType = defineType({
@@ -16,9 +16,7 @@ export const teamMemberType = defineType({
     defineField({
       name: 'role',
       title: 'Görevi',
-      type: 'string',
-      description: 'Örn: Yönetim Kurulu Başkanı',
-      validation: (Rule) => Rule.required(),
+      type: 'localeString',
     }),
     defineField({
       name: 'image',
@@ -29,4 +27,11 @@ export const teamMemberType = defineType({
       },
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'role.tr',
+      media: 'image',
+    },
+  },
 })

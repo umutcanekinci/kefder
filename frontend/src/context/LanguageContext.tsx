@@ -1,3 +1,4 @@
+"use client"
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 
 type Language = 'tr' | 'en'
@@ -79,6 +80,21 @@ const translations: Record<Language, Translations> = {
     'footer.faq': 'SSS',
     'footer.events': 'Etkinlikler',
     'footer.address': 'İzmir, Türkiye',
+    'about.hero.subtitle': 'Kültürel farkındalık ve toplumsal dayanışma için 2012\'den beri yoldayız.',
+    'about.mission.badge': 'Vizyon & Misyon',
+    'about.mission.title': 'Geleceği Birlikte İnşa Ediyoruz',
+    'about.mission.label': 'Misyonumuz',
+    'about.vision.label': 'Vizyonumuz',
+    'about.experience.label': 'Yıllık Tecrübe',
+    'about.team.title': 'Yönetim Kurulumuz ve Ekibimiz',
+    'about.team.subtitle': 'Değişim için emek veren, profesyonel ve gönüllü kadromuz ile toplumsal fayda üretiyoruz.',
+    'about.team.empty': 'Henüz ekip üyesi eklenmemiş.',
+    'about.reports.title': 'Faaliyet Raporları',
+    'about.reports.empty': 'Henüz rapor yüklenmemiş.',
+    'about.documents.title': 'Kurumsal Belgeler & Tüzük',
+    'about.documents.empty': 'Henüz belge yüklenmemiş.',
+    'about.networks.badge': 'İşbirliklerimiz',
+    'about.networks.title': 'Üyesi Olduğumuz Ağlar ve Ortaklıklar',
   },
   en: {
     'nav.home': 'Home',
@@ -154,6 +170,21 @@ const translations: Record<Language, Translations> = {
     'footer.faq': 'FAQ',
     'footer.events': 'Events',
     'footer.address': 'Izmir, Türkiye',
+    'about.hero.subtitle': 'We have been on the road since 2012 for cultural awareness and social solidarity.',
+    'about.mission.badge': 'Vision & Mission',
+    'about.mission.title': 'Building the Future Together',
+    'about.mission.label': 'Our Mission',
+    'about.vision.label': 'Our Vision',
+    'about.experience.label': 'Years of Experience',
+    'about.team.title': 'Our Board and Team',
+    'about.team.subtitle': 'We produce social benefit with our professional and volunteer staff working for change.',
+    'about.team.empty': 'No team members added yet.',
+    'about.reports.title': 'Annual Reports',
+    'about.reports.empty': 'No reports uploaded yet.',
+    'about.documents.title': 'Corporate Documents & Bylaws',
+    'about.documents.empty': 'No documents uploaded yet.',
+    'about.networks.badge': 'Our Collaborations',
+    'about.networks.title': 'Networks and Partnerships We Belong To',
   },
 }
 
@@ -174,6 +205,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     localStorage.setItem('kefder_language', language)
+    document.documentElement.lang = language
   }, [language])
 
   const t = (key: string): string => {

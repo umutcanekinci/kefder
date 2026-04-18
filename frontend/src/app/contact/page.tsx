@@ -1,10 +1,33 @@
-﻿"use client"
+"use client"
+import { useEffect, useState } from 'react'
 import { FaFacebook as Facebook, FaInstagram as Instagram, FaYoutube as Youtube, FaLinkedin as Linkedin } from 'react-icons/fa';
 import { MapPin, Phone, Mail, Clock3, Send } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
+import { getContactData } from './actions'
 
 export default function ContactPage() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  const [data, setData] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    getContactData().then(res => {
+      setData(res)
+      setLoading(false)
+    })
+  }, [])
+
+  if (loading) return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDF6F0]">
+      <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+      <p className="text-gray-500 font-medium">{mounted && language === 'en' ? 'Loading contact info...' : 'İletişim bilgileri yükleniyor...'}</p>
+    </div>
+  )
+
+  const { contactInfo, socialLinks } = data || {}
+  const currentLang = mounted ? language : 'tr'
 
   return (
     <div className="min-h-screen bg-[#FDF6F0]">
@@ -53,8 +76,7 @@ export default function ContactPage() {
                   icon={<MapPin className="h-6 w-6" />}
                   title={t('contact.info.address')}
                   lines={[
-                    'Cumhuriyet Bulvarı, No: 123',
-                    'Konak, İzmir, Türkiye'
+                    contactInfo?.address || (currentLang === 'tr' ? 'İzmir, Türkiye' : 'Izmir, Turkey')
                   ]}
                 />
 
@@ -62,8 +84,7 @@ export default function ContactPage() {
                   icon={<Phone className="h-6 w-6" />}
                   title={t('contact.info.phone')}
                   lines={[
-                    '+90 (232) 123 45 67',
-                    '+90 (555) 987 65 43'
+                    contactInfo?.phone || '+90 (232) 999 29 29'
                   ]}
                 />
 
@@ -71,8 +92,7 @@ export default function ContactPage() {
                   icon={<Mail className="h-6 w-6" />}
                   title={t('contact.info.email')}
                   lines={[
-                    'iletisim@kefder.org',
-                    'info@kefder.org'
+                    contactInfo?.email || 'info@kefder.org'
                   ]}
                 />
 
@@ -94,10 +114,9 @@ export default function ContactPage() {
                   {t('contact.social.desc')}
                 </p>
                 <div className="mt-4 flex gap-4">
-                  <SocialButton icon={<Facebook className="w-5 h-5" />} href="#" />
-                  <SocialButton icon={<Instagram className="w-5 h-5" />} href="#" />
-                  <SocialButton icon={<Youtube className="w-5 h-5" />} href="#" />
-                  <SocialButton icon={<Linkedin className="w-5 h-5" />} href="#" />
+                  {socialLinks?.facebook && <SocialButton icon={<Facebook className="w-5 h-5" />} href={socialLinks.facebook} />}
+                  {socialLinks?.instagram && <SocialButton icon={<Instagram className="w-5 h-5" />} href={socialLinks.instagram} />}
+                  {socialLinks?.youtube && <SocialButton icon={<Youtube className="w-5 h-5" />} href={socialLinks.youtube} />}
                 </div>
               </div>
             </div>
@@ -117,7 +136,7 @@ export default function ContactPage() {
                     <input
                       type="text"
                       className="w-full rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
-                      placeholder="Adınız Soyadınız"
+                      placeholder={currentLang === 'tr' ? "Adınız Soyadınız" : "Your Name"}
                     />
                   </div>
 
@@ -128,7 +147,7 @@ export default function ContactPage() {
                     <input
                       type="email"
                       className="w-full rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
-                      placeholder="ornek@email.com"
+                      placeholder="example@email.com"
                     />
                   </div>
                 </div>
@@ -140,7 +159,7 @@ export default function ContactPage() {
                   <input
                     type="text"
                     className="w-full rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
-                    placeholder="Mesajınızın konusu"
+                    placeholder={currentLang === 'tr' ? "Mesajınızın konusu" : "Subject of your message"}
                   />
                 </div>
 
@@ -151,7 +170,7 @@ export default function ContactPage() {
                   <textarea
                     rows={5}
                     className="w-full resize-none rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
-                    placeholder="Bize ne iletmek istersiniz?"
+                    placeholder={currentLang === 'tr' ? "Bize ne iletmek istersiniz?" : "What would you like to tell us?"}
                   />
                 </div>
 
@@ -172,7 +191,7 @@ export default function ContactPage() {
       <section className="h-[400px] w-full bg-gray-200">
         <iframe
           title="KEFDER Konum"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100000.0000000000!2d27.0000000!3d38.4000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd862a762cacd%3A0x628cbba1a59ce8!2s%C4%B0zmir!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str"
+          src={contactInfo?.googleMapsUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3125.10123456789!2d27.1287!3d38.4237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd862a762cacd%3A0x628cbba1a59ce8!2s%C4%B0zmir!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str"}
           width="100%"
           height="100%"
           style={{ border: 0 }}

@@ -1,4 +1,5 @@
 "use client"
+import { useState, useEffect } from 'react'
 import { FaFacebook as Facebook, FaInstagram as Instagram, FaTwitter as Twitter, FaYoutube as Youtube } from 'react-icons/fa';
 import { MapPin, Phone, Mail, MoreVertical } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
@@ -11,6 +12,13 @@ interface FooterProps {
 export default function Footer({ onAdminClick, settings }: FooterProps) {
   const { t, language } = useLanguage()
   const { socialLinks, contactInfo } = settings || {}
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const currentLang = mounted ? language : 'tr'
 
   const quickLinks = [
     { label: t('nav.home'), href: '/' },
@@ -43,12 +51,12 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
               <div>
                 <h2 className="text-lg font-bold text-white">KEFDER</h2>
                 <p className="text-[10px] text-gray-400">
-                  {language === 'tr' ? 'Kültürel Etkileşim ve Farkındalık Derneği' : 'Cultural Interaction and Awareness Association'}
+                  {currentLang === 'tr' ? 'Kültürel Etkileşim ve Farkındalık Derneği' : 'Cultural Interaction and Awareness Association'}
                 </p>
               </div>
             </a>
             <p className="text-sm text-gray-400 leading-relaxed">
-              {language === 'tr' 
+              {currentLang === 'tr' 
                 ? '2012 yılından beri İzmir\'de kültürel etkileşim ve farkındalık oluşturmak için çalışıyoruz.'
                 : 'Since 2012, we have been working to create cultural interaction and awareness in Izmir.'}
             </p>
@@ -90,9 +98,9 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-base font-semibold text-white mb-4">{t('footer.quickLinks')}</h3>
+            <h3 className="text-base font-semibold text-white mb-4">{mounted ? t('footer.quickLinks') : 'Hızlı Bağlantılar'}</h3>
             <ul className="space-y-3">
-              {quickLinks.map((link) => (
+              {mounted && quickLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
@@ -107,9 +115,9 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
 
           {/* Explore */}
           <div>
-            <h3 className="text-base font-semibold text-white mb-4">{t('footer.explore')}</h3>
+            <h3 className="text-base font-semibold text-white mb-4">{mounted ? t('footer.explore') : 'Keşfet'}</h3>
             <ul className="space-y-3">
-              {exploreLinks.map((link) => (
+              {mounted && exploreLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
@@ -124,12 +132,12 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
 
           {/* Contact */}
           <div>
-            <h3 className="text-base font-semibold text-white mb-4">{t('footer.contact')}</h3>
+            <h3 className="text-base font-semibold text-white mb-4">{mounted ? t('footer.contact') : 'İletişim'}</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
                 <span className="text-sm text-gray-400">
-                  {contactInfo?.address || t('footer.address')}
+                  {contactInfo?.address || (mounted ? t('footer.address') : 'İzmir, Türkiye')}
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -152,15 +160,15 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
         <div className="mt-12 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-500">
-              © 2026 KEFDER. {t('footer.rights')}
+              © 2026 KEFDER. {mounted ? t('footer.rights') : 'Tüm hakları saklıdır.'}
             </p>
             <div className="flex items-center gap-4 text-sm text-gray-500">
               <a href="/privacy" className="hover:text-orange-400 transition-colors">
-                {t('footer.privacy')}
+                {mounted ? t('footer.privacy') : 'Gizlilik Politikası'}
               </a>
               <span>|</span>
               <a href="/terms" className="hover:text-orange-400 transition-colors">
-                {t('footer.terms')}
+                {mounted ? t('footer.terms') : 'Kullanım Koşulları'}
               </a>
             </div>
           </div>
@@ -178,5 +186,3 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
     </footer>
   )
 }
-
-

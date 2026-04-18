@@ -1,5 +1,6 @@
-﻿import { defineConfig } from "sanity";
+import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { assist } from "@sanity/assist";
 import { schemaTypes } from "./schemaTypes";
 
 // Define the actions that should be available for singleton documents
@@ -14,6 +15,7 @@ export default defineConfig({
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || process.env.SANITY_PROJECT_ID || "your_project_id",
   dataset: process.env.SANITY_STUDIO_DATASET || process.env.SANITY_DATASET || "production",
   plugins: [
+    assist(),
     structureTool({
       structure: (S) =>
         S.list()

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Providers from "./Providers";
 import "./globals.css";
 import { sanity } from "@/lib/sanity";
+import { Wrench } from "lucide-react";
 
 export async function generateMetadata(): Promise<Metadata> {
   const query = `*[_type == "siteSettings"][0]{
@@ -10,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }`;
 
   try {
-    const settings = await sanity.fetch(query, {}, { next: { revalidate: 60 } });
+    const settings = await sanity.fetch(query, {}, { next: { tags: ['siteSettings'] } });
     
     return {
       title: settings?.title || "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği",
@@ -41,12 +42,34 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const query = `*[_type == "siteSettings"][0]{
     socialLinks,
-    contactInfo
+    contactInfo,
+    isMaintenanceMode
   }`;
-  let settings = null;
+  let settings: any = null;
   try {
-    settings = await sanity.fetch(query, {}, { next: { revalidate: 60 } });
+    settings = await sanity.fetch(query, {}, { next: { tags: ['siteSettings'] } });
   } catch (error) {}
+
+  if (settings?.isMaintenanceMode) {
+    return (
+      <html lang="tr">
+        <body className="bg-[#FDF6F0] min-h-screen flex items-center justify-center p-4">
+          <div className="bg-white max-w-lg w-full rounded-3xl p-10 text-center shadow-xl border border-orange-100">
+            <div className="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Wrench className="w-10 h-10 text-orange-500" />
+            </div>
+            <h1 className="text-3xl font-bold text-[#1F2A44] mb-4">Bakım Molası</h1>
+            <p className="text-gray-500 mb-8 leading-relaxed">
+              Sizlere daha iyi ve hızlı bir deneyim sunabilmek için sitemizde kısa süreli bir altyapı çalışması gerçekleştiriyoruz. Anlayışınız için teşekkür ederiz, çok yakında tekrar yayındayız!
+            </p>
+            <div className="text-sm font-semibold text-orange-500">
+              KEFDER - Kültürel Etkileşim ve Farkındalık Derneği
+            </div>
+          </div>
+        </body>
+      </html>
+    )
+  }
 
   return (
     <html lang="tr">

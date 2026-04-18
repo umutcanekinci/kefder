@@ -1,4 +1,4 @@
-﻿import {defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 import {DocumentTextIcon} from '@sanity/icons'
 
 export const newsType = defineType({
@@ -10,15 +10,14 @@ export const newsType = defineType({
     defineField({
       name: 'title',
       title: 'Haber Başlığı',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
+      type: 'localeString',
     }),
     defineField({
       name: 'slug',
       title: 'URL (Slug)',
       type: 'slug',
       options: {
-        source: 'title',
+        source: 'title.tr',
         maxLength: 96,
       },
     }),
@@ -39,8 +38,14 @@ export const newsType = defineType({
     defineField({
       name: 'body',
       title: 'Haber İçeriği',
-      type: 'array',
-      of: [{type: 'block'}],
+      type: 'localeBlock',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title.tr',
+      subtitle: 'publishedAt',
+      media: 'mainImage',
+    },
+  },
 })

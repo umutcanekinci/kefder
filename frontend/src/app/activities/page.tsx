@@ -1,24 +1,22 @@
-"use client"
+'use client'
+
+import { CalendarDays, ChevronLeft, ChevronRight, Clock3, List, MapPin } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
-import {
-  CalendarDays,
-  ChevronLeft,
-  ChevronRight,
-  Clock3,
-  List,
-  MapPin,
-} from 'lucide-react'
 import { getEvents } from './actions'
+import { useLanguage } from '@/context/LanguageContext'
 
 type EventStatus = 'upcoming' | 'completed'
 
+type LocalizedString = { tr: string; en: string }
+type LocalizedBlock = { tr: any[]; en: any[] }
+
 type EventItem = {
   _id: string
-  title: string
-  description?: string
+  title: LocalizedString
+  description?: LocalizedBlock
   date: string
   time?: string
-  location?: string
+  location?: LocalizedString
   category?: string
   status?: EventStatus
 }
@@ -79,6 +77,7 @@ function compareByDateDesc(a: EventItem, b: EventItem) {
 }
 
 export default function ActivitiesPage() {
+  const { language, t } = useLanguage()
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list')
   const [currentMonth, setCurrentMonth] = useState(() => new Date())
   const [hoveredDate, setHoveredDate] = useState<string | null>(null)
@@ -300,7 +299,7 @@ export default function ActivitiesPage() {
                                 : 'bg-gray-100 text-gray-600'
                             }`}
                           >
-                            {event.title}
+                            {event.title[language] || event.title['tr']}
                           </div>
                         ))}
 
@@ -321,10 +320,11 @@ export default function ActivitiesPage() {
                             {dayEvents.map((event) => (
                               <div key={event._id} className="rounded-xl bg-[#FAF7F3] p-3">
                                 <div className="text-sm font-semibold text-[#1F2A44]">
-                                  {event.title}
+                                  {event.title[language] || event.title['tr']}
                                 </div>
-                                <div className="mt-1 text-xs text-gray-500">
-                                  {event.description || 'Açıklama yok'}
+                                <div className="mt-1 text-xs text-gray-500 line-clamp-2">
+                                  {/* Portable Text Snippet */}
+                                  {event.description?.[language]?.[0]?.children?.[0]?.text || '...'}
                                 </div>
                                 <div className="mt-2 flex items-center gap-3 text-[11px] text-gray-500">
                                   <span className="inline-flex items-center gap-1">
@@ -333,7 +333,7 @@ export default function ActivitiesPage() {
                                   </span>
                                   <span className="inline-flex items-center gap-1">
                                     <MapPin className="h-3 w-3" />
-                                    {event.location || '-'}
+                                    {event.location?.[language] || event.location?.['tr'] || '-'}
                                   </span>
                                 </div>
                               </div>
@@ -373,6 +373,7 @@ function EventCard({
   showRegister?: boolean
 }) {
   const { day, month } = formatCardDate(event.date)
+  const { language, t } = useLanguage()
 
   return (
     <div className="rounded-[24px] bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
@@ -383,8 +384,10 @@ function EventCard({
         </div>
 
         <div className="flex-1">
-          <h4 className="text-2xl font-bold text-[#1F2A44]">{event.title}</h4>
-          <p className="mt-2 text-base text-gray-500">{event.description || 'Açıklama yok'}</p>
+          <h4 className="text-2xl font-bold text-[#1F2A44]">{event.title?.[language] || event.title?.['tr']}</h4>
+          <p className="mt-2 text-base text-gray-500">
+            {event.description?.[language]?.[0]?.children?.[0]?.text || '...'}
+          </p>
 
           <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-500">
             <span className="inline-flex items-center gap-2">
@@ -394,7 +397,7 @@ function EventCard({
 
             <span className="inline-flex items-center gap-2">
               <MapPin className="h-4 w-4 text-orange-500" />
-              {event.location || '-'}
+              {event.location?.[language] || event.location?.['tr'] || '-'}
             </span>
           </div>
 
@@ -406,12 +409,14 @@ function EventCard({
                   : 'bg-gray-100 text-gray-600'
               }`}
             >
-              {(event.status || 'upcoming') === 'upcoming' ? 'Yaklaşan' : 'Tamamlandı'}
+              {(event.status || 'upcoming') === 'upcoming' 
+                ? (language === 'tr' ? 'Yaklaşan' : 'Upcoming') 
+                : (language === 'tr' ? 'Tamamlandı' : 'Completed')}
             </span>
 
             {showRegister && (
               <button className="rounded-xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(249,115,22,0.25)] transition hover:bg-orange-600">
-                Kayıt Ol
+                {language === 'tr' ? 'Kayıt Ol' : 'Register Now'}
               </button>
             )}
           </div>

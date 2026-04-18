@@ -1,4 +1,4 @@
-﻿import {defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 import {CalendarIcon} from '@sanity/icons'
 
 export const eventType = defineType({
@@ -10,15 +10,14 @@ export const eventType = defineType({
     defineField({
       name: 'title',
       title: 'Etkinlik Başlığı',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
+      type: 'localeString',
     }),
     defineField({
       name: 'slug',
       title: 'URL (Slug)',
       type: 'slug',
       options: {
-        source: 'title',
+        source: 'title.tr',
         maxLength: 96,
       },
     }),
@@ -31,7 +30,7 @@ export const eventType = defineType({
     defineField({
       name: 'location',
       title: 'Yer / Mekan',
-      type: 'string',
+      type: 'localeString',
     }),
     defineField({
       name: 'mainImage',
@@ -44,8 +43,7 @@ export const eventType = defineType({
     defineField({
       name: 'description',
       title: 'Etkinlik Detayları',
-      type: 'array',
-      of: [{type: 'block'}],
+      type: 'localeBlock',
     }),
     defineField({
       name: 'isUpcoming',
@@ -55,4 +53,11 @@ export const eventType = defineType({
       description: 'Geçmiş etkinlik mi yoksa yaklaşan etkinlik mi olduğunu belirlemek için işaretleyin.',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title.tr',
+      subtitle: 'eventDate',
+      media: 'mainImage',
+    },
+  },
 })

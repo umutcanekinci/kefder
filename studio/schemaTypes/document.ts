@@ -1,4 +1,4 @@
-﻿import {defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 import {FolderIcon} from '@sanity/icons'
 
 export const documentType = defineType({
@@ -10,8 +10,7 @@ export const documentType = defineType({
     defineField({
       name: 'title',
       title: 'Dosya Adı',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
+      type: 'localeString',
     }),
     defineField({
       name: 'file',
@@ -36,4 +35,10 @@ export const documentType = defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: 'title.tr',
+      subtitle: 'category',
+    },
+  },
 })
