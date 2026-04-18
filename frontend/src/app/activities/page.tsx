@@ -57,14 +57,20 @@ function getDayLabel(index: number) {
   return labels[index]
 }
 
-function formatCardDate(dateStr: string) {
+function formatCardDate(dateStr: string, lang: string = 'tr') {
+  if (!dateStr) return { day: '--', month: '---', time: '--:--' }
+  
   const date = new Date(dateStr)
+  if (isNaN(date.getTime())) return { day: '--', month: '---', time: '--:--' }
+
   const day = `${date.getDate()}`.padStart(2, '0')
-  const month = new Intl.DateTimeFormat('tr-TR', { month: 'short' }).format(date)
+  const month = new Intl.DateTimeFormat(lang === 'tr' ? 'tr-TR' : 'en-US', { month: 'short' }).format(date)
+  const time = new Intl.DateTimeFormat('tr-TR', { hour: '2-digit', minute: '2-digit' }).format(date)
 
   return {
     day,
-    month: month.toUpperCase(),
+    month: month.replace('.', '').toUpperCase(),
+    time
   }
 }
 
@@ -121,8 +127,10 @@ export default function ActivitiesPage() {
   const eventsByDate = useMemo(() => {
     const map: Record<string, EventItem[]> = {}
     for (const event of events) {
-      if (!map[event.date]) map[event.date] = []
-      map[event.date].push(event)
+      if (!event.date) continue
+      const dateKey = toDateKey(new Date(event.date))
+      if (!map[dateKey]) map[dateKey] = []
+      map[dateKey].push(event)
     }
     return map
   }, [events])
@@ -282,8 +290,10 @@ export default function ActivitiesPage() {
                           {date.getDate()}
                         </span>
 
-                        {dayEvents.length > 0 && isCurrentMonth && (
-                          <span className="rounded-full bg-orange-100 px-2 py-0.5 text-[10px] font-semibold text-orange-600">
+                        {dayEvents.length > 0 && (
+                          <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                            isCurrentMonth ? 'bg-orange-100 text-orange-600' : 'bg-gray-100 text-gray-400'
+                          }`}>
                             {dayEvents.length}
                           </span>
                         )}
@@ -310,7 +320,7 @@ export default function ActivitiesPage() {
                         )}
                       </div>
 
-                      {hoveredDate === dateKey && dayEvents.length > 0 && isCurrentMonth && (
+                      {hoveredDate === dateKey && dayEvents.length > 0 && (
                         <div className="absolute left-1/2 top-full z-20 mt-2 w-[260px] -translate-x-1/2 rounded-2xl border border-orange-100 bg-white p-4 shadow-[0_18px_40px_rgba(0,0,0,0.12)]">
                           <div className="mb-2 text-sm font-bold text-[#1F2A44]">
                             {date.toLocaleDateString('tr-TR')}
@@ -372,8 +382,8 @@ function EventCard({
   event: EventItem
   showRegister?: boolean
 }) {
-  const { day, month } = formatCardDate(event.date)
   const { language } = useLanguage()
+  const { day, month, time } = formatCardDate(event.date, language)
 
   return (
     <div className="rounded-[24px] bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
@@ -392,12 +402,12 @@ function EventCard({
           <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-500">
             <span className="inline-flex items-center gap-2">
               <Clock3 className="h-4 w-4 text-orange-500" />
-              {event.time || '-'}
+              {event.time || time}
             </span>
 
             <span className="inline-flex items-center gap-2">
               <MapPin className="h-4 w-4 text-orange-500" />
-              {event.location?.[language] || event.location?.['tr'] || '-'}
+              {event.location?.[language] || event.location?.['tr'] || (language === 'tr' ? 'Belirtilmedi' : 'Not specified')}
             </span>
           </div>
 
