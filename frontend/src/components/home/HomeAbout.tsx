@@ -31,13 +31,13 @@ export default function HomeAbout() {
           <ScrollReveal direction="right">
             <div className="space-y-8">
               <div className="inline-block px-4 py-2 bg-kefder-orange/10 text-kefder-orange-dark rounded-full text-xs font-bold uppercase tracking-widest">
-                HAKKIMIZDA
+                {t('home.about.badge')}
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-kefder-gray-dark leading-tight">
-                Toplumsal Farkındalık ve Kültürel Etkileşim İçin Çalışıyoruz
+                {t('home.about.title')}
               </h2>
               <p className="text-lg text-kefder-gray leading-relaxed">
-                KEFDER olarak, kültürel farklılıkların zenginlik olduğu bir dünya hayal ediyoruz. Bireylerin gelişimini desteklemek ve toplumsal dayanışmayı güçlendirmek temel önceliğimizdir.
+                {t('home.about.desc')}
               </p>
 
               {/* Icon List */}
@@ -47,8 +47,8 @@ export default function HomeAbout() {
                     <BookOpen className="w-7 h-7" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-kefder-gray-dark mb-1">Eğitim ve Gelişim</h4>
-                    <p className="text-kefder-gray">Kültürel farkındalık eğitimleri ve kapasite geliştirme çalışmaları.</p>
+                    <h4 className="text-xl font-bold text-kefder-gray-dark mb-1">{t('home.about.item1.title')}</h4>
+                    <p className="text-kefder-gray">{t('home.about.item1.desc')}</p>
                   </div>
                 </div>
 
@@ -57,8 +57,8 @@ export default function HomeAbout() {
                     <Palette className="w-7 h-7" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-kefder-gray-dark mb-1">Sanat ve Kültür</h4>
-                    <p className="text-kefder-gray">Kültürel etkileşimi artıran sanatsal projeler ve etkinlikler.</p>
+                    <h4 className="text-xl font-bold text-kefder-gray-dark mb-1">{t('home.about.item2.title')}</h4>
+                    <p className="text-kefder-gray">{t('home.about.item2.desc')}</p>
                   </div>
                 </div>
 
@@ -67,8 +67,8 @@ export default function HomeAbout() {
                     <Recycle className="w-7 h-7" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-kefder-gray-dark mb-1">Sürdürülebilirlik</h4>
-                    <p className="text-kefder-gray">Toplumsal dayanışma ağlarının sürdürülebilirliğini sağlamak.</p>
+                    <h4 className="text-xl font-bold text-kefder-gray-dark mb-1">{t('home.about.item3.title')}</h4>
+                    <p className="text-kefder-gray">{t('home.about.item3.desc')}</p>
                   </div>
                 </div>
               </div>

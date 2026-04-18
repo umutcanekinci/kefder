@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 import { Info, Calendar } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import Link from 'next/link'
@@ -36,27 +36,27 @@ export default function Hero() {
               href="/about"
               className="group relative flex flex-col items-center text-center p-8 bg-white rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-orange-100"
             >
-              <div className="w-16 h-16 bg-orange-100 text-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Info className="w-8 h-8" />
               </div>
               <h3 className="text-2xl font-bold text-[#333333] mb-3">{t('hero.aboutBtn')}</h3>
-              <p className="text-gray-500 text-sm">Amaç ve değerlerimiz, ekibimiz ve tüzüğümüz hakkında bilgi alın.</p>
-              <div className="mt-6 text-primary font-semibold flex items-center gap-2 group-hover:gap-3 transition-all">
-                Daha Fazla Keşfet <span>→</span>
+              <p className="text-gray-500 text-sm">{t('hero.aboutDesc')}</p>
+              <div className="mt-6 text-orange-500 font-semibold flex items-center gap-2 group-hover:gap-3 transition-all">
+                {t('hero.discover')} <span>→</span>
               </div>
             </Link>
 
             <Link
               href="/activities"
-              className="group relative flex flex-col items-center text-center p-8 bg-primary rounded-3xl shadow-xl shadow-orange-500/20 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              className="group relative flex flex-col items-center text-center p-8 bg-orange-500 rounded-3xl shadow-xl shadow-orange-500/20 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-16 h-16 bg-white/20 text-white rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Calendar className="w-8 h-8" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">{t('hero.calendarBtn')}</h3>
-              <p className="text-orange-50 text-sm">Derneğimizin etkinlik takvimi, geçmiş ve gelecek faaliyetler.</p>
+              <p className="text-orange-50 text-sm">{t('hero.calendarDesc')}</p>
               <div className="mt-6 text-white font-semibold flex items-center gap-2 group-hover:gap-3 transition-all">
-                Takvimi İncele <span>→</span>
+                {t('hero.examine')} <span>→</span>
               </div>
             </Link>
           </div>

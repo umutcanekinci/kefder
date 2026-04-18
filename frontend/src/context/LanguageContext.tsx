@@ -30,6 +30,10 @@ const translations: Record<Language, Translations> = {
     'hero.description': 'Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.',
     'hero.aboutBtn': 'Hakkımızda',
     'hero.calendarBtn': 'Etkinlik Takvimi',
+    'hero.aboutDesc': 'Amaç ve değerlerimiz, ekibimiz ve tüzüğümüz hakkında bilgi alın.',
+    'hero.calendarDesc': 'Derneğimizin etkinlik takvimi, geçmiş ve gelecek faaliyetler.',
+    'hero.discover': 'Daha Fazla Keşfet',
+    'hero.examine': 'Takvimi İncele',
 
     'volunteer.title': 'Üye Ol',
     'volunteer.breadcrumb': 'Ana Sayfa / Üyelik',
@@ -97,6 +101,18 @@ const translations: Record<Language, Translations> = {
     'about.documents.empty': 'Henüz belge yüklenmemiş.',
     'about.networks.badge': 'İşbirliklerimiz',
     'about.networks.title': 'Üyesi Olduğumuz Ağlar ve Ortaklıklar',
+    'home.about.badge': 'HAKKIMIZDA',
+    'home.about.title': 'Toplumsal Farkındalık ve Kültürel Etkileşim İçin Çalışıyoruz',
+    'home.about.desc': 'KEFDER olarak, kültürel farklılıkların zenginlik olduğu bir dünya hayal ediyoruz. Bireylerin gelişimini desteklemek ve toplumsal dayanışmayı güçlendirmek temel önceliğimizdir.',
+    'home.about.item1.title': 'Eğitim ve Gelişim',
+    'home.about.item1.desc': 'Kültürel farkındalık eğitimleri ve kapasite geliştirme çalışmaları.',
+    'home.about.item2.title': 'Sanat ve Kültür',
+    'home.about.item2.desc': 'Kültürel etkileşimi artıran sanatsal projeler ve etkinlikler.',
+    'home.about.item3.title': 'Sürdürülebilirlik',
+    'home.about.item3.desc': 'Toplumsal dayanışma ağlarının sürdürülebilirliğini sağlamak.',
+    'home.activities.title': 'Sürdürdüğümüz Çalışmalar',
+    'home.activities.desc': 'Toplumsal farkındalığı artırmak ve kültürel etkileşim için 6 ana grupta projeler üretiyoruz.',
+    'home.activities.more': 'Detayları Gör',
   },
   en: {
     'nav.home': 'Home',
@@ -122,6 +138,10 @@ const translations: Record<Language, Translations> = {
     'hero.description': 'We work together for cultural awareness, solidarity and social interaction.',
     'hero.aboutBtn': 'About Us',
     'hero.calendarBtn': 'Event Calendar',
+    'hero.aboutDesc': 'Learn about our goals, values, team and bylaws.',
+    'hero.calendarDesc': 'Our event calendar, past and future activities.',
+    'hero.discover': 'Discover More',
+    'hero.examine': 'Review Calendar',
 
     'volunteer.title': 'Become a Member',
     'volunteer.breadcrumb': 'Home / Membership',
@@ -189,6 +209,18 @@ const translations: Record<Language, Translations> = {
     'about.documents.empty': 'No documents uploaded yet.',
     'about.networks.badge': 'Our Collaborations',
     'about.networks.title': 'Networks and Partnerships We Belong To',
+    'home.about.badge': 'ABOUT US',
+    'home.about.title': 'We Work for Social Awareness and Cultural Interaction',
+    'home.about.desc': 'At KEFDER, we imagine a world where cultural differences are richness. Supporting individual development and strengthening social solidarity is our main priority.',
+    'home.about.item1.title': 'Education and Development',
+    'home.about.item1.desc': 'Cultural awareness training and capacity building activities.',
+    'home.about.item2.title': 'Art and Culture',
+    'home.about.item2.desc': 'Artistic projects and events that increase cultural interaction.',
+    'home.about.item3.title': 'Sustainability',
+    'home.about.item3.desc': 'Ensuring the sustainability of social solidarity networks.',
+    'home.activities.title': 'Our Ongoing Activities',
+    'home.activities.desc': 'We produce projects in 6 main groups to increase social awareness and cultural interaction.',
+    'home.activities.more': 'View Details',
   },
 }
 
@@ -201,16 +233,23 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>(() => {
-    if (typeof window === 'undefined') return 'tr'
-    const saved = localStorage.getItem('kefder_language')
-    return saved === 'tr' || saved === 'en' ? saved : 'tr'
-  })
+  const [language, setLanguage] = useState<Language>('tr')
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    localStorage.setItem('kefder_language', language)
-    document.documentElement.lang = language
-  }, [language])
+    setIsMounted(true)
+    const saved = localStorage.getItem('kefder_language')
+    if (saved === 'tr' || saved === 'en') {
+      setLanguage(saved)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isMounted) {
+      localStorage.setItem('kefder_language', language)
+      document.documentElement.lang = language
+    }
+  }, [language, isMounted])
 
   const t = (key: string): string => {
     const value = translations[language][key]

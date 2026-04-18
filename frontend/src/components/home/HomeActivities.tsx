@@ -49,9 +49,11 @@ export default function HomeActivities() {
             <div className="inline-block px-4 py-2 bg-kefder-teal/10 text-kefder-teal rounded-full text-xs font-bold uppercase tracking-widest mb-4">
               {t('nav.activities')}
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-kefder-gray-dark mb-6">Sürdürdüğümüz Çalışmalar</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-kefder-gray-dark mb-6">
+              {t('home.activities.title')}
+            </h2>
             <p className="text-kefder-gray text-lg leading-relaxed">
-              Toplumsal farkındalığı artırmak ve kültürel etkileşimi güçlendirmek için 6 ana grupta projeler üretiyoruz.
+              {t('home.activities.desc')}
             </p>
           </div>
         </ScrollReveal>
@@ -91,7 +93,7 @@ export default function HomeActivities() {
                     href="/activities" 
                     className="mt-auto inline-flex items-center gap-2 text-kefder-teal font-bold group/link"
                   >
-                    Detayları Gör
+                    {t('home.activities.more')}
                     <ArrowRight className="w-5 h-5 group-hover/link:translate-x-2 transition-transform" />
                   </Link>
 

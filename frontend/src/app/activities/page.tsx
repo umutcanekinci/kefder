@@ -255,7 +255,7 @@ export default function ActivitiesPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-7 gap-2 md:gap-3">
+                <div className="grid grid-cols-7 gap-3 md:gap-4">
                   {Array.from({ length: 7 }).map((_, i) => (
                     <div
                       key={i}
@@ -276,16 +276,16 @@ export default function ActivitiesPage() {
                         key={`${dateKey}-${index}`}
                         onMouseEnter={() => setHoveredDate(dateKey)}
                         onMouseLeave={() => setHoveredDate(null)}
-                        className={`relative min-h-[120px] rounded-2xl border p-3 transition md:min-h-[135px] ${
+                        className={`relative min-h-[120px] rounded-2xl border p-4 transition-all duration-300 md:min-h-[140px] ${
                           isCurrentMonth
-                            ? 'border-orange-100 bg-white'
+                            ? 'border-gray-100 bg-white hover:border-kefder-teal hover:shadow-xl'
                             : 'border-transparent bg-[#FAF7F3] text-gray-300'
-                        } ${isToday ? 'ring-2 ring-orange-300' : ''}`}
+                        } ${isToday ? 'ring-2 ring-kefder-teal shadow-lg shadow-kefder-teal/10' : ''}`}
                       >
-                        <div className="mb-2 flex items-center justify-between">
+                        <div className="mb-3 flex items-center justify-between">
                           <span
-                            className={`text-sm font-bold ${
-                              isCurrentMonth ? 'text-[#1F2A44]' : 'text-gray-300'
+                            className={`text-lg font-black ${
+                              isCurrentMonth ? 'text-kefder-gray-dark' : 'text-gray-300'
                             }`}
                           >
                             {date.getDate()}
@@ -359,6 +359,7 @@ export default function ActivitiesPage() {
               </div>
             </ScrollReveal>
           )}
+
         </div>
       </section>
     </div>

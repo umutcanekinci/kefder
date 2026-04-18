@@ -7,7 +7,6 @@ import HomeCTA from "@/components/home/HomeCTA";
 export default function Home() {
   return (
     <main>
-
       <HomeAbout />
       <HomeActivities />
       <EventsCalendar />
