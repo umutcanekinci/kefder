@@ -14,8 +14,8 @@ export async function generateMetadata(): Promise<Metadata> {
     const settings = await sanity.fetch(query, {}, { next: { tags: ['siteSettings'] } });
     
     return {
-      title: settings?.title || "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği",
-      description: settings?.description || "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.",
+      title: settings?.title?.tr || "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği",
+      description: settings?.description?.tr || "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.",
       icons: {
         icon: "/images/logo.png",
         apple: "/images/logo.png"
