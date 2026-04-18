@@ -46,7 +46,7 @@ export default function EventsCalendar() {
 
               <div className="grid grid-cols-7 gap-2 md:gap-4">
                 {['Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct', 'Pz'].map(day => (
-                  <div key={day} className="text-center text-xs font-bold text-kefder-gray/40 uppercase mb-4">{day}</div>
+                  <div key={day} className="text-center text-xs font-semibold text-kefder-gray-dark uppercase mb-4">{day}</div>
                 ))}
                 {days.map(day => {
                   const isSelected = day === 18
@@ -86,11 +86,11 @@ export default function EventsCalendar() {
                     </h4>
                     <div className="flex flex-wrap gap-4 text-sm text-gray-500">
                       <div className="flex items-center gap-1.5 font-medium">
-                        <Clock className="w-4 h-4 text-kefder-orange/60" />
+                        <Clock className="w-4 h-4 text-kefder-teal" />
                         {event.time}
                       </div>
                       <div className="flex items-center gap-1.5 font-medium">
-                        <MapPin className="w-4 h-4 text-kefder-orange/60" />
+                        <MapPin className="w-4 h-4 text-kefder-teal" />
                         {event.loc}
                       </div>
                     </div>

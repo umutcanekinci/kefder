@@ -62,7 +62,7 @@ export default function Header({ settings }: { settings?: any }) {
   const currentLang = mounted ? language : 'tr'
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-kefder-gray-light shadow-sm">
+    <header className="sticky top-0 z-50 bg-kefder-teal border-b border-white/10 shadow-lg">
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo - Left Side */}
@@ -76,8 +76,8 @@ export default function Header({ settings }: { settings?: any }) {
                 />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl lg:text-2xl font-black text-kefder-gray-dark leading-tight whitespace-nowrap">KEFDER</h1>
-                <p className="text-xs lg:text-sm text-kefder-gray font-medium leading-tight whitespace-nowrap">
+                <h1 className="text-xl lg:text-2xl font-black text-white leading-tight whitespace-nowrap">KEFDER</h1>
+                <p className="text-xs lg:text-sm text-white/80 font-medium leading-tight whitespace-nowrap">
                   {currentLang === 'tr'
                     ? 'Kültürel Etkileşim ve Farkındalık Derneği'
                     : 'Cultural Interaction and Awareness Association'}
@@ -92,7 +92,7 @@ export default function Header({ settings }: { settings?: any }) {
               <div key={item.label} className="relative group h-full flex items-center">
                 <Link
                   href={item.href}
-                  className={"px-3 xl:px-4 h-full flex items-center gap-1.5 text-base font-bold transition-colors whitespace-nowrap " + (pathname === item.href ? 'text-kefder-orange' : 'text-kefder-gray-dark hover:text-kefder-orange')}
+                  className={"px-3 xl:px-4 h-full flex items-center gap-1.5 text-base font-bold transition-colors whitespace-nowrap " + (pathname === item.href ? 'text-kefder-yellow' : 'text-white hover:text-kefder-yellow')}
                 >
                   {item.label}
                   {item.dropdown && <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform" />}
@@ -107,9 +107,9 @@ export default function Header({ settings }: { settings?: any }) {
                           <Link 
                             key={subItem.label} 
                             href={subItem.href} 
-                            className="px-4 py-2.5 text-base text-kefder-gray-dark hover:text-kefder-orange hover:bg-kefder-orange/10 rounded-md transition-colors flex items-center gap-3 whitespace-nowrap group/item"
+                            className="px-4 py-2.5 text-base text-kefder-gray-dark hover:text-kefder-teal hover:bg-kefder-teal/10 rounded-md transition-colors flex items-center gap-3 whitespace-nowrap group/item"
                           >
-                            {subItem.icon && <subItem.icon className="w-4 h-4 text-kefder-gray/40 group-hover/item:text-kefder-orange transition-colors" />}
+                            {subItem.icon && <subItem.icon className="w-4 h-4 text-kefder-gray/40 group-hover/item:text-kefder-teal transition-colors" />}
                             {subItem.label}
                           </Link>
                         ))}
@@ -138,7 +138,7 @@ export default function Header({ settings }: { settings?: any }) {
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-4 py-2 text-base font-bold text-kefder-gray-dark hover:text-kefder-orange transition-colors border border-kefder-gray-light rounded-full hover:border-kefder-orange/30 bg-white"
+              className="flex items-center gap-2 px-4 py-2 text-base font-bold text-white hover:text-kefder-yellow transition-colors border border-white/20 rounded-full hover:border-kefder-yellow/30 bg-white/10"
             >
               <Globe className="w-5 h-5" />
               <span>{currentLang === 'tr' ? 'English' : 'Türkçe'}</span>
@@ -147,17 +147,17 @@ export default function Header({ settings }: { settings?: any }) {
             {/* Social Icons */}
             <div className="hidden md:flex items-center gap-2">
               {socialLinks?.facebook && (
-                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-kefder-gray/40 hover:text-kefder-orange hover:bg-kefder-orange/10 rounded-full transition-all border border-kefder-gray-light">
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Facebook className="w-5 h-5" />
                 </a>
               )}
               {socialLinks?.instagram && (
-                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-kefder-gray/40 hover:text-kefder-orange hover:bg-kefder-orange/10 rounded-full transition-all border border-kefder-gray-light">
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Instagram className="w-5 h-5" />
                 </a>
               )}
               {socialLinks?.youtube && (
-                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-kefder-gray/40 hover:text-kefder-orange hover:bg-kefder-orange/10 rounded-full transition-all border border-kefder-gray-light">
+                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Youtube className="w-5 h-5" />
                 </a>
               )}
@@ -165,7 +165,7 @@ export default function Header({ settings }: { settings?: any }) {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden w-12 h-12 flex items-center justify-center text-kefder-gray hover:text-kefder-orange hover:bg-kefder-orange/10 rounded-lg transition-all"
+              className="lg:hidden w-12 h-12 flex items-center justify-center text-white hover:text-kefder-yellow hover:bg-white/10 rounded-lg transition-all"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -175,28 +175,28 @@ export default function Header({ settings }: { settings?: any }) {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl max-h-[80vh] overflow-y-auto">
+        <div className="lg:hidden bg-kefder-teal border-t border-white/10 shadow-xl max-h-[80vh] overflow-y-auto">
           <nav className="px-4 py-4 flex flex-col gap-2">
             {mounted && navItems.map((item) => (
               <div key={item.label}>
                 <Link
                   href={item.href}
                   onClick={() => !item.dropdown && setMobileMenuOpen(false)}
-                  className={"flex items-center justify-between px-4 py-4 text-base font-bold rounded-lg transition-all " + (pathname === item.href ? 'text-kefder-orange bg-kefder-orange/10' : 'text-kefder-gray-dark hover:text-kefder-orange hover:bg-kefder-orange/5')}
+                  className={"flex items-center justify-between px-4 py-4 text-base font-bold rounded-lg transition-all " + (pathname === item.href ? 'text-kefder-yellow bg-white/10' : 'text-white hover:text-kefder-yellow hover:bg-white/5')}
                 >
                   {item.label}
-                  {item.dropdown && <ChevronDown className="w-5 h-5 text-kefder-gray/40" />}
+                  {item.dropdown && <ChevronDown className="w-5 h-5 text-white/60" />}
                 </Link>
                 
                 {/* Mobile Dropdown Subitems */}
                 {item.dropdown && (
-                  <div className="pl-6 pr-4 py-2 flex flex-col gap-1 border-l-2 border-kefder-orange/20 ml-6 mt-1">
+                  <div className="pl-6 pr-4 py-2 flex flex-col gap-1 border-l-2 border-kefder-teal/20 ml-6 mt-1">
                     {item.dropdown.map(subItem => (
                       <Link 
                         key={subItem.label} 
                         href={subItem.href} 
                         onClick={() => setMobileMenuOpen(false)}
-                        className="py-3 text-base text-kefder-gray hover:text-kefder-orange flex items-center gap-3"
+                        className="py-3 text-base text-white hover:text-kefder-yellow flex items-center gap-3"
                       >
                         {subItem.icon && <subItem.icon className="w-5 h-5 text-kefder-gray/40" />}
                         {subItem.label}
@@ -207,19 +207,19 @@ export default function Header({ settings }: { settings?: any }) {
               </div>
             ))}
 
-            <div className="flex items-center justify-center gap-4 pt-6 pb-2 border-t border-gray-100 mt-4">
+            <div className="flex items-center justify-center gap-4 pt-6 pb-2 border-t border-white/10 mt-4">
               {socialLinks?.facebook && (
-                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Facebook className="w-6 h-6" />
                 </a>
               )}
               {socialLinks?.instagram && (
-                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Instagram className="w-6 h-6" />
                 </a>
               )}
               {socialLinks?.youtube && (
-                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Youtube className="w-6 h-6" />
                 </a>
               )}
