@@ -19,7 +19,17 @@ export async function getAboutData() {
     "about": *[_type == "about"][0] {
       description,
       mission,
-      vision
+      vision,
+      quote,
+      philosophyText,
+      "philosophyImageUrl": philosophyImage.asset->url,
+      targetAudiences,
+      activities,
+      "networks": networks[] {
+        description,
+        "logoUrl": logo.asset->url,
+        url
+      }
     }
   }`
 

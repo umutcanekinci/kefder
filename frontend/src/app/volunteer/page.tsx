@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 import { useLanguage } from '@/context/LanguageContext'
 
 export default function MembershipPage() {
@@ -11,27 +11,7 @@ export default function MembershipPage() {
         <h1 className="text-4xl font-bold mb-2">{t('volunteer.title')}</h1>
         <p className="text-sm opacity-90">{t('volunteer.breadcrumb')}</p>
       </div>
-      {/* İSTATİSTİK */}
-      <div className="bg-white py-10 shadow-sm">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 text-center gap-6">
-          <div>
-            <h2 className="text-3xl font-bold text-orange-500">500+</h2>
-            <p className="text-gray-500 text-sm">{t('volunteer.stats.members')}</p>
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold text-orange-500">50+</h2>
-            <p className="text-gray-500 text-sm">{t('volunteer.stats.projects')}</p>
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold text-orange-500">1000+</h2>
-            <p className="text-gray-500 text-sm">{t('volunteer.stats.participants')}</p>
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold text-orange-500">12</h2>
-            <p className="text-gray-500 text-sm">{t('volunteer.stats.experience')}</p>
-          </div>
-        </div>
-      </div>
+
       {/* ANA İÇERİK */}
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 py-16 px-4">
         {/* SOL TARAF */}

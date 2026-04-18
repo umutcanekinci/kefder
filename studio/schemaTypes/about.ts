@@ -22,6 +22,50 @@ export const aboutType = defineType({
       title: 'Vizyonumuz',
       type: 'localeString',
     }),
+    defineField({
+      name: 'quote',
+      title: 'Motivasyon Sözü / Alıntı',
+      type: 'localeString',
+      description: 'Atatürk veya önemli şahsiyetlerin sözü için.',
+    }),
+    defineField({
+      name: 'philosophyText',
+      title: 'Felsefemiz / Hakkımızda Metni',
+      type: 'localeBlock',
+    }),
+    defineField({
+      name: 'philosophyImage',
+      title: 'Felsefe Görseli',
+      type: 'image',
+      options: {hotspot: true},
+    }),
+    defineField({
+      name: 'targetAudiences',
+      title: 'Hedef Kitlemiz',
+      type: 'array',
+      of: [{type: 'localeString'}],
+    }),
+    defineField({
+      name: 'activities',
+      title: 'Faaliyet Alanlarımız',
+      type: 'array',
+      of: [{type: 'localeString'}],
+    }),
+    defineField({
+      name: 'networks',
+      title: 'Üyesi Olduğumuz Ağlar',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {name: 'logo', title: 'Logo', type: 'image', options: {hotspot: true}},
+            {name: 'description', title: 'Ağ Açıklaması (Tam Ad)', type: 'string'},
+            {name: 'url', title: 'Web Sitesi URL', type: 'url'},
+          ],
+        },
+      ],
+    }),
   ],
   preview: {
     prepare() {
