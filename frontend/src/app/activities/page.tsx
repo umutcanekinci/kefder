@@ -23,58 +23,7 @@ type EventItem = {
   status?: EventStatus
 }
 
-const defaultEvents: EventItem[] = [
-  {
-    _id: '1',
-    title: 'Hayatınıza Dokunan Gelişim Programı',
-    description: 'Kişisel gelişim atölyesi - 18 yaş ve üzeri',
-    date: '2026-04-01',
-    time: '16:00 - 17:00',
-    location: 'Altındağ AKM',
-    category: 'Atölye',
-    status: 'upcoming',
-  },
-  {
-    _id: '2',
-    title: 'İleri Dönüşüm Tasarım Atölyesi',
-    description: 'Upcycling workshop - Kontenjan sınırlı',
-    date: '2026-04-01',
-    time: '12:00 - 15:00',
-    location: 'Altındağ AKM',
-    category: 'Atölye',
-    status: 'upcoming',
-  },
-  {
-    _id: '3',
-    title: 'Bahar Buluşması',
-    description: 'Üyelerimiz ve gönüllülerimizle bahar şenliği',
-    date: '2026-05-15',
-    time: '14:00 - 18:00',
-    location: 'STK Yerleşkesi Bahçesi',
-    category: 'Etkinlik',
-    status: 'upcoming',
-  },
-  {
-    _id: '4',
-    title: 'Atamızın İzinde Kadınlar Yaratıyor Sergisi',
-    description: 'Sanat sergisi açılışı ve kokteyl',
-    date: '2026-01-06',
-    time: '14:00',
-    location: 'Altındağ AKM',
-    category: 'Sergi',
-    status: 'completed',
-  },
-  {
-    _id: '5',
-    title: 'Deneme Etkinliği',
-    description: 'Test amaçlı eklenen etkinlik',
-    date: '2026-06-10',
-    time: '15:00',
-    location: 'İzmir',
-    category: 'Etkinlik',
-    status: 'upcoming',
-  },
-]
+const defaultEvents: EventItem[] = []
 
 function formatMonthYear(date: Date) {
   return new Intl.DateTimeFormat('tr-TR', {
@@ -140,9 +89,8 @@ export default function ActivitiesPage() {
     getEvents()
       .then((data) => {
         console.log('SANITY DATA FROM SERVER ACTION:', data)
-        if (Array.isArray(data) && data.length > 0) {
-          const merged = [...defaultEvents, ...data]
-          setEvents(merged)
+        if (Array.isArray(data)) {
+          setEvents(data)
         }
       })
       .catch((error) => {

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from 'react'
 import Header from '@/sections/Header'
@@ -9,7 +9,7 @@ import AdminPanel from '@/sections/AdminPanel'
 import { LanguageProvider } from '@/context/LanguageContext'
 import { AdminProvider, useAdmin } from '@/context/AdminContext'
 
-function AppContent({ children }: { children: React.ReactNode }) {
+function AppContent({ children, settings }: { children: React.ReactNode, settings?: any }) {
   const [showAdminLogin, setShowAdminLogin] = useState(false)
   const [showAdminPanel, setShowAdminPanel] = useState(false)
   const { isLoggedIn } = useAdmin()
@@ -24,11 +24,11 @@ function AppContent({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-[#FDF6F0]">
-      <Header />
+      <Header settings={settings} />
       <main>
         {children}
       </main>
-      <Footer onAdminClick={handleAdminClick} />
+      <Footer onAdminClick={handleAdminClick} settings={settings} />
 
       <AdminLogin
         isOpen={showAdminLogin}
@@ -43,11 +43,11 @@ function AppContent({ children }: { children: React.ReactNode }) {
   )
 }
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function Providers({ children, settings }: { children: React.ReactNode, settings?: any }) {
   return (
     <LanguageProvider>
       <AdminProvider>
-        <AppContent>{children}</AppContent>
+        <AppContent settings={settings}>{children}</AppContent>
       </AdminProvider>
     </LanguageProvider>
   )

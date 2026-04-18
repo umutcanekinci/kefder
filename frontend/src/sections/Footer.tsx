@@ -5,10 +5,12 @@ import { useLanguage } from '../context/LanguageContext'
 
 interface FooterProps {
   onAdminClick: () => void
+  settings?: any
 }
 
-export default function Footer({ onAdminClick }: FooterProps) {
+export default function Footer({ onAdminClick, settings }: FooterProps) {
   const { t, language } = useLanguage()
+  const { socialLinks, contactInfo } = settings || {}
 
   const quickLinks = [
     { label: t('nav.home'), href: '/' },
@@ -53,22 +55,36 @@ export default function Footer({ onAdminClick }: FooterProps) {
             
             {/* Social Icons */}
             <div className="flex items-center gap-3 mt-6">
-              <a
-                href="https://www.facebook.com/share/18A2bMLZXm/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.instagram.com/kefder_org_ciaa"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
+              {socialLinks?.facebook && (
+                <a
+                  href={socialLinks.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200"
+                >
+                  <Facebook className="w-5 h-5" />
+                </a>
+              )}
+              {socialLinks?.instagram && (
+                <a
+                  href={socialLinks.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200"
+                >
+                  <Instagram className="w-5 h-5" />
+                </a>
+              )}
+              {socialLinks?.youtube && (
+                <a
+                  href={socialLinks.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200"
+                >
+                  <Youtube className="w-5 h-5" />
+                </a>
+              )}
             </div>
           </div>
 
@@ -113,19 +129,19 @@ export default function Footer({ onAdminClick }: FooterProps) {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
                 <span className="text-sm text-gray-400">
-                  {t('footer.address')}
+                  {contactInfo?.address || t('footer.address')}
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                <a href="tel:02329992929" className="text-sm text-gray-400 hover:text-orange-400 transition-colors">
-                  0232 999 29 29
+                <a href={`tel:${contactInfo?.phone?.replace(/\s+/g, '') || '02329992929'}`} className="text-sm text-gray-400 hover:text-orange-400 transition-colors">
+                  {contactInfo?.phone || '0232 999 29 29'}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                <a href="mailto:info@kefder.org" className="text-sm text-gray-400 hover:text-orange-400 transition-colors">
-                  info@kefder.org
+                <a href={`mailto:${contactInfo?.email || 'info@kefder.org'}`} className="text-sm text-gray-400 hover:text-orange-400 transition-colors">
+                  {contactInfo?.email || 'info@kefder.org'}
                 </a>
               </li>
             </ul>

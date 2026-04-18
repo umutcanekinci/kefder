@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
@@ -34,12 +34,13 @@ const getNavItems = (t: (key: string) => string) => [
   { label: t('nav.contact'), href: '/contact' },
 ]
 
-export default function Header() {
+export default function Header({ settings }: { settings?: any }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { language, setLanguage, t } = useLanguage()
   const pathname = usePathname()
 
   const navItems = getNavItems(t)
+  const { socialLinks } = settings || {}
 
   const toggleLanguage = () => {
     setLanguage(language === 'tr' ? 'en' : 'tr')
@@ -121,15 +122,21 @@ export default function Header() {
 
             {/* Social Icons */}
             <div className="hidden md:flex items-center gap-1">
-              <a href="#" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                <Youtube className="w-4 h-4" />
-              </a>
+              {socialLinks?.facebook && (
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
+                  <Facebook className="w-4 h-4" />
+                </a>
+              )}
+              {socialLinks?.instagram && (
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
+                  <Instagram className="w-4 h-4" />
+                </a>
+              )}
+              {socialLinks?.youtube && (
+                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
+                  <Youtube className="w-4 h-4" />
+                </a>
+              )}
             </div>
 
             <button
@@ -176,15 +183,21 @@ export default function Header() {
             ))}
 
             <div className="flex items-center justify-center gap-4 pt-6 pb-2 border-t border-gray-100 mt-4">
-              <a href="#" className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                <Youtube className="w-5 h-5" />
-              </a>
+              {socialLinks?.facebook && (
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
+                  <Facebook className="w-5 h-5" />
+                </a>
+              )}
+              {socialLinks?.instagram && (
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
+                  <Instagram className="w-5 h-5" />
+                </a>
+              )}
+              {socialLinks?.youtube && (
+                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
+                  <Youtube className="w-5 h-5" />
+                </a>
+              )}
             </div>
           </nav>
         </div>
