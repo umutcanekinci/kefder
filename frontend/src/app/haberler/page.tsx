@@ -4,6 +4,7 @@ import { getNews } from './actions'
 import { Calendar, ArrowRight, Newspaper } from 'lucide-react'
 import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
+import ScrollReveal from '@/components/shared/ScrollReveal'
 
 export default function NewsPage() {
   const [news, setNews] = useState<any[]>([])
@@ -35,68 +36,72 @@ export default function NewsPage() {
       {/* Header Section */}
       <section className="bg-[#1F2A44] text-white py-24 px-4 mb-16 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full text-orange-400 text-xs font-bold uppercase tracking-widest mb-6 border border-white/10">
-            <Newspaper className="w-4 h-4" />
-            {currentLang === 'tr' ? "KEFDER'den Güncel Bilgiler" : "Latest Updates from KEFDER"}
+        <ScrollReveal>
+          <div className="max-w-7xl mx-auto text-center relative z-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full text-orange-400 text-xs font-bold uppercase tracking-widest mb-6 border border-white/10">
+              <Newspaper className="w-4 h-4" />
+              {currentLang === 'tr' ? "KEFDER'den Güncel Bilgiler" : "Latest Updates from KEFDER"}
+            </div>
+            <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+              {currentLang === 'tr' ? 'Haberler ve Duyurular' : 'News and Announcements'}
+            </h1>
+            <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+              {currentLang === 'tr' 
+                ? 'Derneğimizden en son haberler, etkinlik duyuruları ve toplumsal farkındalık çalışmalarımız.'
+                : 'Latest news from our association, event announcements and social awareness activities.'}
+            </p>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-            {currentLang === 'tr' ? 'Haberler ve Duyurular' : 'News and Announcements'}
-          </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-            {currentLang === 'tr' 
-              ? 'Derneğimizden en son haberler, etkinlik duyuruları ve toplumsal farkındalık çalışmalarımız.'
-              : 'Latest news from our association, event announcements and social awareness activities.'}
-          </p>
-        </div>
+        </ScrollReveal>
       </section>
 
       <div className="max-w-7xl mx-auto px-4">
         {news.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {news.map((item) => (
-              <article key={item._id} className="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col hover:-translate-y-2">
-                {/* Image Container */}
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img 
-                    src={item.mainImage || "/images/asset_1.jpg"} 
-                    alt={item.title?.[currentLang] || item.title?.tr}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-sm flex items-center gap-2">
-                      <Calendar className="w-3.5 h-3.5 text-orange-500" />
-                      <span className="text-[11px] font-bold text-[#1F2A44]">
-                        {new Date(item.publishedAt).toLocaleDateString(currentLang === 'tr' ? 'tr-TR' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
-                      </span>
+            {news.map((item, index) => (
+              <ScrollReveal key={item._id} delay={index * 0.1} direction="up">
+                <article className="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col hover:-translate-y-2 h-full">
+                  {/* Image Container */}
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img 
+                      src={item.mainImage || "/images/asset_1.jpg"} 
+                      alt={item.title?.[currentLang] || item.title?.tr}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-sm flex items-center gap-2">
+                        <Calendar className="w-3.5 h-3.5 text-orange-500" />
+                        <span className="text-[11px] font-bold text-[#1F2A44]">
+                          {new Date(item.publishedAt).toLocaleDateString(currentLang === 'tr' ? 'tr-TR' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className="p-8 flex flex-col flex-1">
-                  <h2 className="text-xl font-bold text-[#1F2A44] mb-4 line-clamp-2 leading-tight group-hover:text-orange-500 transition-colors">
-                    {item.title?.[currentLang] || item.title?.tr}
-                  </h2>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-8 line-clamp-3">
-                    {/* Snippet from body or a localized static description if body is complex */}
-                    {item.body?.[currentLang]?.[0]?.children?.[0]?.text || 
-                     (currentLang === 'tr' 
-                      ? 'Haber detayları için tıklayınız.' 
-                      : 'Click for news details.')}
-                  </p>
-                  
-                  <div className="mt-auto">
-                    <Link 
-                      href={`/haberler/${item.slug}`}
-                      className="inline-flex items-center gap-2 text-[#1F2A44] font-bold text-sm hover:text-orange-500 transition-all group/link"
-                    >
-                      {currentLang === 'tr' ? 'Devamını Oku' : 'Read More'}
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
-                    </Link>
+                  {/* Content */}
+                  <div className="p-8 flex flex-col flex-1">
+                    <h2 className="text-xl font-bold text-[#1F2A44] mb-4 line-clamp-2 leading-tight group-hover:text-orange-500 transition-colors">
+                      {item.title?.[currentLang] || item.title?.tr}
+                    </h2>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                      {/* Snippet from body or a localized static description if body is complex */}
+                      {item.body?.[currentLang]?.[0]?.children?.[0]?.text || 
+                       (currentLang === 'tr' 
+                        ? 'Haber detayları için tıklayınız.' 
+                        : 'Click for news details.')}
+                    </p>
+                    
+                    <div className="mt-auto">
+                      <Link 
+                        href={`/haberler/${item.slug}`}
+                        className="inline-flex items-center gap-2 text-[#1F2A44] font-bold text-sm hover:text-orange-500 transition-all group/link"
+                      >
+                        {currentLang === 'tr' ? 'Devamını Oku' : 'Read More'}
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
         ) : (

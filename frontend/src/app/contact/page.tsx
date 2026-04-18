@@ -4,6 +4,7 @@ import { FaFacebook as Facebook, FaInstagram as Instagram, FaYoutube as Youtube 
 import { MapPin, Phone, Mail, Clock3, Send } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
 import { getContactData } from './actions'
+import ScrollReveal from '@/components/shared/ScrollReveal'
 
 export default function ContactPage() {
   const { t, language } = useLanguage()
@@ -45,143 +46,149 @@ export default function ContactPage() {
       {/* ANA İÇERİK */}
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
-          {/* ÜST ORTA BAŞLIK */}
-          <div className="mx-auto mb-14 max-w-2xl text-center">
-            <div className="inline-flex rounded-full bg-orange-100 px-4 py-1.5 text-sm font-semibold text-orange-600">
-              {t('contact.badge')}
+          <ScrollReveal>
+            {/* ÜST ORTA BAŞLIK */}
+            <div className="mx-auto mb-14 max-w-2xl text-center">
+              <div className="inline-flex rounded-full bg-orange-100 px-4 py-1.5 text-sm font-semibold text-orange-600">
+                {t('contact.badge')}
+              </div>
+              <h2 className="mt-5 text-4xl font-bold tracking-tight text-[#1F2A44]">
+                {t('contact.title')}
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-gray-500">
+                {t('contact.desc')}
+              </p>
             </div>
-            <h2 className="mt-5 text-4xl font-bold tracking-tight text-[#1F2A44]">
-              {t('contact.title')}
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-gray-500">
-              {t('contact.desc')}
-            </p>
-          </div>
+          </ScrollReveal>
 
           <div className="grid gap-10 lg:grid-cols-2">
             {/* SOL TARAF */}
-            <div>
-              <h3 className="text-3xl font-bold text-[#1F2A44]">
-                {t('contact.info.title')}
-              </h3>
-              <p className="mt-4 max-w-xl text-lg leading-8 text-gray-500">
-                {t('contact.info.desc')}
-              </p>
-
-              <div className="mt-8 space-y-5">
-                <InfoCard
-                  icon={<MapPin className="h-6 w-6" />}
-                  title={t('contact.info.address')}
-                  lines={[
-                    contactInfo?.address || (currentLang === 'tr' ? 'İzmir, Türkiye' : 'Izmir, Turkey')
-                  ]}
-                />
-
-                <InfoCard
-                  icon={<Phone className="h-6 w-6" />}
-                  title={t('contact.info.phone')}
-                  lines={[
-                    contactInfo?.phone || '+90 (232) 999 29 29'
-                  ]}
-                />
-
-                <InfoCard
-                  icon={<Mail className="h-6 w-6" />}
-                  title={t('contact.info.email')}
-                  lines={[
-                    contactInfo?.email || 'info@kefder.org'
-                  ]}
-                />
-
-                <InfoCard
-                  icon={<Clock3 className="h-6 w-6" />}
-                  title={t('contact.info.hours')}
-                  lines={[
-                    contactInfo?.workingHours?.[currentLang] || 
-                    contactInfo?.workingHours?.tr || 
-                    t('contact.info.hours.detail')
-                  ]}
-                />
-              </div>
-
-              {/* SOSYAL MEDYA */}
-              <div className="mt-12">
-                <h4 className="text-xl font-bold text-[#1F2A44]">
-                  {t('contact.social.title')}
-                </h4>
-                <p className="mt-2 text-sm text-gray-500">
-                  {t('contact.social.desc')}
+            <ScrollReveal direction="left">
+              <div>
+                <h3 className="text-3xl font-bold text-[#1F2A44]">
+                  {t('contact.info.title')}
+                </h3>
+                <p className="mt-4 max-w-xl text-lg leading-8 text-gray-500">
+                  {t('contact.info.desc')}
                 </p>
-                <div className="mt-4 flex gap-4">
-                  {socialLinks?.facebook && <SocialButton icon={<Facebook className="w-5 h-5" />} href={socialLinks.facebook} />}
-                  {socialLinks?.instagram && <SocialButton icon={<Instagram className="w-5 h-5" />} href={socialLinks.instagram} />}
-                  {socialLinks?.youtube && <SocialButton icon={<Youtube className="w-5 h-5" />} href={socialLinks.youtube} />}
+
+                <div className="mt-8 space-y-5">
+                  <InfoCard
+                    icon={<MapPin className="h-6 w-6" />}
+                    title={t('contact.info.address')}
+                    lines={[
+                      contactInfo?.address || (currentLang === 'tr' ? 'İzmir, Türkiye' : 'Izmir, Turkey')
+                    ]}
+                  />
+
+                  <InfoCard
+                    icon={<Phone className="h-6 w-6" />}
+                    title={t('contact.info.phone')}
+                    lines={[
+                      contactInfo?.phone || '+90 (232) 999 29 29'
+                    ]}
+                  />
+
+                  <InfoCard
+                    icon={<Mail className="h-6 w-6" />}
+                    title={t('contact.info.email')}
+                    lines={[
+                      contactInfo?.email || 'info@kefder.org'
+                    ]}
+                  />
+
+                  <InfoCard
+                    icon={<Clock3 className="h-6 w-6" />}
+                    title={t('contact.info.hours')}
+                    lines={[
+                      contactInfo?.workingHours?.[currentLang] || 
+                      contactInfo?.workingHours?.tr || 
+                      t('contact.info.hours.detail')
+                    ]}
+                  />
+                </div>
+
+                {/* SOSYAL MEDYA */}
+                <div className="mt-12">
+                  <h4 className="text-xl font-bold text-[#1F2A44]">
+                    {t('contact.social.title')}
+                  </h4>
+                  <p className="mt-2 text-sm text-gray-500">
+                    {t('contact.social.desc')}
+                  </p>
+                  <div className="mt-4 flex gap-4">
+                    {socialLinks?.facebook && <SocialButton icon={<Facebook className="w-5 h-5" />} href={socialLinks.facebook} />}
+                    {socialLinks?.instagram && <SocialButton icon={<Instagram className="w-5 h-5" />} href={socialLinks.instagram} />}
+                    {socialLinks?.youtube && <SocialButton icon={<Youtube className="w-5 h-5" />} href={socialLinks.youtube} />}
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* SAĞ TARAF (FORM) */}
-            <div className="rounded-[32px] bg-white p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] sm:p-10">
-              <h3 className="text-2xl font-bold text-[#1F2A44]">
-                {t('contact.form.title')}
-              </h3>
+            <ScrollReveal direction="right" delay={0.2}>
+              <div className="rounded-[32px] bg-white p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] sm:p-10">
+                <h3 className="text-2xl font-bold text-[#1F2A44]">
+                  {t('contact.form.title')}
+                </h3>
 
-              <form className="mt-8 space-y-5">
-                <div className="grid gap-5 sm:grid-cols-2">
+                <form className="mt-8 space-y-5">
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-gray-700">
+                        {t('contact.form.name')}
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
+                        placeholder={currentLang === 'tr' ? "Adınız Soyadınız" : "Your Name"}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-gray-700">
+                        {t('contact.form.email')}
+                      </label>
+                      <input
+                        type="email"
+                        className="w-full rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
+                        placeholder="example@email.com"
+                      />
+                    </div>
+                  </div>
+
                   <div>
                     <label className="mb-2 block text-sm font-medium text-gray-700">
-                      {t('contact.form.name')}
+                      {t('contact.form.subject')}
                     </label>
                     <input
                       type="text"
                       className="w-full rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
-                      placeholder={currentLang === 'tr' ? "Adınız Soyadınız" : "Your Name"}
+                      placeholder={currentLang === 'tr' ? "Mesajınızın konusu" : "Subject of your message"}
                     />
                   </div>
 
                   <div>
                     <label className="mb-2 block text-sm font-medium text-gray-700">
-                      {t('contact.form.email')}
+                      {t('contact.form.message')}
                     </label>
-                    <input
-                      type="email"
-                      className="w-full rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
-                      placeholder="example@email.com"
+                    <textarea
+                      rows={5}
+                      className="w-full resize-none rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
+                      placeholder={currentLang === 'tr' ? "Bize ne iletmek istersiniz?" : "What would you like to tell us?"}
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-gray-700">
-                    {t('contact.form.subject')}
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
-                    placeholder={currentLang === 'tr' ? "Mesajınızın konusu" : "Subject of your message"}
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-gray-700">
-                    {t('contact.form.message')}
-                  </label>
-                  <textarea
-                    rows={5}
-                    className="w-full resize-none rounded-xl border border-gray-200 bg-[#FAF7F3] px-4 py-3.5 text-sm text-[#1F2A44] transition-colors focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:outline-none"
-                    placeholder={currentLang === 'tr' ? "Bize ne iletmek istersiniz?" : "What would you like to tell us?"}
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  className="group flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 px-8 py-4 text-sm font-bold text-white shadow-[0_8px_20px_rgba(249,115,22,0.25)] transition-all hover:-translate-y-0.5 hover:bg-orange-600 hover:shadow-[0_10px_25px_rgba(249,115,22,0.35)] focus:ring-4 focus:ring-orange-500/20 focus:outline-none"
-                >
-                  <Send className="w-4 h-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-                  {t('contact.form.submit')}
-                </button>
-              </form>
-            </div>
+                  <button
+                    type="button"
+                    className="group flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 px-8 py-4 text-sm font-bold text-white shadow-[0_8px_20px_rgba(249,115,22,0.25)] transition-all hover:-translate-y-0.5 hover:bg-orange-600 hover:shadow-[0_10px_25px_rgba(249,115,22,0.35)] focus:ring-4 focus:ring-orange-500/20 focus:outline-none"
+                  >
+                    <Send className="w-4 h-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+                    {t('contact.form.submit')}
+                  </button>
+                </form>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>

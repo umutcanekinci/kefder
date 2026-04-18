@@ -81,6 +81,15 @@ export const aboutType = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'officialBylaws',
+      title: 'Resmi Tüzük Dosyası',
+      type: 'file',
+      description: 'Derneğin resmi tüzük dökümanı (Örn: Kefder_Tüzük_2017)',
+      options: {
+        accept: '.pdf',
+      },
+    }),
   ],
   preview: {
     prepare() {

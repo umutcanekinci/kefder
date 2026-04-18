@@ -1,84 +1,106 @@
 "use client"
-import React from 'react'
-import { ArrowRight } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { ArrowRight, GraduationCap, Palette, Music, Landmark, Heart, Globe, Activity } from 'lucide-react'
 import Link from 'next/link'
 import ScrollReveal from '@/components/shared/ScrollReveal'
+import { getHomeActivities } from '@/app/homeActions'
+import { useLanguage } from '@/context/LanguageContext'
 
-const activities = [
-  {
-    id: 1,
-    title: 'Kültürel Etkileşim',
-    desc: 'Farklı kültürlerin bir araya gelerek ortak değerler ürettiği atölye ve projeler.',
-    category: 'Etkileşim',
-    image: '/images/asset_1.jpg'
-  },
-  {
-    id: 2,
-    title: 'Sivil Toplum Eğitimi',
-    desc: 'Gençlerin ve gönüllülerin sivil toplum alanında kapasitelerini artıracak eğitimler.',
-    category: 'Eğitim',
-    image: '/images/hero_img.jpg'
-  },
-  {
-    id: 3,
-    title: 'Çevre ve Doğa',
-    desc: 'Sürdürülebilir bir gelecek için ekoloji ve doğa bilinci odaklı faaliyetler.',
-    category: 'Ekoloji',
-    image: '/images/asset_1.jpg'
-  }
-]
+const iconMap: Record<string, any> = {
+  GraduationCap,
+  Palette,
+  Music,
+  Landmark,
+  Heart,
+  Globe,
+  Activity
+}
 
 export default function HomeActivities() {
+  const [activities, setActivities] = useState<any[]>([])
+  const { language, t } = useLanguage()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getHomeActivities().then(data => {
+      setActivities(data)
+      setLoading(false)
+    })
+  }, [])
+
+  // 6 default groups for demonstration or fallback
+  const defaultActivities = [
+    { title: { tr: 'Eğitim', en: 'Education' }, category: 'Eğitim', icon: 'GraduationCap', desc: { tr: 'Geleceğin liderleri için kapsayıcı eğitim programları.', en: 'Inclusive education programs for future leaders.' } },
+    { title: { tr: 'Sanat', en: 'Art' }, category: 'Kültür', icon: 'Palette', desc: { tr: 'Yaratıcılığı destekleyen sanatsal projeler ve sergiler.', en: 'Artistic projects and exhibitions supporting creativity.' } },
+    { title: { tr: 'Müzik', en: 'Music' }, category: 'Kültür', icon: 'Music', desc: { tr: 'Kültürlerarası köprüler kuran müzikal etkileşimler.', en: 'Musical interactions building intercultural bridges.' } },
+    { title: { tr: 'Kültürel Miras', en: 'Cultural Heritage' }, category: 'Mirasa Sahip Çık', icon: 'Landmark', desc: { tr: 'Geleneksel değerlerimizi koruma ve tanıtma çalışmaları.', en: 'Protecting and promoting our traditional values.' } },
+    { title: { tr: 'Dayanışma', en: 'Solidarity' }, category: 'Toplum', icon: 'Heart', desc: { tr: 'Toplumsal bağları güçlendiren yardımlaşma ağları.', en: 'Support networks strengthening social bonds.' } },
+    { title: { tr: 'Dijital Farkındalık', en: 'Digital Awareness' }, category: 'Teknoloji', icon: 'Globe', desc: { tr: 'Dijital dünyada güvenli ve bilinçli etkileşim eğitimleri.', en: 'Training for safe and conscious interaction in the digital world.' } },
+  ]
+
+  const displayActivities = activities.length > 0 ? activities : defaultActivities
+
   return (
-    <section className="py-24 px-4 bg-[#FDF6F0] overflow-hidden">
+    <section className="py-24 px-4 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <ScrollReveal>
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-block px-4 py-2 bg-kefder-orange/10 text-kefder-orange-dark rounded-full text-xs font-bold uppercase tracking-widest mb-4">
-              FAALİYETLERİMİZ
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <div className="inline-block px-4 py-2 bg-kefder-teal/10 text-kefder-teal rounded-full text-xs font-bold uppercase tracking-widest mb-4">
+              {t('nav.activities')}
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-kefder-gray-dark mb-4">Neler Yapıyoruz?</h2>
-            <p className="text-kefder-gray text-lg">Toplumsal fayda odaklı ana faaliyet alanlarımız ve yürüttüğümüz çalışmalar.</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-kefder-gray-dark mb-6">Sürdürdüğümüz Çalışmalar</h2>
+            <p className="text-kefder-gray text-lg leading-relaxed">
+              Toplumsal farkındalığı artırmak ve kültürel etkileşimi güçlendirmek için 6 ana grupta projeler üretiyoruz.
+            </p>
           </div>
         </ScrollReveal>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {activities.map((activity, index) => (
-            <ScrollReveal key={activity.id} delay={index * 0.1}>
-              <div className="bg-white rounded-[32px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group border border-gray-100 h-full">
-                {/* Image Section */}
-                <div className="h-64 relative overflow-hidden">
-                  <img 
-                    src={activity.image} 
-                    alt={activity.title} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-kefder-orange shadow-sm uppercase tracking-wider">
-                    {activity.category}
-                  </div>
-                </div>
+        {/* Grid - 3x2 Structure */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {displayActivities.slice(0, 6).map((activity, index) => {
+            const IconComponent = iconMap[activity.icon] || Activity
+            const title = activity.title?.[language] || activity.title?.tr || activity.title
+            const desc = activity.description?.[language] || activity.description?.tr || activity.desc?.[language] || activity.desc?.tr
 
-                {/* Content Section */}
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-kefder-gray-dark mb-4 group-hover:text-kefder-orange transition-colors">
-                    {activity.title}
-                  </h3>
-                  <p className="text-kefder-gray mb-8 leading-relaxed">
-                    {activity.desc}
-                  </p>
+            return (
+              <ScrollReveal key={activity._id || index} delay={index * 0.1}>
+                <div className="group relative bg-kefder-gray-light/30 rounded-[40px] p-10 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-kefder-teal/10 h-full flex flex-col">
+                  {/* Icon & Category */}
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-kefder-teal shadow-sm group-hover:bg-kefder-teal group-hover:text-white transition-all duration-500">
+                      <IconComponent className="w-8 h-8" />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-kefder-gray/40 group-hover:text-kefder-teal transition-colors">
+                      {activity.category}
+                    </span>
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-grow">
+                    <h3 className="text-2xl font-bold text-kefder-gray-dark mb-4 group-hover:text-kefder-teal transition-colors">
+                      {title}
+                    </h3>
+                    <p className="text-kefder-gray leading-relaxed mb-8">
+                      {desc}
+                    </p>
+                  </div>
+
+                  {/* Action */}
                   <Link 
                     href="/activities" 
-                    className="inline-flex items-center gap-2 text-kefder-orange font-bold group/link"
+                    className="mt-auto inline-flex items-center gap-2 text-kefder-teal font-bold group/link"
                   >
                     Detayları Gör
                     <ArrowRight className="w-5 h-5 group-hover/link:translate-x-2 transition-transform" />
                   </Link>
+
+                  {/* Decorative element */}
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-kefder-teal/5 rounded-bl-[100px] -z-10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-              </div>
-            </ScrollReveal>
-          ))}
+              </ScrollReveal>
+            )
+          })}
         </div>
       </div>
     </section>

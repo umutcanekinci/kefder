@@ -33,16 +33,16 @@ export const eventType = defineType({
       type: 'localeString',
     }),
     defineField({
-      name: 'mainImage',
-      title: 'Etkinlik Afişi/Görseli',
+      name: 'eventPoster',
+      title: 'Etkinlik Afişi',
       type: 'image',
       options: {
         hotspot: true,
       },
     }),
     defineField({
-      name: 'description',
-      title: 'Etkinlik Detayları',
+      name: 'content',
+      title: 'Etkinlik İçeriği (Detaylı)',
       type: 'localeBlock',
     }),
     defineField({
@@ -57,7 +57,7 @@ export const eventType = defineType({
     select: {
       title: 'title.tr',
       subtitle: 'eventDate',
-      media: 'mainImage',
+      media: 'eventPoster',
     },
   },
 })

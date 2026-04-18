@@ -16,6 +16,12 @@ export async function getAboutData() {
       category,
       "fileUrl": file.asset->url
     },
+    "archive": *[_type == "documentArchive"] | order(publishDate desc) {
+      _id,
+      title,
+      fileType,
+      "fileUrl": file.asset->url
+    },
     "about": *[_type == "about"][0] {
       description,
       mission,
@@ -26,6 +32,7 @@ export async function getAboutData() {
       targetAudiences,
       activities,
       logoFeatures,
+      "officialBylawsUrl": officialBylaws.asset->url,
       "networks": networks[] {
         description,
         shortDescription,
@@ -38,7 +45,7 @@ export async function getAboutData() {
   try {
     const result = await sanity.fetch(query, {}, { 
       next: { 
-        tags: ['teamMember', 'kefderDocument', 'about'],
+        tags: ['teamMember', 'kefderDocument', 'documentArchive', 'about'],
         revalidate: 0 
       } 
     })
