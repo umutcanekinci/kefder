@@ -34,70 +34,121 @@ export default function LogoMeaning({ features, language }: LogoMeaningProps) {
   if (!features || features.length === 0) return null
 
   return (
-    <div className="w-full py-16 bg-white overflow-hidden">
+    <div className="w-full py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-800 mb-4">Logo Anlamı</h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">Kurumsal kimliğimizin temel taşı olan logomuzun her detayı, derneğimizin vizyonunu ve değerlerini temsil eder.</p>
+        <div className="text-center mb-20">
+          <div className="inline-block px-4 py-2 bg-kefder-teal/10 text-kefder-teal rounded-full text-xs font-bold uppercase tracking-widest mb-4">
+            KURUMSAL KİMLİK
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-kefder-gray-dark mb-4">Logo Anlamı</h2>
+          <p className="text-gray-500 max-w-2xl mx-auto">Logomuzun her detayı, derneğimizin vizyonunu ve değerlerini temsil eden birer semboldür.</p>
         </div>
 
-        {/* Desktop View: Interactive Logo */}
-        <div className="hidden lg:block relative max-w-2xl mx-auto aspect-square">
-          {/* Main Logo */}
-          <div className="absolute inset-0 flex items-center justify-center p-20">
-             <div className="relative w-full h-full p-12 bg-gray-50/50 rounded-full border border-gray-100 shadow-inner">
+        {/* Desktop View: Interactive Logo with Side Panels */}
+        <div className="hidden lg:flex items-center justify-center gap-16 relative min-h-[700px]">
+          
+          {/* Left Content Area */}
+          <div className="w-[380px] shrink-0 h-[500px] flex flex-col justify-center items-end text-right">
+            <AnimatePresence mode="wait">
+              {activeIndex !== null && activeIndex % 2 === 0 ? (
+                <motion.div
+                  key={`left-${activeIndex}`}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  className="space-y-6"
+                >
+                  <div className="inline-block w-16 h-1.5 bg-kefder-teal rounded-full"></div>
+                  <h4 className="text-3xl font-bold text-kefder-gray-dark">{getTitle(features[activeIndex])}</h4>
+                  <p className="text-lg text-kefder-gray leading-relaxed">{getDesc(features[activeIndex])}</p>
+                </motion.div>
+              ) : (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.2 }}
+                  className="text-gray-400 italic text-lg"
+                >
+                  İşaretçilerin üzerine gelerek <br /> anlamlarını keşfedin
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Center Logo Circle */}
+          <div className="relative w-[650px] h-[650px] shrink-0">
+            {/* Background Rings */}
+            <div className="absolute inset-0 border-2 border-dashed border-gray-100 rounded-full animate-[spin_80s_linear_infinite]"></div>
+            <div className="absolute inset-16 border border-gray-100 rounded-full"></div>
+            <div className="absolute inset-32 border border-gray-50 rounded-full"></div>
+            
+            <div className="absolute inset-0 flex items-center justify-center p-32">
+              <div className="relative w-full h-full p-16 bg-white/40 backdrop-blur-sm rounded-full border border-gray-200 shadow-2xl group transition-all duration-700 hover:shadow-kefder-teal/10">
                 <img 
                   src="/images/logo.png" 
                   alt="KEFDER Logo" 
-                  className="w-full h-full object-contain drop-shadow-2xl"
+                  className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] transition-transform duration-700 group-hover:scale-110"
                 />
-             </div>
-          </div>
+              </div>
+            </div>
 
-          {/* Feature Points */}
-          {features.map((feature, index) => {
-            const pos = positions[index % positions.length]
-            return (
-              <div 
-                key={index}
-                className="absolute z-20 group"
-                style={{ top: pos.top, left: pos.left }}
-                onMouseEnter={() => setActiveIndex(index)}
-                onMouseLeave={() => setActiveIndex(null)}
-              >
-                {/* Pulse Dot */}
-                <div className="relative cursor-pointer">
-                  <div className="absolute inset-0 rounded-full bg-orange-500/30 animate-ping"></div>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${activeIndex === index ? 'bg-orange-500 scale-125 shadow-lg' : 'bg-white border-2 border-orange-500 shadow-md'}`}>
-                    <Plus className={`w-4 h-4 transition-colors ${activeIndex === index ? 'text-white' : 'text-orange-500'}`} />
+            {/* Interactive Dots */}
+            {features.map((_, index) => {
+              const pos = positions[index % positions.length]
+              const isActive = activeIndex === index
+              return (
+                <div 
+                  key={index}
+                  className="absolute z-20"
+                  style={{ top: pos.top, left: pos.left }}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onMouseLeave={() => setActiveIndex(null)}
+                >
+                  <div className="relative cursor-pointer group">
+                    <div className={`absolute inset-0 rounded-full bg-kefder-teal/30 ${isActive ? 'animate-ping' : 'opacity-0'}`}></div>
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 ${
+                      isActive 
+                        ? 'bg-kefder-teal text-white scale-125 shadow-xl' 
+                        : 'bg-white border-2 border-kefder-teal text-kefder-teal shadow-lg hover:scale-110'
+                    }`}>
+                      {isActive ? <Info className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
+                    </div>
                   </div>
                 </div>
+              )
+            })}
+          </div>
 
-                {/* Tooltip */}
-                <AnimatePresence>
-                  {activeIndex === index && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.9, y: 10 }}
-                      className={`absolute z-30 w-72 p-6 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-100 ${
-                        index % 2 === 0 ? 'left-full ml-4' : 'right-full mr-4'
-                      } -top-1/2 transform`}
-                    >
-                      <div className="h-1 w-12 bg-orange-500 rounded-full mb-4"></div>
-                      <h4 className="text-lg font-bold text-slate-800 mb-2">{getTitle(feature)}</h4>
-                      <p className="text-sm text-gray-600 leading-relaxed">{getDesc(feature)}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            )
-          })}
+          {/* Right Content Area */}
+          <div className="w-[380px] shrink-0 h-[500px] flex flex-col justify-center items-start text-left">
+            <AnimatePresence mode="wait">
+              {activeIndex !== null && activeIndex % 2 !== 0 ? (
+                <motion.div
+                  key={`right-${activeIndex}`}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 30 }}
+                  className="space-y-6"
+                >
+                  <div className="inline-block w-16 h-1.5 bg-kefder-teal rounded-full"></div>
+                  <h4 className="text-3xl font-bold text-kefder-gray-dark">{getTitle(features[activeIndex])}</h4>
+                  <p className="text-lg text-kefder-gray leading-relaxed">{getDesc(features[activeIndex])}</p>
+                </motion.div>
+              ) : (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.2 }}
+                  className="text-gray-400 italic text-lg"
+                >
+                  Logomuzun hikayesini <br /> incelemek için dokunun
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Mobile View: List */}
         <div className="lg:hidden space-y-12">
-          <div className="relative w-48 h-48 mx-auto bg-gray-50 rounded-full p-8 flex items-center justify-center">
+          <div className="relative w-64 h-64 mx-auto bg-gray-50 rounded-full p-10 flex items-center justify-center border border-gray-100 shadow-inner">
             <img 
               src="/images/logo.png" 
               alt="KEFDER Logo" 
@@ -108,11 +159,11 @@ export default function LogoMeaning({ features, language }: LogoMeaningProps) {
           <div className="grid gap-6">
             {features.map((feature, index) => (
               <div key={index} className="bg-[#FDF6F0] p-6 rounded-2xl border border-orange-100 flex gap-5 items-start">
-                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-orange-500 shadow-sm shrink-0 mt-1">
+                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-kefder-teal shadow-sm shrink-0 mt-1">
                    <Info className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-800 text-lg mb-1">{getTitle(feature)}</h4>
+                  <h4 className="font-bold text-kefder-gray-dark text-lg mb-1">{getTitle(feature)}</h4>
                   <p className="text-gray-600 text-sm leading-relaxed">{getDesc(feature)}</p>
                 </div>
               </div>
