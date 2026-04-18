@@ -28,6 +28,7 @@ export async function getAboutData() {
       logoFeatures,
       "networks": networks[] {
         description,
+        shortDescription,
         "logoUrl": logo.asset->url,
         url
       }

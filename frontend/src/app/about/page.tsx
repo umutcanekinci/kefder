@@ -293,12 +293,19 @@ export default function AboutPage() {
              {about?.networks?.length > 0 ? (
                about.networks.map((network: any, index: number) => {
                  const content = (
-                   <div className="flex flex-col items-center gap-4 group cursor-pointer">
-                     <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center border border-gray-100 group-hover:border-orange-200 transition-all shadow-sm group-hover:shadow-lg overflow-hidden">
+                   <div className="flex flex-col items-center gap-4 group cursor-pointer relative">
+                     <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center border border-gray-100 group-hover:border-orange-200 transition-all shadow-sm group-hover:shadow-lg overflow-hidden relative">
                        {network.logoUrl ? (
                          <img src={network.logoUrl} alt={network.description} className="w-full h-full object-contain p-4 transition-all duration-500" />
                        ) : (
                          <span className="font-black text-2xl text-gray-400 group-hover:text-orange-500 uppercase">Logo</span>
+                       )}
+                       
+                       {/* Hover Tooltip/Hold Effect */}
+                       {network.shortDescription && (
+                         <div className="absolute inset-0 bg-orange-500/90 text-white p-2 flex items-center justify-center text-[10px] text-center font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                           {network.shortDescription}
+                         </div>
                        )}
                      </div>
                      <span className="text-sm font-bold text-gray-600 group-hover:text-[#1F2A44] transition-colors text-center max-w-[150px] leading-tight">

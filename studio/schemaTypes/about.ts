@@ -74,7 +74,8 @@ export const aboutType = defineType({
           type: 'object',
           fields: [
             {name: 'logo', title: 'Logo', type: 'image', options: {hotspot: true}},
-            {name: 'description', title: 'Ağ Açıklaması (Tam Ad)', type: 'string'},
+            {name: 'description', title: 'Ağ Adı / Tanımı (Görünen)', type: 'string'},
+            {name: 'shortDescription', title: 'Kısa Açıklama (Hover/Hold Effect)', type: 'string'},
             {name: 'url', title: 'Web Sitesi URL', type: 'url'},
           ],
         },
