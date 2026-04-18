@@ -60,24 +60,24 @@ export default function EventsCalendar() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-7 gap-2 md:gap-4">
+              <div className="grid grid-cols-7 gap-3 md:gap-5">
                 {['Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct', 'Pz'].map(day => (
-                  <div key={day} className="text-center text-xs font-semibold text-kefder-gray-dark uppercase mb-4">{day}</div>
+                  <div key={day} className="text-center text-xs font-bold text-kefder-teal/50 uppercase mb-2 tracking-wider">{day}</div>
                 ))}
                 {days.map(day => {
                   const isSelected = day === 18
                   const hasEvent = events.some(e => new Date(e.eventDate).getDate() === day)
                   return (
-                    <div key={day} className="relative aspect-square flex flex-col items-center justify-center">
-                      <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-all cursor-pointer ${
+                    <div key={day} className="relative flex flex-col items-center justify-center">
+                      <div className={`w-12 h-12 md:w-16 md:h-16 rounded-[20px] flex items-center justify-center text-base md:text-xl font-black transition-all duration-300 cursor-pointer ${
                       isSelected 
-                        ? 'bg-kefder-teal text-white shadow-lg' 
-                        : 'bg-white text-kefder-gray-dark hover:bg-kefder-teal/10 hover:text-kefder-teal'
+                        ? 'bg-kefder-teal text-white shadow-[0_10px_25px_rgba(0,128,128,0.3)] scale-110 z-10' 
+                        : 'bg-white text-kefder-gray-dark hover:bg-kefder-teal/10 hover:text-kefder-teal hover:shadow-lg'
                     }`}>
                         {day}
                       </div>
                       {hasEvent && !isSelected && (
-                        <div className="absolute bottom-1 w-1 h-1 bg-kefder-teal/30 rounded-full"></div>
+                        <div className="absolute -bottom-1 w-1.5 h-1.5 bg-kefder-teal rounded-full"></div>
                       )}
                     </div>
                   )

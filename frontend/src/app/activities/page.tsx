@@ -259,7 +259,7 @@ export default function ActivitiesPage() {
                   {Array.from({ length: 7 }).map((_, i) => (
                     <div
                       key={i}
-                      className="rounded-xl bg-[#F8F4EF] py-3 text-center text-xs font-semibold text-gray-500 md:text-sm"
+                      className="rounded-xl bg-kefder-teal/5 py-3 text-center text-xs font-bold text-kefder-teal uppercase tracking-widest"
                     >
                       {getDayLabel(i)}
                     </div>
