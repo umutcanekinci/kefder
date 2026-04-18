@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 import { getAboutData } from './actions'
 import { PortableText } from '@portabletext/react'
+import LogoMeaning from '@/components/LogoMeaning'
 import { 
   Users, 
   FileText, 
@@ -97,6 +98,11 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Logo Anlamı Section */}
+      {about?.logoFeatures?.length > 0 && (
+        <LogoMeaning features={about.logoFeatures} language={language} />
+      )}
 
       {/* Misyon & Vizyon Section */}
       <section id="mission" className="py-24 px-4">

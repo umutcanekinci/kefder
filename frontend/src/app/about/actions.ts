@@ -25,6 +25,7 @@ export async function getAboutData() {
       "philosophyImageUrl": philosophyImage.asset->url,
       targetAudiences,
       activities,
+      logoFeatures,
       "networks": networks[] {
         description,
         "logoUrl": logo.asset->url,

@@ -52,6 +52,20 @@ export const aboutType = defineType({
       of: [{type: 'localeString'}],
     }),
     defineField({
+      name: 'logoFeatures',
+      title: 'Logo Anlamı ve Detayları',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {name: 'title', title: 'Özellik Başlığı', type: 'localeString'},
+            {name: 'description', title: 'Özellik Açıklaması', type: 'localeString'},
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: 'networks',
       title: 'Üyesi Olduğumuz Ağlar',
       type: 'array',
