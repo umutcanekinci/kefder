@@ -8,7 +8,6 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { value: 12, suffix: '+', label: 'Yıllık Deneyim' },
   { value: 500, suffix: '+', label: 'Gönüllü' },
   { value: 50, suffix: '+', label: 'Proje' },
   { value: 1000, suffix: '+', label: 'Yararlanıcı' },

@@ -56,45 +56,48 @@ export default function Header({ settings }: { settings?: any }) {
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 lg:w-12 lg:h-12 flex-shrink-0">
-              <img
-                src="/images/logo.png"
-                alt="KEFDER Logo"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-lg lg:text-xl font-bold text-[#333333] leading-tight">KEFDER</h1>
-              <p className="text-[10px] lg:text-xs text-gray-500 leading-tight">
-                {currentLang === 'tr'
-                  ? 'Kültürel Etkileşim ve Farkındalık Derneği'
-                  : 'Cultural Interaction and Awareness Association'}
-              </p>
-            </div>
-          </Link>
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 lg:h-24">
+          {/* Logo - Left Side */}
+          <div className="flex-shrink-0">
+            <Link href="/" className="flex items-center gap-4 group">
+              <div className="w-12 h-12 lg:w-16 lg:h-16 flex-shrink-0">
+                <img
+                  src="/images/logo.png"
+                  alt="KEFDER Logo"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="hidden sm:block">
+                <h1 className="text-xl lg:text-2xl font-black text-[#333333] leading-tight whitespace-nowrap">KEFDER</h1>
+                <p className="text-xs lg:text-sm text-gray-500 font-medium leading-tight whitespace-nowrap">
+                  {currentLang === 'tr'
+                    ? 'Kültürel Etkileşim ve Farkındalık Derneği'
+                    : 'Cultural Interaction and Awareness Association'}
+                </p>
+              </div>
+            </Link>
+          </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center h-full">
+          {/* Desktop Navigation - Center */}
+          <nav className="hidden lg:flex flex-1 items-center justify-center h-full mx-6 xl:mx-10">
             {mounted && navItems.map((item) => (
               <div key={item.label} className="relative group h-full flex items-center">
                 <Link
                   href={item.href}
-                  className={"px-3 xl:px-4 h-full flex items-center gap-1 text-sm font-medium transition-colors " + (pathname === item.href ? 'text-primary' : 'text-[#333333] hover:text-primary')}
+                  className={"px-3 xl:px-4 h-full flex items-center gap-1.5 text-base font-bold transition-colors whitespace-nowrap " + (pathname === item.href ? 'text-primary' : 'text-[#333333] hover:text-primary')}
                 >
                   {item.label}
-                  {item.dropdown && <ChevronDown className="w-3.5 h-3.5 group-hover:rotate-180 transition-transform" />}
+                  {item.dropdown && <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform" />}
                 </Link>
 
                 {/* Desktop Dropdown */}
                 {item.dropdown && (
-                  <div className="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2 z-50 cursor-default">
-                    <div className={"bg-white shadow-xl rounded-xl border border-gray-100 p-2 flex gap-4 " + (item.label === t('nav.activities') ? 'w-[450px] p-4' : 'w-56')}>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2 z-50 cursor-default">
+                    <div className={"bg-white shadow-xl rounded-xl border border-gray-100 p-2 flex gap-4 " + (item.label === t('nav.activities') ? 'w-[450px] p-4' : 'w-60')}>
                       <div className="flex-1 flex flex-col gap-1">
                         {item.dropdown.map(subItem => (
-                          <Link key={subItem.label} href={subItem.href} className="px-3 py-2 text-sm text-[#333333] hover:text-primary hover:bg-orange-50 rounded-md transition-colors block">
+                          <Link key={subItem.label} href={subItem.href} className="px-4 py-2.5 text-base text-[#333333] hover:text-primary hover:bg-orange-50 rounded-md transition-colors block whitespace-nowrap">
                             {subItem.label}
                           </Link>
                         ))}
@@ -118,40 +121,41 @@ export default function Header({ settings }: { settings?: any }) {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 lg:gap-4">
+          {/* Right Side - Icons and Toggle */}
+          <div className="flex-shrink-0 flex items-center gap-2 lg:gap-4">
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-[#333333] hover:text-primary transition-colors border border-gray-200 rounded-full hover:border-orange-200 bg-white"
+              className="flex items-center gap-2 px-4 py-2 text-base font-bold text-[#333333] hover:text-primary transition-colors border border-gray-200 rounded-full hover:border-orange-200 bg-white"
             >
-              <Globe className="w-4 h-4" />
+              <Globe className="w-5 h-5" />
               <span>{currentLang === 'tr' ? 'English' : 'Türkçe'}</span>
             </button>
 
             {/* Social Icons */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-2">
               {socialLinks?.facebook && (
-                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                  <Facebook className="w-4 h-4" />
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                  <Facebook className="w-5 h-5" />
                 </a>
               )}
               {socialLinks?.instagram && (
-                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                  <Instagram className="w-4 h-4" />
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                  <Instagram className="w-5 h-5" />
                 </a>
               )}
               {socialLinks?.youtube && (
-                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                  <Youtube className="w-4 h-4" />
+                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                  <Youtube className="w-5 h-5" />
                 </a>
               )}
             </div>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary hover:bg-orange-50 rounded-lg transition-all"
+              className="lg:hidden w-12 h-12 flex items-center justify-center text-gray-600 hover:text-primary hover:bg-orange-50 rounded-lg transition-all"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -166,10 +170,10 @@ export default function Header({ settings }: { settings?: any }) {
                 <Link
                   href={item.href}
                   onClick={() => !item.dropdown && setMobileMenuOpen(false)}
-                  className={"flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all " + (pathname === item.href ? 'text-primary bg-orange-50' : 'text-[#333333] hover:text-primary hover:bg-orange-50/50')}
+                  className={"flex items-center justify-between px-4 py-4 text-base font-bold rounded-lg transition-all " + (pathname === item.href ? 'text-primary bg-orange-50' : 'text-[#333333] hover:text-primary hover:bg-orange-50/50')}
                 >
                   {item.label}
-                  {item.dropdown && <ChevronDown className="w-4 h-4 text-gray-400" />}
+                  {item.dropdown && <ChevronDown className="w-5 h-5 text-gray-400" />}
                 </Link>
                 
                 {/* Mobile Dropdown Subitems */}
@@ -180,7 +184,7 @@ export default function Header({ settings }: { settings?: any }) {
                         key={subItem.label} 
                         href={subItem.href} 
                         onClick={() => setMobileMenuOpen(false)}
-                        className="py-2 text-sm text-gray-500 hover:text-primary"
+                        className="py-3 text-base text-gray-500 hover:text-primary"
                       >
                         {subItem.label}
                       </Link>
@@ -192,18 +196,18 @@ export default function Header({ settings }: { settings?: any }) {
 
             <div className="flex items-center justify-center gap-4 pt-6 pb-2 border-t border-gray-100 mt-4">
               {socialLinks?.facebook && (
-                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                  <Facebook className="w-5 h-5" />
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                  <Facebook className="w-6 h-6" />
                 </a>
               )}
               {socialLinks?.instagram && (
-                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                  <Instagram className="w-5 h-5" />
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                  <Instagram className="w-6 h-6" />
                 </a>
               )}
               {socialLinks?.youtube && (
-                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all">
-                  <Youtube className="w-5 h-5" />
+                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-orange-50 rounded-full transition-all border border-gray-100">
+                  <Youtube className="w-6 h-6" />
                 </a>
               )}
             </div>

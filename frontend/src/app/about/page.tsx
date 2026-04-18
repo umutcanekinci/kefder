@@ -76,10 +76,6 @@ export default function AboutPage() {
               <div className="aspect-[4/5] md:aspect-square rounded-3xl overflow-hidden shadow-2xl relative z-10">
                 <img src="/images/asset_1.jpg" alt="Kefder Çalışma" className="w-full h-full object-cover" />
               </div>
-              <div className="absolute -bottom-8 -right-8 bg-orange-500 text-white p-10 rounded-3xl shadow-2xl hidden md:block z-20">
-                <div className="text-5xl font-black mb-1">12+</div>
-                <div className="text-sm font-bold uppercase tracking-widest opacity-90">{t('about.experience.label')}</div>
-              </div>
               <div className="absolute -top-10 -left-10 w-40 h-40 bg-orange-200 rounded-full blur-3xl opacity-30 -z-10"></div>
             </div>
           </div>
