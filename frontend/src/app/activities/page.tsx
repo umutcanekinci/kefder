@@ -2,7 +2,8 @@
 
 import { CalendarDays, ChevronLeft, ChevronRight, Clock3, List, MapPin } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
-import { getEvents } from './actions'
+import { getActivitiesData } from './actions'
+import { FileText, Download } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
 import ScrollReveal from '@/components/shared/ScrollReveal'
 
@@ -88,16 +89,15 @@ export default function ActivitiesPage() {
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list')
   const [currentMonth, setCurrentMonth] = useState(() => new Date())
   const [hoveredDate, setHoveredDate] = useState<string | null>(null)
-  const [events, setEvents] = useState<EventItem[]>(defaultEvents)
+  const [events, setEvents] = useState<EventItem[]>([])
+  const [archive, setArchive] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getEvents()
+    getActivitiesData()
       .then((data) => {
-        console.log('SANITY DATA FROM SERVER ACTION:', data)
-        if (Array.isArray(data)) {
-          setEvents(data)
-        }
+        setEvents(data.events)
+        setArchive(data.archive)
       })
       .catch((error) => {
         console.error('Action fetch error:', error)
@@ -360,6 +360,61 @@ export default function ActivitiesPage() {
             </ScrollReveal>
           )}
 
+        </div>
+      </section>
+
+      {/* Dosya Arşivi Bölümü */}
+      <section id="archive" className="py-24 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <div className="inline-flex rounded-full bg-kefder-teal/10 px-4 py-1.5 text-sm font-semibold text-kefder-teal mb-4 uppercase tracking-widest">
+                Dosya Arşivi
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">Kurumsal Dökümanlar ve Raporlar</h2>
+              <p className="text-gray-500 text-lg max-w-2xl mx-auto">Derneğimizin faaliyet raporlarına, tüzüğüne ve diğer önemli belgelerine buradan ulaşabilirsiniz.</p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {archive.length > 0 ? (
+              archive.map((doc, index) => (
+                <ScrollReveal key={doc._id} delay={index * 0.05} direction="up">
+                  <a 
+                    href={doc.fileUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-6 bg-[#FAF7F3] rounded-3xl border border-transparent hover:border-kefder-teal/20 hover:bg-white hover:shadow-xl transition-all group h-full"
+                  >
+                    <div className="flex items-center gap-5">
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-bold text-xs uppercase shadow-sm ${
+                        doc.fileType === 'pdf' ? 'bg-red-50 text-red-500' : 
+                        doc.fileType === 'doc' ? 'bg-blue-50 text-blue-500' : 
+                        doc.fileType === 'ppt' ? 'bg-orange-50 text-orange-600' :
+                        'bg-white text-kefder-teal'
+                      }`}>
+                        {doc.fileType || 'File'}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-bold text-[#1F2A44] group-hover:text-kefder-teal transition-colors text-lg">
+                          {doc.title?.[language] || doc.title?.tr}
+                        </span>
+                        <span className="text-xs text-gray-400 mt-1 uppercase font-medium tracking-wider">
+                          Dökümanı Görüntüle
+                        </span>
+                      </div>
+                    </div>
+                    <Download className="w-6 h-6 text-gray-300 group-hover:text-kefder-teal transition-colors" />
+                  </a>
+                </ScrollReveal>
+              ))
+            ) : (
+              <div className="col-span-full py-12 text-center bg-gray-50 rounded-3xl border-2 border-dashed border-gray-100">
+                <FileText className="w-12 h-12 text-gray-200 mx-auto mb-4" />
+                <p className="text-gray-400">Henüz arşivlenmiş dosya bulunmamaktadır.</p>
+              </div>
+            )}
+          </div>
         </div>
       </section>
     </div>

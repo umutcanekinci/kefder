@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 import { getAboutData } from './actions'
+import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import LogoMeaning from '@/components/LogoMeaning'
 import { 
@@ -11,7 +12,8 @@ import {
   ShieldCheck,
   CheckCircle2,
   Target,
-  Quote 
+  Quote,
+  ChevronRight
 } from 'lucide-react'
 import SidebarLinks from '@/components/shared/SidebarLinks'
 import ScrollReveal from '@/components/shared/ScrollReveal'
@@ -302,7 +304,7 @@ export default function AboutPage() {
 
                 <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                   {archive.length > 0 ? (
-                    archive.map((doc: any, index: number) => (
+                    archive.slice(0, 2).map((doc: any, index: number) => (
                       <div key={doc._id}>
                         <a 
                           href={doc.fileUrl} 
@@ -314,6 +316,7 @@ export default function AboutPage() {
                             <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-[10px] uppercase ${
                               doc.fileType === 'pdf' ? 'bg-red-50 text-red-500' : 
                               doc.fileType === 'doc' ? 'bg-blue-50 text-blue-500' : 
+                              doc.fileType === 'ppt' ? 'bg-orange-50 text-orange-500' :
                               'bg-gray-100 text-gray-500'
                             }`}>
                               {doc.fileType || 'Dosya'}
@@ -332,6 +335,19 @@ export default function AboutPage() {
                     </div>
                   )}
                 </div>
+
+                {archive.length > 0 && (
+                  <div className="mt-10 pt-8 border-t border-gray-100">
+                    <Link 
+                      href="/activities#archive" 
+                      className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-kefder-orange text-kefder-orange rounded-3xl font-bold hover:bg-kefder-orange hover:text-white transition-all shadow-lg hover:shadow-kefder-orange/20 group"
+                    >
+                      <FileText className="w-5 h-5" />
+                      Tüm Dosya Arşivini Gör
+                      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                )}
               </div>
             </ScrollReveal>
 

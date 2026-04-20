@@ -22,6 +22,7 @@ export const documentArchiveType = defineType({
           {title: 'PDF', value: 'pdf'},
           {title: 'Word', value: 'doc'},
           {title: 'Excel', value: 'xls'},
+          {title: 'PowerPoint', value: 'ppt'},
           {title: 'Görsel', value: 'img'},
           {title: 'Diğer', value: 'other'},
         ],
@@ -32,7 +33,7 @@ export const documentArchiveType = defineType({
       title: 'Dosya',
       type: 'file',
       options: {
-        accept: '.pdf,.doc,.docx,.xls,.xlsx,.png,.jpg',
+        accept: '.pdf,.doc,.docx,.xls,.xlsx,.pptx,.ppsx,.png,.jpg',
       },
       validation: (Rule) => Rule.required(),
     }),
