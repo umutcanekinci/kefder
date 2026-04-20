@@ -1,8 +1,9 @@
 "use client"
 import React from 'react'
-import { BookOpen, Palette, Recycle, CheckCircle2 } from 'lucide-react'
+import { BookOpen, Palette, Recycle, ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
 import ScrollReveal from '@/components/shared/ScrollReveal'
+import Link from 'next/link'
 
 export default function HomeAbout() {
   const { t } = useLanguage()
@@ -71,6 +72,16 @@ export default function HomeAbout() {
                     <p className="text-kefder-gray">{t('home.about.item3.desc')}</p>
                   </div>
                 </div>
+              </div>
+
+              <div className="pt-6">
+                <Link 
+                  href="/about"
+                  className="inline-flex items-center gap-3 bg-kefder-teal text-white px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-kefder-teal/20 hover:-translate-y-1 transition-all group"
+                >
+                  {t('hero.discover')}
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                </Link>
               </div>
             </div>
           </ScrollReveal>

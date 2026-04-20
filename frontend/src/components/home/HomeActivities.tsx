@@ -104,6 +104,17 @@ export default function HomeActivities() {
             )
           })}
         </div>
+        <ScrollReveal direction="up" delay={0.4}>
+          <div className="mt-16 text-center">
+            <Link 
+              href="/activities#work" 
+              className="inline-flex items-center gap-3 bg-white border-2 border-kefder-teal text-kefder-teal px-10 py-4 rounded-full font-bold shadow-lg hover:bg-kefder-teal hover:text-white transition-all hover:-translate-y-1 group"
+            >
+              {language === 'tr' ? 'Tüm Çalışmaları Gör' : 'See All Activities'}
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   )

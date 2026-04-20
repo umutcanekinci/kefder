@@ -45,14 +45,14 @@ export default function AboutPage() {
   return (
     <div className="bg-[#FDF6F0] min-h-screen">
       {/* Hero Section */}
-      <section className="bg-[#1F2A44] text-white py-24 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-orange-500 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
+      <section className="bg-gradient-to-r from-orange-500 to-orange-400 text-white py-24 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
         </div>
         <ScrollReveal>
           <div className="max-w-7xl mx-auto text-center relative z-10">
             <h1 className="text-4xl md:text-6xl font-extrabold mb-8 tracking-tight">{t('nav.about')}</h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
               {about?.description?.[language] || about?.description?.tr || t('about.hero.subtitle')}
             </p>
           </div>
@@ -132,12 +132,12 @@ export default function AboutPage() {
               </div>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={0.3}>
-              <div className="bg-[#1F2A44] p-10 rounded-[40px] shadow-sm text-white hover:shadow-xl transition-all duration-500 transform md:translate-y-8 h-full">
-                <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6 text-orange-400">
+              <div className="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 h-full">
+                <div className="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 text-orange-600">
                   <ShieldCheck className="w-7 h-7" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 uppercase tracking-wider">{t('about.vision.label')}</h3>
-                <p className="text-gray-300 leading-relaxed text-lg">
+                <h3 className="text-2xl font-bold text-[#1F2A44] mb-4 uppercase tracking-wider">{t('about.vision.label')}</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
                   {about?.vision?.[language] || about?.vision?.tr}
                 </p>
               </div>
@@ -225,7 +225,7 @@ export default function AboutPage() {
                         alt={member.name} 
                         className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#1F2A44]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-8">
+                      <div className="absolute inset-0 bg-gradient-to-t from-kefder-teal/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-8">
                          <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                             <p className="text-white font-bold text-lg">{member.name}</p>
                             <p className="text-orange-400 text-sm font-medium">{member.role?.[language] || member.role?.tr}</p>

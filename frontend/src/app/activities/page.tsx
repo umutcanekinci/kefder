@@ -1,9 +1,19 @@
 'use client'
 
-import { CalendarDays, ChevronLeft, ChevronRight, Clock3, List, MapPin } from 'lucide-react'
+import { CalendarDays, ChevronLeft, ChevronRight, Clock3, List, MapPin, GraduationCap, Palette, Music, Landmark, Heart, Globe, Activity, ArrowRight } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { getActivitiesData } from './actions'
 import { FileText, Download } from 'lucide-react'
+
+const iconMap: Record<string, any> = {
+  GraduationCap,
+  Palette,
+  Music,
+  Landmark,
+  Heart,
+  Globe,
+  Activity
+}
 import { useLanguage } from '@/context/LanguageContext'
 import ScrollReveal from '@/components/shared/ScrollReveal'
 
@@ -91,6 +101,7 @@ export default function ActivitiesPage() {
   const [hoveredDate, setHoveredDate] = useState<string | null>(null)
   const [events, setEvents] = useState<EventItem[]>([])
   const [archive, setArchive] = useState<any[]>([])
+  const [categories, setCategories] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -98,6 +109,7 @@ export default function ActivitiesPage() {
       .then((data) => {
         setEvents(data.events)
         setArchive(data.archive)
+        setCategories(data.categories)
       })
       .catch((error) => {
         console.error('Action fetch error:', error)
@@ -146,9 +158,62 @@ export default function ActivitiesPage() {
 
   return (
     <div className="min-h-screen bg-[#FDF6F0]">
+      {/* Header Section */}
+      <section className="bg-gradient-to-r from-orange-500 to-orange-400 text-white py-24 px-4 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <ScrollReveal>
+          <div className="max-w-7xl mx-auto text-center relative z-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white text-xs font-bold uppercase tracking-widest mb-6 border border-white/20">
+              <Activity className="w-4 h-4" />
+              KEFDER FAALİYETLERİ
+            </div>
+            <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+              Faaliyetlerimiz ve Etkinliklerimiz
+            </h1>
+            <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+              Toplumsal farkındalık yaratmak ve kültürel etkileşimi güçlendirmek için yürüttüğümüz çalışmaların tamamını burada bulabilirsiniz.
+            </p>
+          </div>
+        </ScrollReveal>
+      </section>
 
+      {/* Sürdürdüğümüz Çalışmalar Section */}
+      <section id="work" className="py-24 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <div className="inline-flex rounded-full bg-kefder-teal/10 px-4 py-1.5 text-sm font-semibold text-kefder-teal mb-4 uppercase tracking-widest">
+                Çalışma Alanlarımız
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">Sürdürdüğümüz Çalışmalar</h2>
+              <p className="text-gray-500 text-lg max-w-2xl mx-auto">Derneğimiz bünyesinde aktif olarak yürüttüğümüz ana faaliyet alanları ve çalışma grupları.</p>
+            </div>
+          </ScrollReveal>
 
-      <section className="py-16 md:py-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {categories.map((activity, index) => {
+              const IconComponent = iconMap[activity.icon] || Activity
+              return (
+                <ScrollReveal key={activity._id || index} delay={index * 0.1}>
+                  <div className="group bg-kefder-gray-light/30 rounded-[40px] p-10 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-kefder-teal/10 h-full">
+                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-kefder-teal mb-8 shadow-sm group-hover:bg-kefder-teal group-hover:text-white transition-all duration-500">
+                      <IconComponent className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-[#1F2A44] mb-4 group-hover:text-kefder-teal transition-colors">
+                      {activity.title?.[language] || activity.title?.tr || activity.title}
+                    </h3>
+                    <p className="text-gray-500 leading-relaxed">
+                      {activity.description?.[language] || activity.description?.tr || activity.desc}
+                    </p>
+                  </div>
+                </ScrollReveal>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="calendar" className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
           <ScrollReveal>
             <div className="mx-auto mb-12 max-w-2xl text-center">

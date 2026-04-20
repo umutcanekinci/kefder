@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { FaFacebook as Facebook, FaInstagram as Instagram, FaYoutube as Youtube } from 'react-icons/fa';
-import { Globe, ChevronDown, Menu, X, CalendarDays, Target, Users, FileText, Scale, Network, History, Archive, Image as ImageIcon, Newspaper, Megaphone } from 'lucide-react'
+import { Globe, ChevronDown, Menu, X, CalendarDays, Target, Users, FileText, Scale, Network, History, Archive, Image as ImageIcon, Newspaper, Megaphone, Activity } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
 const getNavItems = (t: (key: string) => string) => [
@@ -23,6 +23,7 @@ const getNavItems = (t: (key: string) => string) => [
     label: t('nav.activities'), 
     href: '/activities', 
     dropdown: [
+      { label: t('nav.activities.work'), href: '/activities#work', icon: Activity },
       { label: t('nav.activities.calendar'), href: '/activities#calendar', icon: CalendarDays },
       { label: t('nav.activities.past'), href: '/activities#past', icon: History },
       { label: t('nav.activities.archive'), href: '/activities#archive', icon: Archive },

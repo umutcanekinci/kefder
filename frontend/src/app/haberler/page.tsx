@@ -34,18 +34,18 @@ export default function NewsPage() {
   return (
     <div className="bg-[#FDF6F0] min-h-screen pb-20">
       {/* Header Section */}
-      <section className="bg-[#1F2A44] text-white py-24 px-4 mb-16 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+      <section className="bg-gradient-to-r from-orange-500 to-orange-400 text-white py-24 px-4 mb-16 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
         <ScrollReveal>
           <div className="max-w-7xl mx-auto text-center relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full text-orange-400 text-xs font-bold uppercase tracking-widest mb-6 border border-white/10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white text-xs font-bold uppercase tracking-widest mb-6 border border-white/20">
               <Newspaper className="w-4 h-4" />
               {currentLang === 'tr' ? "KEFDER'den Güncel Bilgiler" : "Latest Updates from KEFDER"}
             </div>
             <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
               {currentLang === 'tr' ? 'Haberler ve Duyurular' : 'News and Announcements'}
             </h1>
-            <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
               {currentLang === 'tr' 
                 ? 'Derneğimizden en son haberler, etkinlik duyuruları ve toplumsal farkındalık çalışmalarımız.'
                 : 'Latest news from our association, event announcements and social awareness activities.'}

@@ -17,6 +17,13 @@ export async function getActivitiesData() {
       title,
       fileType,
       "fileUrl": file.asset->url
+    },
+    "categories": *[_type == "activity"] | order(order asc) {
+      _id,
+      title,
+      description,
+      category,
+      icon
     }
   }`
 
@@ -27,7 +34,8 @@ export async function getActivitiesData() {
         ...event,
         status: event.isUpcoming ? 'upcoming' : 'completed'
       })),
-      archive: data.archive || []
+      archive: data.archive || [],
+      categories: data.categories || []
     }
   } catch (error) {
     console.error('Server Action Sanity fetch error:', error)
