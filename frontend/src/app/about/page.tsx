@@ -338,7 +338,7 @@ export default function AboutPage() {
             {/* Sidebar Links & AECC Special */}
             <ScrollReveal direction="right" delay={0.3}>
               <div className="lg:col-span-1">
-                <SidebarLinks />
+                <SidebarLinks aeccUrl={about?.aeccFacebookUrl} />
               </div>
             </ScrollReveal>
           </div>

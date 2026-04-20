@@ -38,7 +38,8 @@ export async function getAboutData() {
         shortDescription,
         "logoUrl": logo.asset->url,
         url
-      }
+      },
+      aeccFacebookUrl
     }
   }`
 

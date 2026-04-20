@@ -4,7 +4,7 @@ import { FaFacebook as Facebook } from 'react-icons/fa'
 import { ExternalLink, MessageCircle, Heart, Users } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
 
-export default function SidebarLinks() {
+export default function SidebarLinks({ aeccUrl }: { aeccUrl?: string }) {
   const { language } = useLanguage()
 
   const links = [
@@ -24,6 +24,8 @@ export default function SidebarLinks() {
       icon: Users
     }
   ]
+
+  const facebookUrl = aeccUrl || "https://www.facebook.com/groups/aeccizmir"
 
   return (
     <div className="space-y-8">
@@ -49,7 +51,7 @@ export default function SidebarLinks() {
           </p>
 
           <a 
-            href="https://www.facebook.com/groups/aeccizmir" 
+            href={facebookUrl} 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white text-kefder-teal px-6 py-3 rounded-2xl font-bold text-sm hover:bg-kefder-yellow hover:text-kefder-teal-dark transition-all group/btn shadow-lg"

@@ -106,6 +106,13 @@ export const aboutType = defineType({
         accept: '.pdf',
       },
     }),
+    defineField({
+      name: 'aeccFacebookUrl',
+      title: 'AECC Facebook Grubu Linki',
+      type: 'url',
+      description: 'Hakkımızda sayfasındaki yan panelde görünen Facebook grubu linki.',
+      initialValue: 'https://www.facebook.com/groups/aeccizmir',
+    }),
   ],
   preview: {
     prepare() {
