@@ -28,18 +28,6 @@ export default function HomeActivities() {
     })
   }, [])
 
-  // 6 default groups for demonstration or fallback
-  const defaultActivities = [
-    { title: { tr: 'Eğitim', en: 'Education' }, category: 'Eğitim', icon: 'GraduationCap', desc: { tr: 'Geleceğin liderleri için kapsayıcı eğitim programları.', en: 'Inclusive education programs for future leaders.' } },
-    { title: { tr: 'Sanat', en: 'Art' }, category: 'Kültür', icon: 'Palette', desc: { tr: 'Yaratıcılığı destekleyen sanatsal projeler ve sergiler.', en: 'Artistic projects and exhibitions supporting creativity.' } },
-    { title: { tr: 'Müzik', en: 'Music' }, category: 'Kültür', icon: 'Music', desc: { tr: 'Kültürlerarası köprüler kuran müzikal etkileşimler.', en: 'Musical interactions building intercultural bridges.' } },
-    { title: { tr: 'Kültürel Miras', en: 'Cultural Heritage' }, category: 'Mirasa Sahip Çık', icon: 'Landmark', desc: { tr: 'Geleneksel değerlerimizi koruma ve tanıtma çalışmaları.', en: 'Protecting and promoting our traditional values.' } },
-    { title: { tr: 'Dayanışma', en: 'Solidarity' }, category: 'Toplum', icon: 'Heart', desc: { tr: 'Toplumsal bağları güçlendiren yardımlaşma ağları.', en: 'Support networks strengthening social bonds.' } },
-    { title: { tr: 'Dijital Farkındalık', en: 'Digital Awareness' }, category: 'Teknoloji', icon: 'Globe', desc: { tr: 'Dijital dünyada güvenli ve bilinçli etkileşim eğitimleri.', en: 'Training for safe and conscious interaction in the digital world.' } },
-  ]
-
-  const displayActivities = activities.length > 0 ? activities : defaultActivities
-
   return (
     <section className="py-24 px-4 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -58,47 +46,55 @@ export default function HomeActivities() {
           </div>
         </ScrollReveal>
 
-        {/* Grid - 3x2 Structure */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayActivities.slice(0, 6).map((activity, index) => {
+        {/* Grid - Dynamic from CMS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {activities.slice(0, 6).map((activity, index) => {
             const IconComponent = iconMap[activity.icon] || Activity
             const title = activity.title?.[language] || activity.title?.tr || activity.title
-            const desc = activity.description?.[language] || activity.description?.tr || activity.desc?.[language] || activity.desc?.tr
+            const desc = activity.description?.[language] || activity.description?.tr
+            const imageUrl = activity.imageUrl || "/images/asset_1.jpg"
 
             return (
               <ScrollReveal key={activity._id || index} delay={index * 0.1}>
-                <div className="group relative bg-kefder-gray-light/30 rounded-[40px] p-10 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-kefder-teal/10 h-full flex flex-col">
-                  {/* Icon & Category */}
-                  <div className="flex justify-between items-start mb-8">
-                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-kefder-teal shadow-sm group-hover:bg-kefder-teal group-hover:text-white transition-all duration-500">
-                      <IconComponent className="w-8 h-8" />
+                <div className="group bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full hover:-translate-y-2">
+                  {/* Image Container */}
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img 
+                      src={imageUrl} 
+                      alt={title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                       <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-kefder-teal shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                          <IconComponent className="w-6 h-6" />
+                       </div>
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-kefder-gray/40 group-hover:text-kefder-teal transition-colors">
-                      {activity.category}
-                    </span>
+                    {activity.category && (
+                      <div className="absolute top-6 left-6">
+                        <span className="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-kefder-teal shadow-sm">
+                          {activity.category}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Content */}
-                  <div className="flex-grow">
+                  <div className="p-10 flex flex-col flex-1">
                     <h3 className="text-2xl font-bold text-kefder-gray-dark mb-4 group-hover:text-kefder-teal transition-colors">
                       {title}
                     </h3>
-                    <p className="text-kefder-gray leading-relaxed mb-8">
+                    <p className="text-kefder-gray leading-relaxed mb-8 line-clamp-3">
                       {desc}
                     </p>
+
+                    <Link 
+                      href="/activities#work" 
+                      className="mt-auto inline-flex items-center gap-2 text-kefder-teal font-bold group/link"
+                    >
+                      {t('home.activities.more')}
+                      <ArrowRight className="w-5 h-5 group-hover/link:translate-x-2 transition-transform" />
+                    </Link>
                   </div>
-
-                  {/* Action */}
-                  <Link 
-                    href="/activities" 
-                    className="mt-auto inline-flex items-center gap-2 text-kefder-teal font-bold group/link"
-                  >
-                    {t('home.activities.more')}
-                    <ArrowRight className="w-5 h-5 group-hover/link:translate-x-2 transition-transform" />
-                  </Link>
-
-                  {/* Decorative element */}
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-kefder-teal/5 rounded-bl-[100px] -z-10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </ScrollReveal>
             )

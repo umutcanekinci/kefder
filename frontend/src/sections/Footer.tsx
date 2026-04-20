@@ -24,14 +24,14 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
     { label: t('nav.home'), href: '/' },
     { label: t('nav.about'), href: '/about' },
     { label: t('nav.activities'), href: '/activities' },
-    { label: t('footer.events'), href: '/events' },
+    { label: t('nav.news') || 'Haberler', href: '/haberler' },
   ]
 
   const exploreLinks = [
     { label: t('footer.volunteer'), href: '/volunteer' },
     { label: t('nav.contact'), href: '/contact' },
-    { label: t('footer.press'), href: '/press' },
-    { label: t('footer.faq'), href: '/faq' },
+    { label: t('nav.activities.work') || 'Çalışmalarımız', href: '/activities#work' },
+    { label: t('nav.activities.archive') || 'Dosya Arşivi', href: '/activities#archive' },
   ]
 
   return (

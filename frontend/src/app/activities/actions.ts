@@ -23,7 +23,8 @@ export async function getActivitiesData() {
       title,
       description,
       category,
-      icon
+      icon,
+      "imageUrl": image.asset->url
     }
   }`
 

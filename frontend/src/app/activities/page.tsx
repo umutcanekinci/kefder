@@ -190,21 +190,46 @@ export default function ActivitiesPage() {
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {categories.map((activity, index) => {
               const IconComponent = iconMap[activity.icon] || Activity
+              const title = activity.title?.[language] || activity.title?.tr || activity.title
+              const desc = activity.description?.[language] || activity.description?.tr || activity.desc
+              const imageUrl = activity.imageUrl || "/images/asset_1.jpg"
+
               return (
                 <ScrollReveal key={activity._id || index} delay={index * 0.1}>
-                  <div className="group bg-kefder-gray-light/30 rounded-[40px] p-10 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-kefder-teal/10 h-full">
-                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-kefder-teal mb-8 shadow-sm group-hover:bg-kefder-teal group-hover:text-white transition-all duration-500">
-                      <IconComponent className="w-8 h-8" />
+                  <div className="group bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full hover:-translate-y-2">
+                    {/* Image Container */}
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <img 
+                        src={imageUrl} 
+                        alt={title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                         <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-kefder-teal shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <IconComponent className="w-6 h-6" />
+                         </div>
+                      </div>
+                      {activity.category && (
+                        <div className="absolute top-6 left-6">
+                          <span className="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-kefder-teal shadow-sm">
+                            {activity.category}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <h3 className="text-2xl font-bold text-[#1F2A44] mb-4 group-hover:text-kefder-teal transition-colors">
-                      {activity.title?.[language] || activity.title?.tr || activity.title}
-                    </h3>
-                    <p className="text-gray-500 leading-relaxed">
-                      {activity.description?.[language] || activity.description?.tr || activity.desc}
-                    </p>
+
+                    {/* Content */}
+                    <div className="p-10 flex flex-col flex-1">
+                      <h3 className="text-2xl font-bold text-[#1F2A44] mb-4 group-hover:text-kefder-teal transition-colors leading-tight">
+                        {title}
+                      </h3>
+                      <p className="text-gray-500 leading-relaxed line-clamp-4">
+                        {desc}
+                      </p>
+                    </div>
                   </div>
                 </ScrollReveal>
               )

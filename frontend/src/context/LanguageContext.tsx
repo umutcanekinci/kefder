@@ -8,6 +8,7 @@ type Translations = Record<string, string>
 const translations: Record<Language, Translations> = {
   tr: {
     'nav.home': 'Ana Sayfa',
+    'nav.news': 'Haberler',
     'nav.about': 'Hakkımızda',
     'nav.about.mission': 'Amaç ve Değerler',
     'nav.about.team': 'Ekip',
@@ -88,6 +89,9 @@ const translations: Record<Language, Translations> = {
     'footer.faq': 'SSS',
     'footer.events': 'Etkinlikler',
     'footer.address': 'İzmir, Türkiye',
+    'footer.rights': 'Tüm hakları saklıdır.',
+    'footer.privacy': 'Gizlilik Politikası',
+    'footer.terms': 'Kullanım Koşulları',
     'about.hero.subtitle': 'Kültürel farkındalık ve toplumsal dayanışma için 2012\'den beri yoldayız.',
     'about.mission.badge': 'Vizyon & Misyon',
     'about.mission.title': 'Geleceği Birlikte İnşa Ediyoruz',
@@ -118,6 +122,7 @@ const translations: Record<Language, Translations> = {
   },
   en: {
     'nav.home': 'Home',
+    'nav.news': 'News',
     'nav.about': 'About Us',
     'nav.about.mission': 'Mission & Values',
     'nav.about.team': 'Team',
@@ -198,6 +203,9 @@ const translations: Record<Language, Translations> = {
     'footer.faq': 'FAQ',
     'footer.events': 'Events',
     'footer.address': 'Izmir, Türkiye',
+    'footer.rights': 'All rights reserved.',
+    'footer.privacy': 'Privacy Policy',
+    'footer.terms': 'Terms of Use',
     'about.hero.subtitle': 'We have been on the road since 2012 for cultural awareness and social solidarity.',
     'about.mission.badge': 'Vision & Mission',
     'about.mission.title': 'Building the Future Together',
