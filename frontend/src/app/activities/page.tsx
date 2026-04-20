@@ -159,7 +159,7 @@ export default function ActivitiesPage() {
   return (
     <div className="min-h-screen bg-[#FDF6F0]">
       {/* Header Section */}
-      <section className="bg-gradient-to-r from-orange-500 to-orange-400 text-white py-24 px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-r from-orange-500 to-orange-400 text-white py-16 px-4 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
         <ScrollReveal>
           <div className="max-w-7xl mx-auto text-center relative z-10">
@@ -167,10 +167,10 @@ export default function ActivitiesPage() {
               <Activity className="w-4 h-4" />
               KEFDER FAALİYETLERİ
             </div>
-            <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+            <h1 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
               Faaliyetlerimiz ve Etkinliklerimiz
             </h1>
-            <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-white/80 text-lg max-w-2xl mx-auto font-light leading-relaxed">
               Toplumsal farkındalık yaratmak ve kültürel etkileşimi güçlendirmek için yürüttüğümüz çalışmaların tamamını burada bulabilirsiniz.
             </p>
           </div>

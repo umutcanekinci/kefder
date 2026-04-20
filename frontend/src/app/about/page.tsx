@@ -45,13 +45,17 @@ export default function AboutPage() {
   return (
     <div className="bg-[#FDF6F0] min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-orange-500 to-orange-400 text-white py-24 px-4 relative overflow-hidden">
+      <section className="bg-gradient-to-r from-orange-500 to-orange-400 text-white py-16 px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
         </div>
         <ScrollReveal>
           <div className="max-w-7xl mx-auto text-center relative z-10">
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-8 tracking-tight">{t('nav.about')}</h1>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white text-xs font-bold uppercase tracking-widest mb-6 border border-white/20">
+              <Target className="w-4 h-4" />
+              {t('nav.about')}
+            </div>
+            <h1 className="text-3xl md:text-5xl font-extrabold mb-8 tracking-tight">{t('nav.about')}</h1>
             <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
               {about?.description?.[language] || about?.description?.tr || t('about.hero.subtitle')}
             </p>

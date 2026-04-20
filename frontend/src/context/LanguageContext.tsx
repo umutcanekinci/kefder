@@ -37,7 +37,8 @@ const translations: Record<Language, Translations> = {
     'hero.examine': 'Takvimi İncele',
 
     'volunteer.title': 'Üye Ol',
-    'volunteer.breadcrumb': 'Ana Sayfa / Üyelik',
+    'volunteer.breadcrumb': 'Bize Katılın',
+    'volunteer.subtitle': 'Kültürel etkileşimi güçlendirmek ve toplumsal farkındalık yaratmak için siz de KEFDER ailesine katılın.',
     'volunteer.stats.members': 'Aktif Üye',
     'volunteer.stats.projects': 'Yıllık Proje',
     'volunteer.stats.participants': 'Katılımcı',
@@ -146,7 +147,8 @@ const translations: Record<Language, Translations> = {
     'hero.examine': 'Review Calendar',
 
     'volunteer.title': 'Become a Member',
-    'volunteer.breadcrumb': 'Home / Membership',
+    'volunteer.breadcrumb': 'Join Us',
+    'volunteer.subtitle': 'Join the KEFDER family to strengthen cultural interaction and create social awareness.',
     'volunteer.stats.members': 'Active Members',
     'volunteer.stats.projects': 'Annual Projects',
     'volunteer.stats.participants': 'Participants',

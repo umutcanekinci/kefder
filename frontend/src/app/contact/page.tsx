@@ -41,25 +41,28 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-[#FDF6F0]">
-
+      {/* Header Section */}
+      <section className="bg-gradient-to-r from-orange-500 to-orange-400 text-white py-16 px-4 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <ScrollReveal>
+          <div className="max-w-7xl mx-auto text-center relative z-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white text-xs font-bold uppercase tracking-widest mb-6 border border-white/20">
+              <Mail className="w-4 h-4" />
+              {t('contact.badge')}
+            </div>
+            <h1 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
+              {t('contact.title')}
+            </h1>
+            <p className="text-white/80 text-lg max-w-2xl mx-auto font-light leading-relaxed">
+              {t('contact.desc')}
+            </p>
+          </div>
+        </ScrollReveal>
+      </section>
 
       {/* ANA İÇERİK */}
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
-          <ScrollReveal>
-            {/* ÜST ORTA BAŞLIK */}
-            <div className="mx-auto mb-14 max-w-2xl text-center">
-              <div className="inline-flex rounded-full bg-orange-100 px-4 py-1.5 text-sm font-semibold text-orange-600">
-                {t('contact.badge')}
-              </div>
-              <h2 className="mt-5 text-4xl font-bold tracking-tight text-[#1F2A44]">
-                {t('contact.title')}
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-gray-500">
-                {t('contact.desc')}
-              </p>
-            </div>
-          </ScrollReveal>
 
           <div className="grid gap-10 lg:grid-cols-2">
             {/* SOL TARAF */}
