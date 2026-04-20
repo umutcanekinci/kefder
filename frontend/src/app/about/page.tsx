@@ -361,12 +361,17 @@ export default function AboutPage() {
                       ) : (
                         <span className="font-black text-2xl text-gray-400 group-hover:text-orange-500 uppercase">Logo</span>
                       )}
-                      {network.shortDescription && (
-                        <div className="absolute inset-0 bg-orange-500/90 text-white p-2 flex items-center justify-center text-[10px] text-center font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
-                          {network.shortDescription}
-                        </div>
-                      )}
                     </div>
+                    
+                    {/* Tooltip Bubble */}
+                    {network.shortDescription && (
+                      <div className="absolute bottom-[calc(100%+1rem)] left-1/2 -translate-x-1/2 w-72 md:w-80 p-5 bg-white shadow-2xl rounded-3xl text-kefder-gray-dark text-xs leading-relaxed font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-50 border border-gray-100 translate-y-2 group-hover:translate-y-0 text-left">
+                        <div className="mb-2 font-bold text-orange-500 border-b border-orange-100 pb-1">{network.description}</div>
+                        {network.shortDescription}
+                        {/* Arrow */}
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white"></div>
+                      </div>
+                    )}
                     <span className="text-sm font-bold text-gray-600 group-hover:text-[#1F2A44] transition-colors text-center max-w-[150px] leading-tight">
                       {network.description}
                     </span>

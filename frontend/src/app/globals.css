@@ -43,12 +43,12 @@
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 
   /* KEFDER Corporate Colors */
-  --color-kefder-orange: #F97316;
-  --color-kefder-orange-light: #FB923C;
-  --color-kefder-orange-dark: #EA580C;
-  --color-kefder-teal: #0D9488;
-  --color-kefder-teal-light: #14B8A6;
-  --color-kefder-teal-dark: #0F766E;
+  --color-kefder-orange: #e77816;
+  --color-kefder-orange-light: #f0a14d;
+  --color-kefder-orange-dark: #c66713;
+  --color-kefder-teal: #3f91a2;
+  --color-kefder-teal-light: #58aac0;
+  --color-kefder-teal-dark: #337684;
   --color-kefder-yellow: #EAB308;
   --color-kefder-gray: #374151;
   --color-kefder-gray-dark: #1F2937;
@@ -91,11 +91,11 @@
     --popover-foreground: 0 0% 20%;
     
     /* Primary: KEFDER Orange */
-    --primary: 24 95% 53%;
+    --primary: 28 83% 50%;
     --primary-foreground: 0 0% 100%;
     
     /* Secondary: KEFDER Turquoise */
-    --secondary: 175 84% 32%;
+    --secondary: 190 44% 44%;
     --secondary-foreground: 0 0% 100%;
     
     /* Accent: KEFDER Yellow */

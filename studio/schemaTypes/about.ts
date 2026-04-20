@@ -62,6 +62,22 @@ export const aboutType = defineType({
             {name: 'title', title: 'Özellik Başlığı', type: 'localeString'},
             {name: 'description', title: 'Özellik Açıklaması', type: 'localeString'},
           ],
+          preview: {
+            select: {
+              titleEn: 'title.en',
+              titleTr: 'title.tr',
+              descEn: 'description.en',
+              descTr: 'description.tr',
+            },
+            prepare({titleEn, titleTr, descEn, descTr}) {
+              const title = titleTr || titleEn || 'Başlıksız'
+              const subtitle = descTr || descEn || 'Açıklama yok'
+              return {
+                title: title,
+                subtitle: subtitle.substring(0, 60) + (subtitle.length > 60 ? '...' : ''),
+              }
+            },
+          },
         },
       ],
     }),

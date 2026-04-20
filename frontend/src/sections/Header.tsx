@@ -92,7 +92,7 @@ export default function Header({ settings }: { settings?: any }) {
               <div key={item.label} className="relative group h-full flex items-center">
                 <Link
                   href={item.href}
-                  className={"px-3 xl:px-4 h-full flex items-center gap-1.5 text-base font-bold transition-colors whitespace-nowrap " + (pathname === item.href ? 'text-kefder-yellow' : 'text-white hover:text-kefder-yellow')}
+                  className={"px-3 xl:px-4 h-full flex items-center gap-1.5 text-base font-bold transition-colors whitespace-nowrap " + (pathname === item.href ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/80 hover:text-white')}
                 >
                   {item.label}
                   {item.dropdown && <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform" />}
@@ -138,7 +138,7 @@ export default function Header({ settings }: { settings?: any }) {
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-4 py-2 text-base font-bold text-white hover:text-kefder-yellow transition-colors border border-white/20 rounded-full hover:border-kefder-yellow/30 bg-white/10"
+              className="flex items-center gap-2 px-4 py-2 text-base font-bold text-white hover:bg-white/20 transition-all border border-white/20 rounded-full bg-white/10"
             >
               <Globe className="w-5 h-5" />
               <span>{currentLang === 'tr' ? 'English' : 'Türkçe'}</span>
@@ -147,17 +147,17 @@ export default function Header({ settings }: { settings?: any }) {
             {/* Social Icons */}
             <div className="hidden md:flex items-center gap-2">
               {socialLinks?.facebook && (
-                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Facebook className="w-5 h-5" />
                 </a>
               )}
               {socialLinks?.instagram && (
-                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Instagram className="w-5 h-5" />
                 </a>
               )}
               {socialLinks?.youtube && (
-                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
+                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Youtube className="w-5 h-5" />
                 </a>
               )}
@@ -182,7 +182,7 @@ export default function Header({ settings }: { settings?: any }) {
                 <Link
                   href={item.href}
                   onClick={() => !item.dropdown && setMobileMenuOpen(false)}
-                  className={"flex items-center justify-between px-4 py-4 text-base font-bold rounded-lg transition-all " + (pathname === item.href ? 'text-kefder-yellow bg-white/10' : 'text-white hover:text-kefder-yellow hover:bg-white/5')}
+                  className={"flex items-center justify-between px-4 py-4 text-base font-bold rounded-lg transition-all " + (pathname === item.href ? 'text-white bg-white/20' : 'text-white hover:bg-white/10')}
                 >
                   {item.label}
                   {item.dropdown && <ChevronDown className="w-5 h-5 text-white/60" />}
@@ -209,17 +209,17 @@ export default function Header({ settings }: { settings?: any }) {
 
             <div className="flex items-center justify-center gap-4 pt-6 pb-2 border-t border-white/10 mt-4">
               {socialLinks?.facebook && (
-                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Facebook className="w-6 h-6" />
                 </a>
               )}
               {socialLinks?.instagram && (
-                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Instagram className="w-6 h-6" />
                 </a>
               )}
               {socialLinks?.youtube && (
-                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-kefder-yellow hover:bg-white/10 rounded-full transition-all border border-white/10">
+                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Youtube className="w-6 h-6" />
                 </a>
               )}
