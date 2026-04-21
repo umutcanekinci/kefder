@@ -93,7 +93,7 @@ export default function Header({ settings }: { settings?: any }) {
               <div key={item.label} className="relative group h-full flex items-center">
                 <Link
                   href={item.href}
-                  className={"px-3 xl:px-4 h-full flex items-center gap-1.5 text-base font-bold transition-colors whitespace-nowrap " + (pathname === item.href ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/80 hover:text-white')}
+                  className={"px-2 xl:px-4 h-full flex items-center gap-1 xl:gap-1.5 text-sm xl:text-base font-bold transition-colors whitespace-nowrap " + (pathname === item.href ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/80 hover:text-white')}
                 >
                   {item.label}
                   {item.dropdown && <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform" />}

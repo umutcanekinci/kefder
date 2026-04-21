@@ -104,7 +104,7 @@ export default function HomeActivities() {
               href="/activities#work" 
               className="inline-flex items-center gap-3 bg-white border-2 border-kefder-teal text-kefder-teal px-10 py-4 rounded-full font-bold shadow-lg hover:bg-kefder-teal hover:text-white transition-all hover:-translate-y-1 group"
             >
-              {language === 'tr' ? 'Tüm Çalışmaları Gör' : 'See All Activities'}
+              {t('home.activities.all')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>

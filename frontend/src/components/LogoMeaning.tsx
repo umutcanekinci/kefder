@@ -44,10 +44,10 @@ export default function LogoMeaning({ features, language }: LogoMeaningProps) {
         </div>
 
         {/* Desktop View: Interactive Logo with Side Panels */}
-        <div className="hidden lg:flex items-center justify-center gap-16 relative min-h-[700px]">
+        <div className="hidden lg:flex items-center justify-center gap-8 xl:gap-16 relative min-h-[600px] xl:min-h-[700px]">
           
           {/* Left Content Area */}
-          <div className="w-[380px] shrink-0 h-[500px] flex flex-col justify-center items-end text-right">
+          <div className="w-[300px] xl:w-[380px] shrink-0 h-[500px] flex flex-col justify-center items-end text-right">
             <AnimatePresence mode="wait">
               {activeIndex !== null && activeIndex % 2 === 0 ? (
                 <motion.div
@@ -76,7 +76,7 @@ export default function LogoMeaning({ features, language }: LogoMeaningProps) {
           </div>
 
           {/* Center Logo Circle */}
-          <div className="relative w-[650px] h-[650px] shrink-0">
+          <div className="relative w-[420px] h-[420px] xl:w-[650px] xl:h-[650px] shrink-0">
             {/* Background Rings */}
             <div className="absolute inset-0 border-2 border-dashed border-gray-100 rounded-full animate-[spin_80s_linear_infinite]"></div>
             <div className="absolute inset-16 border border-gray-100 rounded-full"></div>
@@ -120,7 +120,7 @@ export default function LogoMeaning({ features, language }: LogoMeaningProps) {
           </div>
 
           {/* Right Content Area */}
-          <div className="w-[380px] shrink-0 h-[500px] flex flex-col justify-center items-start text-left">
+          <div className="w-[300px] xl:w-[380px] shrink-0 h-[500px] flex flex-col justify-center items-start text-left">
             <AnimatePresence mode="wait">
               {activeIndex !== null && activeIndex % 2 !== 0 ? (
                 <motion.div

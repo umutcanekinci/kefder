@@ -4,7 +4,11 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import ScrollReveal from '@/components/shared/ScrollReveal'
 
+import { useLanguage } from '@/context/LanguageContext'
+
 export default function HomeCTA() {
+  const { t } = useLanguage()
+
   return (
     <section className="py-24 px-6 bg-kefder-teal relative overflow-hidden">
       {/* Decorative patterns */}
@@ -15,17 +19,17 @@ export default function HomeCTA() {
         <ScrollReveal direction="up">
           <div className="flex flex-col items-center text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight">
-              Gönüllü Ailemize Katılın
+              {t('home.cta.title')}
             </h2>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed mb-10 font-light">
-              Birlikte daha güçlüyüz. Kültürel farkındalık için bir adım atın ve topluluğumuza katkıda bulunun.
+              {t('home.cta.desc')}
             </p>
 
             <Link 
               href="/volunteer" 
               className="group flex items-center gap-3 bg-kefder-orange hover:bg-kefder-orange-dark text-white px-10 py-4 rounded-full font-bold shadow-lg hover:shadow-[0_10px_25px_rgba(249,115,22,0.4)] transition-all hover:-translate-y-1"
             >
-              Hemen Gönüllü Ol
+              {t('home.cta.btn')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>

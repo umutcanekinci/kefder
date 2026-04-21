@@ -118,6 +118,10 @@ const translations: Record<Language, Translations> = {
     'home.activities.title': 'Sürdürdüğümüz Çalışmalar',
     'home.activities.desc': 'Toplumsal farkındalığı artırmak ve kültürel etkileşim için 6 ana grupta projeler üretiyoruz.',
     'home.activities.more': 'Detayları Gör',
+    'home.activities.all': 'Tüm Çalışmaları Gör',
+    'home.cta.title': 'Gönüllü Ailemize Katılın',
+    'home.cta.desc': 'Birlikte daha güçlüyüz. Kültürel farkındalık için bir adım atın ve topluluğumuza katkıda bulunun.',
+    'home.cta.btn': 'Hemen Gönüllü Ol',
   },
   en: {
     'nav.home': 'Home',
@@ -231,6 +235,10 @@ const translations: Record<Language, Translations> = {
     'home.activities.title': 'Our Ongoing Activities',
     'home.activities.desc': 'We produce projects in 6 main groups to increase social awareness and cultural interaction.',
     'home.activities.more': 'View Details',
+    'home.activities.all': 'See All Activities',
+    'home.cta.title': 'Join Our Volunteer Family',
+    'home.cta.desc': 'We are stronger together. Take a step for cultural awareness and contribute to our community.',
+    'home.cta.btn': 'Volunteer Now',
   },
 }
 

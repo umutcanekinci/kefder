@@ -55,7 +55,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   if (settings?.isMaintenanceMode) {
     return (
       <html lang="tr">
-        <body className="bg-[#FDF6F0] min-h-screen flex items-center justify-center p-4">
+        <body className="bg-[#FDF6F0] min-h-screen flex items-center justify-center p-4 overflow-x-hidden">
           <div className="bg-white max-w-lg w-full rounded-3xl p-10 text-center shadow-xl border border-orange-100">
             <div className="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-6">
               <Wrench className="w-10 h-10 text-orange-500" />
@@ -75,7 +75,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <html lang="tr">
-      <body>
+      <body className="overflow-x-hidden">
         <Providers settings={settings}>{children}</Providers>
       </body>
     </html>
