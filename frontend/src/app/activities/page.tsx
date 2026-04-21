@@ -1,7 +1,7 @@
 'use client'
 
-import { CalendarDays, ChevronLeft, ChevronRight, Clock3, List, MapPin, GraduationCap, Palette, Music, Landmark, Heart, Globe, Activity } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { CalendarDays, ChevronLeft, ChevronRight, Clock3, List, MapPin, GraduationCap, Palette, Music, Landmark, Heart, Globe, Activity, Images, X, ChevronRight as ArrowRight, ChevronLeft as ArrowLeft, ZoomIn } from 'lucide-react'
+import { useEffect, useMemo, useState, useCallback } from 'react'
 import { getActivitiesData } from './actions'
 import { FileText, Download } from 'lucide-react'
 
@@ -102,7 +102,45 @@ export default function ActivitiesPage() {
   const [events, setEvents] = useState<EventItem[]>([])
   const [archive, setArchive] = useState<any[]>([])
   const [categories, setCategories] = useState<any[]>([])
+  const [memoryGalleries, setMemoryGalleries] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+
+  // Lightbox state
+  const [lightbox, setLightbox] = useState<{ galleryIndex: number; imageIndex: number } | null>(null)
+
+  const openLightbox = useCallback((galleryIndex: number, imageIndex: number) => {
+    setLightbox({ galleryIndex, imageIndex })
+    document.body.style.overflow = 'hidden'
+  }, [])
+
+  const closeLightbox = useCallback(() => {
+    setLightbox(null)
+    document.body.style.overflow = ''
+  }, [])
+
+  const lightboxNext = useCallback(() => {
+    if (!lightbox) return
+    const gallery = memoryGalleries[lightbox.galleryIndex]
+    setLightbox(prev => prev ? { ...prev, imageIndex: (prev.imageIndex + 1) % gallery.images.length } : null)
+  }, [lightbox, memoryGalleries])
+
+  const lightboxPrev = useCallback(() => {
+    if (!lightbox) return
+    const gallery = memoryGalleries[lightbox.galleryIndex]
+    setLightbox(prev => prev ? { ...prev, imageIndex: (prev.imageIndex - 1 + gallery.images.length) % gallery.images.length } : null)
+  }, [lightbox, memoryGalleries])
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!lightbox) return
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeLightbox()
+      if (e.key === 'ArrowRight') lightboxNext()
+      if (e.key === 'ArrowLeft') lightboxPrev()
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [lightbox, closeLightbox, lightboxNext, lightboxPrev])
 
   useEffect(() => {
     getActivitiesData()
@@ -110,6 +148,7 @@ export default function ActivitiesPage() {
         setEvents(data.events)
         setArchive(data.archive)
         setCategories(data.categories)
+        setMemoryGalleries(data.memoryGalleries || [])
       })
       .catch((error) => {
         console.error('Action fetch error:', error)
@@ -452,6 +491,179 @@ export default function ActivitiesPage() {
 
         </div>
       </section>
+
+      {/* Anılarımız Bölümü */}
+      <section id="memories" className="py-24 px-4 bg-[#FDF6F0]">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <div className="inline-flex rounded-full bg-orange-100 px-4 py-1.5 text-sm font-semibold text-orange-600 mb-4 uppercase tracking-widest">
+                Anı Defteri
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">Anılarımız</h2>
+              <p className="text-gray-500 text-lg max-w-2xl mx-auto">Birlikte yaşadığımız güzel anlar, paylaştığımız değerli etkinlikler ve unutulmaz anılarımız.</p>
+            </div>
+          </ScrollReveal>
+
+          {memoryGalleries.length > 0 ? (
+            <div className="space-y-20">
+              {memoryGalleries.map((gallery, galleryIndex) => (
+                <ScrollReveal key={gallery._id} delay={galleryIndex * 0.1}>
+                  <div className="group">
+                    {/* Gallery Header */}
+                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+                      <div>
+                        <h3 className="text-2xl md:text-3xl font-bold text-[#1F2A44] mb-2">
+                          {gallery.title?.[language] || gallery.title?.tr || ''}
+                        </h3>
+                        {gallery.description && (
+                          <p className="text-gray-500">{gallery.description?.[language] || gallery.description?.tr || ''}</p>
+                        )}
+                        {gallery.date && (
+                          <span className="inline-flex items-center gap-2 mt-2 text-sm font-semibold text-orange-500">
+                            <CalendarDays className="w-4 h-4" />
+                            {new Date(gallery.date).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' })}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-sm text-gray-400 font-medium shrink-0">
+                        {gallery.images?.length || 0} fotoğraf
+                      </span>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-16 h-1 bg-gradient-to-r from-orange-400 to-orange-200 rounded-full mb-8" />
+
+                    {/* Photo Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                      {/* Cover / first image — larger */}
+                      {gallery.images?.slice(0, 1).map((img: any, imgIndex: number) => (
+                        <button
+                          key={imgIndex}
+                          onClick={() => openLightbox(galleryIndex, imgIndex)}
+                          className="col-span-2 row-span-2 relative aspect-square rounded-3xl overflow-hidden cursor-pointer group/img focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400"
+                        >
+                          <img
+                            src={img.url}
+                            alt={img.caption || gallery.title?.tr || ''}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <ZoomIn className="w-6 h-6 text-white" />
+                          </div>
+                          {img.caption && (
+                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300">
+                              <p className="text-white text-sm font-medium">{img.caption}</p>
+                            </div>
+                          )}
+                        </button>
+                      ))}
+
+                      {/* Remaining images */}
+                      {gallery.images?.slice(1).map((img: any, imgIndex: number) => (
+                        <button
+                          key={imgIndex + 1}
+                          onClick={() => openLightbox(galleryIndex, imgIndex + 1)}
+                          className="relative aspect-square rounded-2xl overflow-hidden cursor-pointer group/img focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400"
+                        >
+                          <img
+                            src={img.url}
+                            alt={img.caption || ''}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                            <ZoomIn className="w-5 h-5 text-white opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          ) : (
+            <div className="py-16 text-center">
+              <div className="w-20 h-20 rounded-3xl bg-orange-50 flex items-center justify-center mx-auto mb-6">
+                <Images className="w-10 h-10 text-orange-200" />
+              </div>
+              <p className="text-gray-400 text-lg">Henüz anı fotoğrafı eklenmemiş.</p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Lightbox */}
+      {lightbox && memoryGalleries[lightbox.galleryIndex]?.images?.[lightbox.imageIndex] && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+          onClick={closeLightbox}
+        >
+          {/* Close */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* Counter */}
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white/10 px-4 py-1.5 rounded-full text-white text-sm font-semibold">
+            {lightbox.imageIndex + 1} / {memoryGalleries[lightbox.galleryIndex].images.length}
+          </div>
+
+          {/* Gallery title */}
+          <div className="absolute top-14 left-1/2 -translate-x-1/2 text-white/70 text-sm">
+            {memoryGalleries[lightbox.galleryIndex].title?.[language] || memoryGalleries[lightbox.galleryIndex].title?.tr}
+          </div>
+
+          {/* Prev */}
+          <button
+            onClick={(e) => { e.stopPropagation(); lightboxPrev() }}
+            className="absolute left-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
+          >
+            <ArrowLeft className="w-6 h-6" />
+          </button>
+
+          {/* Image */}
+          <div className="relative max-w-5xl max-h-[80vh] mx-16" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={memoryGalleries[lightbox.galleryIndex].images[lightbox.imageIndex].url}
+              alt={memoryGalleries[lightbox.galleryIndex].images[lightbox.imageIndex].caption || ''}
+              className="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl"
+            />
+            {memoryGalleries[lightbox.galleryIndex].images[lightbox.imageIndex].caption && (
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent rounded-b-2xl">
+                <p className="text-white text-sm text-center">
+                  {memoryGalleries[lightbox.galleryIndex].images[lightbox.imageIndex].caption}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Next */}
+          <button
+            onClick={(e) => { e.stopPropagation(); lightboxNext() }}
+            className="absolute right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"
+          >
+            <ArrowRight className="w-6 h-6" />
+          </button>
+
+          {/* Thumbnail strip */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 max-w-[90vw] overflow-x-auto pb-1 px-4">
+            {memoryGalleries[lightbox.galleryIndex].images.map((img: any, i: number) => (
+              <button
+                key={i}
+                onClick={(e) => { e.stopPropagation(); setLightbox(prev => prev ? { ...prev, imageIndex: i } : null) }}
+                className={`w-14 h-14 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${
+                  i === lightbox.imageIndex ? 'border-orange-400 scale-110' : 'border-transparent opacity-60 hover:opacity-100'
+                }`}
+              >
+                <img src={img.url} alt="" className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Dosya Arşivi Bölümü */}
       <section id="archive" className="py-24 px-4 bg-white">

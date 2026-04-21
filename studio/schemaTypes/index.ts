@@ -8,6 +8,7 @@ import {localeString} from './localeString'
 import {localeBlock} from './localeBlock'
 
 import {documentArchiveType} from './documentArchive'
+import {memoryGalleryType} from './memoryGallery'
 
 import {activityType} from './activity'
 
@@ -18,6 +19,7 @@ export const schemaTypes = [
   documentType,
   documentArchiveType,
   activityType,
+  memoryGalleryType,
   siteSettingsType,
   aboutType,
   localeString,
