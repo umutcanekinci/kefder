@@ -1,13 +1,13 @@
-  "use client"
+"use client"
 import { useEffect, useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 import { getAboutData } from './actions'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import LogoMeaning from '@/components/LogoMeaning'
-import { 
-  Users, 
-  FileText, 
+import {
+  Users,
+  FileText,
   Download,
   ShieldCheck,
   CheckCircle2,
@@ -102,10 +102,10 @@ export default function AboutPage() {
             <ScrollReveal direction="right" delay={0.2}>
               <div className="relative">
                 <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl relative z-10 border-8 border-white">
-                  <img 
-                    src={about?.philosophyImageUrl || "/images/asset_1.jpg"} 
-                    alt="Felsefemiz" 
-                    className="w-full h-full object-cover" 
+                  <img
+                    src={about?.philosophyImageUrl || "/images/asset_1.jpg"}
+                    alt="Felsefemiz"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-orange-500 rounded-full -z-10"></div>
@@ -196,12 +196,12 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                 <div className="h-64 bg-orange-200 rounded-3xl overflow-hidden mt-8">
-                    <img src="/images/asset_1.jpg" className="w-full h-full object-cover" alt="Faaliyet 1" />
-                 </div>
-                 <div className="h-64 bg-gray-200 rounded-3xl overflow-hidden">
-                    <img src="/images/hero_img.jpg" className="w-full h-full object-cover" alt="Faaliyet 2" />
-                 </div>
+                <div className="h-64 bg-orange-200 rounded-3xl overflow-hidden mt-8">
+                  <img src="/images/asset_1.jpg" className="w-full h-full object-cover" alt="Faaliyet 1" />
+                </div>
+                <div className="h-64 bg-gray-200 rounded-3xl overflow-hidden">
+                  <img src="/images/hero_img.jpg" className="w-full h-full object-cover" alt="Faaliyet 2" />
+                </div>
               </div>
             </div>
           </div>
@@ -217,23 +217,23 @@ export default function AboutPage() {
               <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">Değişim için emek veren, profesyonel ve gönüllü kadromuz ile toplumsal fayda üretiyoruz.</p>
             </div>
           </ScrollReveal>
-          
+
           {team.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
               {team.map((member: any, index: number) => (
                 <ScrollReveal key={member._id} delay={index * 0.1}>
                   <div className="group">
                     <div className="relative aspect-[4/5] rounded-3xl overflow-hidden mb-6 shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-3">
-                      <img 
-                        src={member.imageUrl || "/images/placeholder-user.png"} 
-                        alt={member.name} 
+                      <img
+                        src={member.imageUrl || "/images/placeholder-user.png"}
+                        alt={member.name}
                         className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-kefder-teal/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-8">
-                         <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p className="text-white font-bold text-lg">{member.name}</p>
-                            <p className="text-orange-400 text-sm font-medium">{member.role?.[language] || member.role?.tr}</p>
-                         </div>
+                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                          <p className="text-white font-bold text-lg">{member.name}</p>
+                          <p className="text-orange-400 text-sm font-medium">{member.role?.[language] || member.role?.tr}</p>
+                        </div>
                       </div>
                     </div>
                     <div className="text-center">
@@ -268,10 +268,10 @@ export default function AboutPage() {
                 <p className="text-kefder-gray mb-10 leading-relaxed">
                   KEFDER'in yasal dayanaklarını, kuruluş amaçlarını ve çalışma prensiplerini barındıran resmi tüzük dökümanı.
                 </p>
-                
+
                 {officialBylawsUrl ? (
-                  <a 
-                    href={officialBylawsUrl} 
+                  <a
+                    href={officialBylawsUrl}
                     download="Kefder_Tüzük_2017.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -310,19 +310,18 @@ export default function AboutPage() {
                   {archive.length > 0 ? (
                     archive.slice(0, 2).map((doc: any) => (
                       <div key={doc._id}>
-                        <a 
-                          href={doc.fileUrl} 
-                          target="_blank" 
+                        <a
+                          href={doc.fileUrl}
+                          target="_blank"
                           download
                           className="flex items-center justify-between p-5 bg-kefder-gray-light/50 rounded-2xl border border-transparent hover:border-kefder-orange/20 hover:bg-white hover:shadow-xl transition-all group"
                         >
                           <div className="flex items-center gap-4">
-                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-[10px] uppercase ${
-                              doc.fileType === 'pdf' ? 'bg-red-50 text-red-500' : 
-                              doc.fileType === 'doc' ? 'bg-blue-50 text-blue-500' : 
-                              doc.fileType === 'ppt' ? 'bg-orange-50 text-orange-500' :
-                              'bg-gray-100 text-gray-500'
-                            }`}>
+                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-[10px] uppercase ${doc.fileType === 'pdf' ? 'bg-red-50 text-red-500' :
+                                doc.fileType === 'doc' ? 'bg-blue-50 text-blue-500' :
+                                  doc.fileType === 'ppt' ? 'bg-orange-50 text-orange-500' :
+                                    'bg-gray-100 text-gray-500'
+                              }`}>
                               {doc.fileType || 'Dosya'}
                             </div>
                             <span className="font-bold text-kefder-gray-dark group-hover:text-kefder-orange transition-colors">
@@ -342,8 +341,8 @@ export default function AboutPage() {
 
                 {archive.length > 0 && (
                   <div className="mt-10 pt-8 border-t border-gray-100">
-                    <Link 
-                      href="/activities#archive" 
+                    <Link
+                      href="/activities#archive"
                       className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-kefder-orange text-kefder-orange rounded-3xl font-bold hover:bg-kefder-orange hover:text-white transition-all shadow-lg hover:shadow-kefder-orange/20 group"
                     >
                       <FileText className="w-5 h-5" />
@@ -382,7 +381,7 @@ export default function AboutPage() {
                         <span className="font-black text-2xl text-gray-400 group-hover:text-orange-500 uppercase">Logo</span>
                       )}
                     </div>
-                    
+
                     {/* Tooltip Bubble */}
                     {network.shortDescription && (
                       <div className="absolute bottom-[calc(100%+1rem)] left-1/2 -translate-x-1/2 w-72 md:w-80 p-5 bg-white shadow-2xl rounded-3xl text-kefder-gray-dark text-xs leading-relaxed font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-50 border border-gray-100 translate-y-2 group-hover:translate-y-0 text-left">

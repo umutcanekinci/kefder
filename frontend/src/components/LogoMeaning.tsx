@@ -64,10 +64,12 @@ export default function LogoMeaning({ features, language }: LogoMeaningProps) {
               ) : (
                 <motion.div 
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.2 }}
-                  className="text-gray-400 italic text-lg"
+                  animate={{ opacity: 0.7 }}
+                  className="text-kefder-teal font-medium text-lg flex flex-col items-end gap-3"
                 >
-                  İşaretçilerin üzerine gelerek <br /> anlamlarını keşfedin
+                  <span className="bg-kefder-teal/10 px-4 py-2 rounded-2xl border border-kefder-teal/20">
+                    İşaretçilerin üzerine gelerek <br /> anlamlarını keşfedin
+                  </span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -135,10 +137,12 @@ export default function LogoMeaning({ features, language }: LogoMeaningProps) {
               ) : (
                 <motion.div 
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.2 }}
-                  className="text-gray-400 italic text-lg"
+                  animate={{ opacity: 0.7 }}
+                  className="text-kefder-teal font-medium text-lg flex flex-col items-start gap-3"
                 >
-                  Logomuzun hikayesini <br /> incelemek için dokunun
+                  <span className="bg-kefder-teal/10 px-4 py-2 rounded-2xl border border-kefder-teal/20">
+                    Logomuzun hikayesini <br /> incelemek için dokunun
+                  </span>
                 </motion.div>
               )}
             </AnimatePresence>
