@@ -19,12 +19,10 @@ const iconMap: Record<string, any> = {
 export default function HomeActivities() {
   const [activities, setActivities] = useState<any[]>([])
   const { language, t } = useLanguage()
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getHomeActivities().then(data => {
       setActivities(data)
-      setLoading(false)
     })
   }, [])
 

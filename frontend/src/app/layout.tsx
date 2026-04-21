@@ -50,7 +50,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   let settings: any = null;
   try {
     settings = await sanity.fetch(query, {}, { next: { tags: ['siteSettings'] } });
-  } catch (error) {}
+  } catch {}
 
   if (settings?.isMaintenanceMode) {
     return (

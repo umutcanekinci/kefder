@@ -8,7 +8,6 @@ type Translations = Record<string, string>
 const translations: Record<Language, Translations> = {
   tr: {
     'nav.home': 'Ana Sayfa',
-    'nav.news': 'Haberler',
     'nav.about': 'Hakkımızda',
     'nav.about.mission': 'Amaç ve Değerler',
     'nav.about.team': 'Ekip',
@@ -122,7 +121,6 @@ const translations: Record<Language, Translations> = {
   },
   en: {
     'nav.home': 'Home',
-    'nav.news': 'News',
     'nav.about': 'About Us',
     'nav.about.mission': 'Mission & Values',
     'nav.about.team': 'Team',

@@ -308,7 +308,7 @@ export default function AboutPage() {
 
                 <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                   {archive.length > 0 ? (
-                    archive.slice(0, 2).map((doc: any, index: number) => (
+                    archive.slice(0, 2).map((doc: any) => (
                       <div key={doc._id}>
                         <a 
                           href={doc.fileUrl} 

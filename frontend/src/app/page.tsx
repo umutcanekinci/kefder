@@ -1,4 +1,3 @@
-import Hero from "@/sections/Hero";
 import HomeAbout from "@/components/home/HomeAbout";
 import HomeActivities from "@/components/home/HomeActivities";
 import EventsCalendar from "@/components/shared/EventsCalendar";

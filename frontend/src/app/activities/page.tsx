@@ -1,6 +1,6 @@
 'use client'
 
-import { CalendarDays, ChevronLeft, ChevronRight, Clock3, List, MapPin, GraduationCap, Palette, Music, Landmark, Heart, Globe, Activity, ArrowRight } from 'lucide-react'
+import { CalendarDays, ChevronLeft, ChevronRight, Clock3, List, MapPin, GraduationCap, Palette, Music, Landmark, Heart, Globe, Activity } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { getActivitiesData } from './actions'
 import { FileText, Download } from 'lucide-react'
@@ -33,7 +33,7 @@ type EventItem = {
   status?: EventStatus
 }
 
-const defaultEvents: EventItem[] = []
+
 
 function formatMonthYear(date: Date) {
   return new Intl.DateTimeFormat('tr-TR', {
