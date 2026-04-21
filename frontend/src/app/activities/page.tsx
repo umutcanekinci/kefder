@@ -506,78 +506,59 @@ export default function ActivitiesPage() {
           </ScrollReveal>
 
           {memoryGalleries.length > 0 ? (
-            <div className="space-y-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {memoryGalleries.map((gallery, galleryIndex) => (
                 <ScrollReveal key={gallery._id} delay={galleryIndex * 0.1}>
-                  <div className="group">
-                    {/* Gallery Header */}
-                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-                      <div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-[#1F2A44] mb-2">
+                  <button
+                    onClick={() => openLightbox(galleryIndex, 0)}
+                    className="group relative w-full text-left focus:outline-none"
+                  >
+                    {/* Album Cover Container */}
+                    <div className="relative aspect-[4/3] rounded-[32px] overflow-hidden bg-white shadow-lg transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl">
+                      <img
+                        src={gallery.coverImage || gallery.images?.[0]?.url || "/images/placeholder.jpg"}
+                        alt={gallery.title?.[language] || gallery.title?.tr || ''}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      
+                      {/* Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                      
+                      {/* Photo Count Badge */}
+                      <div className="absolute top-6 right-6 bg-white/20 backdrop-blur-md border border-white/30 px-4 py-1.5 rounded-full text-white text-xs font-bold flex items-center gap-2">
+                        <Images className="w-3.5 h-3.5" />
+                        {gallery.images?.length || 0} Fotoğraf
+                      </div>
+
+                      {/* Content Overlay */}
+                      <div className="absolute inset-x-0 bottom-0 p-8">
+                        {gallery.date && (
+                          <div className="text-orange-400 text-xs font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
+                            <CalendarDays className="w-3.5 h-3.5" />
+                            {new Date(gallery.date).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long' })}
+                          </div>
+                        )}
+                        <h3 className="text-xl md:text-2xl font-bold text-white mb-2 leading-tight">
                           {gallery.title?.[language] || gallery.title?.tr || ''}
                         </h3>
                         {gallery.description && (
-                          <p className="text-gray-500">{gallery.description?.[language] || gallery.description?.tr || ''}</p>
-                        )}
-                        {gallery.date && (
-                          <span className="inline-flex items-center gap-2 mt-2 text-sm font-semibold text-orange-500">
-                            <CalendarDays className="w-4 h-4" />
-                            {new Date(gallery.date).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' })}
-                          </span>
+                          <p className="text-white/70 text-sm line-clamp-2 font-light">
+                            {gallery.description?.[language] || gallery.description?.tr || ''}
+                          </p>
                         )}
                       </div>
-                      <span className="text-sm text-gray-400 font-medium shrink-0">
-                        {gallery.images?.length || 0} fotoğraf
-                      </span>
+
+                      {/* Hover Action Icon */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-orange-500 shadow-xl transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                          <ZoomIn className="w-8 h-8" />
+                        </div>
+                      </div>
                     </div>
 
-                    {/* Divider */}
-                    <div className="w-16 h-1 bg-gradient-to-r from-orange-400 to-orange-200 rounded-full mb-8" />
-
-                    {/* Photo Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                      {/* Cover / first image — larger */}
-                      {gallery.images?.slice(0, 1).map((img: any, imgIndex: number) => (
-                        <button
-                          key={imgIndex}
-                          onClick={() => openLightbox(galleryIndex, imgIndex)}
-                          className="col-span-2 row-span-2 relative aspect-square rounded-3xl overflow-hidden cursor-pointer group/img focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400"
-                        >
-                          <img
-                            src={img.url}
-                            alt={img.caption || gallery.title?.tr || ''}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <ZoomIn className="w-6 h-6 text-white" />
-                          </div>
-                          {img.caption && (
-                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300">
-                              <p className="text-white text-sm font-medium">{img.caption}</p>
-                            </div>
-                          )}
-                        </button>
-                      ))}
-
-                      {/* Remaining images */}
-                      {gallery.images?.slice(1).map((img: any, imgIndex: number) => (
-                        <button
-                          key={imgIndex + 1}
-                          onClick={() => openLightbox(galleryIndex, imgIndex + 1)}
-                          className="relative aspect-square rounded-2xl overflow-hidden cursor-pointer group/img focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400"
-                        >
-                          <img
-                            src={img.url}
-                            alt={img.caption || ''}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                            <ZoomIn className="w-5 h-5 text-white opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                    {/* Reflection/Decoration effect */}
+                    <div className="absolute -bottom-4 inset-x-8 h-8 bg-black/5 blur-2xl rounded-full -z-10 group-hover:bg-orange-500/10 transition-colors duration-500" />
+                  </button>
                 </ScrollReveal>
               ))}
             </div>
