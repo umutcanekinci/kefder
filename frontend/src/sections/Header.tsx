@@ -23,7 +23,6 @@ const getNavItems = (t: (key: string) => string) => [
     label: t('nav.activities'), 
     href: '/activities', 
     dropdown: [
-      { label: t('nav.activities.work'), href: '/activities#work', icon: Activity },
       { label: t('nav.activities.calendar'), href: '/activities#calendar', icon: CalendarDays },
       { label: t('nav.activities.past'), href: '/activities#past', icon: History },
       { label: t('nav.activities.archive'), href: '/activities#archive', icon: Archive },
@@ -68,10 +67,10 @@ export default function Header({ settings }: { settings?: any }) {
         <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo - Left Side */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-4 group">
-              <div className="w-12 h-12 lg:w-16 lg:h-16 flex-shrink-0">
+            <Link href="/" className="flex items-center gap-0 group">
+              <div className="w-14 h-14 lg:w-16 lg:h-16 flex-shrink-0">
                 <img
-                  src="/images/logo.png"
+                  src={settings?.logoUrl || "/images/logo.png"}
                   alt="KEFDER Logo"
                   className="w-full h-full object-contain"
                 />
@@ -155,6 +154,12 @@ export default function Header({ settings }: { settings?: any }) {
                   <Instagram className="w-5 h-5" />
                 </a>
               )}
+              {socialLinks?.aeccFacebook && (
+                <a href={socialLinks.aeccFacebook} target="_blank" rel="noopener noreferrer" className="px-3 h-11 flex items-center justify-center gap-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10 group/aecc">
+                  <Facebook className="w-5 h-5 text-[#1877F2] group-hover/aecc:scale-110 transition-transform" />
+                  <span className="text-[10px] font-black tracking-widest">AECC</span>
+                </a>
+              )}
             </div>
 
             <button
@@ -210,6 +215,12 @@ export default function Header({ settings }: { settings?: any }) {
               {socialLinks?.instagram && (
                 <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Instagram className="w-6 h-6" />
+                </a>
+              )}
+              {socialLinks?.aeccFacebook && (
+                <a href={socialLinks.aeccFacebook} target="_blank" rel="noopener noreferrer" className="px-4 h-12 flex items-center justify-center gap-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
+                  <Facebook className="w-6 h-6 text-[#1877F2]" />
+                  <span className="text-xs font-black tracking-widest">AECC</span>
                 </a>
               )}
             </div>

@@ -63,27 +63,6 @@ export default function SidebarLinks({ aeccUrl }: { aeccUrl?: string }) {
         <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-kefder-yellow/10 rounded-full blur-xl"></div>
       </div>
 
-      {/* Quick Links */}
-      <div className="bg-white rounded-[32px] p-8 border border-gray-100 shadow-sm">
-        <h4 className="text-sm font-black uppercase tracking-widest text-kefder-gray/40 mb-6">
-          {t('sidebar.quickLinks')}
-        </h4>
-        <div className="space-y-4">
-          {links.map((link, idx) => (
-            <a 
-              key={idx} 
-              href={link.href}
-              className="flex items-center justify-between p-4 bg-kefder-gray-light/30 rounded-2xl hover:bg-kefder-teal/5 hover:text-kefder-teal transition-all group"
-            >
-              <div className="flex items-center gap-3 font-bold text-kefder-gray-dark group-hover:text-kefder-teal">
-                <link.icon className="w-5 h-5 text-kefder-teal/40 group-hover:text-kefder-teal" />
-                {link.title}
-              </div>
-              <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-            </a>
-          ))}
-        </div>
-      </div>
     </div>
   )
 }

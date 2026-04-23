@@ -150,33 +150,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Hedef Kitle Section */}
-      {about?.targetAudiences?.length > 0 && (
-        <section className="py-24 px-4 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <ScrollReveal>
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#1F2A44] mb-4">{t('about.target.title')}</h2>
-                <p className="text-gray-500">{t('about.target.desc')}</p>
-              </div>
-            </ScrollReveal>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {about.targetAudiences.map((item: any, idx: number) => (
-                <ScrollReveal key={idx} delay={idx * 0.1}>
-                  <div className="bg-[#FDF6F0] p-8 rounded-3xl border border-orange-100 group hover:bg-orange-500 transition-all duration-500 h-full">
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 text-orange-500 group-hover:text-orange-500 transition-colors">
-                      <Users className="w-6 h-6" />
-                    </div>
-                    <p className="text-xl font-bold text-[#1F2A44] group-hover:text-white transition-colors">
-                      {item[language] || item.tr}
-                    </p>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Faaliyet Alanlarımız Section */}
       {about?.activities?.length > 0 && (

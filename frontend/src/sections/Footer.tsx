@@ -30,7 +30,6 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
   const exploreLinks = [
     { label: t('footer.volunteer'), href: '/volunteer' },
     { label: t('nav.contact'), href: '/contact' },
-    { label: t('nav.activities.work') || 'Çalışmalarımız', href: '/activities#work' },
     { label: t('nav.activities.archive') || 'Dosya Arşivi', href: '/activities#archive' },
   ]
 
@@ -43,7 +42,7 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
             <a href="/" className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 flex-shrink-0">
                 <img 
-                  src="/images/logo.png" 
+                  src={settings?.logoUrl || "/images/logo.png"} 
                   alt="KEFDER Logo" 
                   className="w-full h-full object-contain"
                 />
@@ -81,6 +80,17 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
                   className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200"
                 >
                   <Instagram className="w-5 h-5" />
+                </a>
+              )}
+              {socialLinks?.aeccFacebook && (
+                <a
+                  href={socialLinks.aeccFacebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 h-10 flex items-center justify-center gap-2 bg-white/10 hover:bg-[#1877F2] rounded-lg transition-all duration-200 group/aecc"
+                >
+                  <Facebook className="w-5 h-5 group-hover/aecc:scale-110 transition-transform" />
+                  <span className="text-[10px] font-black tracking-widest">AECC</span>
                 </a>
               )}
             </div>

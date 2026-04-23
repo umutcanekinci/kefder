@@ -6,7 +6,10 @@ import { Wrench } from "lucide-react";
 
 export async function generateMetadata(): Promise<Metadata> {
   const query = `{
-    "settings": *[_type == "siteSettings"][0]{title},
+    "settings": *[_type == "siteSettings"][0]{
+      title,
+      "logoUrl": logo.asset->url
+    },
     "about": *[_type == "about"][0]{description}
   }`;
 
@@ -14,16 +17,17 @@ export async function generateMetadata(): Promise<Metadata> {
     const data = await sanity.fetch(query, {}, { next: { tags: ['siteSettings', 'about'] } });
     const settings = data?.settings;
     const about = data?.about;
+    const logo = settings?.logoUrl || "/images/logo.png";
     
     return {
       title: settings?.title?.tr || "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği",
       description: about?.description?.tr || "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.",
       icons: {
-        icon: "/images/logo.png",
-        apple: "/images/logo.png"
+        icon: logo,
+        apple: logo
       },
       openGraph: {
-        images: ["/images/logo.png"]
+        images: [logo]
       }
     };
   } catch {
@@ -45,7 +49,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const query = `*[_type == "siteSettings"][0]{
     socialLinks,
     contactInfo,
-    isMaintenanceMode
+    isMaintenanceMode,
+    "logoUrl": logo.asset->url
   }`;
   let settings: any = null;
   try {

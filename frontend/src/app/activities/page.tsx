@@ -217,66 +217,6 @@ export default function ActivitiesPage() {
         </ScrollReveal>
       </section>
 
-      {/* Sürdürdüğümüz Çalışmalar Section */}
-      <section id="work" className="py-24 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <div className="inline-flex rounded-full bg-kefder-teal/10 px-4 py-1.5 text-sm font-semibold text-kefder-teal mb-4 uppercase tracking-widest">
-                {t('activities.work.badge')}
-              </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">{t('activities.work.title')}</h2>
-              <p className="text-gray-500 text-lg max-w-2xl mx-auto">{t('activities.work.desc')}</p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {categories.map((activity, index) => {
-              const IconComponent = iconMap[activity.icon] || Activity
-              const title = activity.title?.[language] || activity.title?.tr || activity.title
-              const desc = activity.description?.[language] || activity.description?.tr || activity.desc
-              const imageUrl = activity.imageUrl || "/images/asset_1.jpg"
-
-              return (
-                <ScrollReveal key={activity._id || index} delay={index * 0.1}>
-                  <div className="group bg-white rounded-[40px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full hover:-translate-y-2">
-                    {/* Image Container */}
-                    <div className="relative aspect-[16/10] overflow-hidden">
-                      <img 
-                        src={imageUrl} 
-                        alt={title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
-                         <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-kefder-teal shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <IconComponent className="w-6 h-6" />
-                         </div>
-                      </div>
-                      {activity.category && (
-                        <div className="absolute top-6 left-6">
-                          <span className="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-kefder-teal shadow-sm">
-                            {activity.category}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-10 flex flex-col flex-1">
-                      <h3 className="text-2xl font-bold text-[#1F2A44] mb-4 group-hover:text-kefder-teal transition-colors leading-tight">
-                        {title}
-                      </h3>
-                      <p className="text-gray-500 leading-relaxed line-clamp-4">
-                        {desc}
-                      </p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              )
-            })}
-          </div>
-        </div>
-      </section>
 
       <section id="calendar" className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
