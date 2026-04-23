@@ -15,7 +15,7 @@ import {
   Quote,
   ChevronRight
 } from 'lucide-react'
-import SidebarLinks from '@/components/shared/SidebarLinks'
+// import SidebarLinks removed as per user request
 import ScrollReveal from '@/components/shared/ScrollReveal'
 
 export default function AboutPage() {
@@ -41,6 +41,7 @@ export default function AboutPage() {
   const archive = data?.archive || []
   const about = data?.about || {}
   const officialBylawsUrl = about?.officialBylawsUrl
+  const activityReportUrl = about?.activityReportUrl
 
   return (
     <div className="bg-[#FDF6F0] min-h-screen">
@@ -228,108 +229,66 @@ export default function AboutPage() {
       </section>
 
       <section id="reports" className="py-24 px-4 bg-kefder-gray-light/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 gap-12">
             {/* Tüzük / Resmi Belgeler */}
             <ScrollReveal direction="up" delay={0.1}>
-              <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-sm border border-gray-100 flex flex-col lg:col-span-1 h-full">
+              <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-sm border border-gray-100 flex flex-col h-full">
                 <div className="w-16 h-16 bg-kefder-teal/10 rounded-2xl flex items-center justify-center mb-8">
                   <ShieldCheck className="w-8 h-8 text-kefder-teal" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-kefder-gray-dark mb-4">{t('about.bylaws.title')}</h3>
-                <p className="text-kefder-gray mb-10 leading-relaxed">
+                <h3 className="text-2xl md:text-3xl font-bold text-kefder-gray-dark mb-4">{t('about.documents.title')}</h3>
+                <p className="text-kefder-gray mb-10 leading-relaxed text-lg">
                   {t('about.bylaws.desc')}
                 </p>
 
-                {officialBylawsUrl ? (
-                  <a
-                    href={officialBylawsUrl}
-                    download="Kefder_Tüzük_2017.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-auto flex items-center justify-between p-6 bg-kefder-teal text-white rounded-3xl hover:bg-kefder-teal-dark transition-all shadow-lg hover:shadow-kefder-teal/20 group"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                        <Download className="w-6 h-6" />
+                <div className="space-y-4 mt-auto">
+                  {activityReportUrl && (
+                    <a
+                      href={activityReportUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-6 bg-orange-500 text-white rounded-3xl hover:bg-orange-600 transition-all shadow-lg hover:shadow-orange-500/20 group"
+                    >
+                      <div className="flex items-center gap-4 text-left">
+                        <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                          <FileText className="w-6 h-6" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-bold text-lg">{t('about.activityReport.title')}</span>
+                          <span className="text-xs text-white/70 uppercase font-medium">{t('about.activityReport.button')}</span>
+                        </div>
                       </div>
-                      <div className="flex flex-col">
-                        <span className="font-bold text-lg">Kefder_Tüzük_2017</span>
-                        <span className="text-xs text-white/70 uppercase font-medium">{t('about.bylaws.officialPdf')}</span>
-                      </div>
-                    </div>
-                  </a>
-                ) : (
-                  <div className="mt-auto p-6 bg-gray-50 border border-dashed border-gray-200 rounded-3xl text-center">
-                    <p className="text-gray-400 italic">{t('about.documents.empty')}</p>
-                  </div>
-                )}
-              </div>
-            </ScrollReveal>
+                      <Download className="w-6 h-6 text-white/40 group-hover:text-white transition-colors" />
+                    </a>
+                  )}
 
-            {/* Dosya Arşivi / Raporlar */}
-            <ScrollReveal direction="up" delay={0.2}>
-              <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-sm border border-gray-100 lg:col-span-1 h-full">
-                <div className="w-16 h-16 bg-kefder-orange/10 rounded-2xl flex items-center justify-center mb-8">
-                  <FileText className="w-8 h-8 text-kefder-orange" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-kefder-gray-dark mb-4">{t('about.archive.title')}</h3>
-                <p className="text-kefder-gray mb-10 leading-relaxed">
-                  {t('about.archive.desc')}
-                </p>
-
-                <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                  {archive.length > 0 ? (
-                    archive.slice(0, 2).map((doc: any) => (
-                      <div key={doc._id}>
-                        <a
-                          href={doc.fileUrl}
-                          target="_blank"
-                          download
-                          className="flex items-center justify-between p-5 bg-kefder-gray-light/50 rounded-2xl border border-transparent hover:border-kefder-orange/20 hover:bg-white hover:shadow-xl transition-all group"
-                        >
-                          <div className="flex items-center gap-4">
-                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-[10px] uppercase ${doc.fileType === 'pdf' ? 'bg-red-50 text-red-500' :
-                                doc.fileType === 'doc' ? 'bg-blue-50 text-blue-500' :
-                                  doc.fileType === 'ppt' ? 'bg-orange-50 text-orange-500' :
-                                    'bg-gray-100 text-gray-500'
-                              }`}>
-                              {doc.fileType || t('about.archive.file')}
-                            </div>
-                            <span className="font-bold text-kefder-gray-dark group-hover:text-kefder-orange transition-colors">
-                              {doc.title?.[language] || doc.title?.tr}
-                            </span>
-                          </div>
-                          <Download className="w-5 h-5 text-kefder-gray/20 group-hover:text-kefder-orange transition-colors" />
-                        </a>
+                  {officialBylawsUrl && (
+                    <a
+                      href={officialBylawsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-6 bg-kefder-teal text-white rounded-3xl hover:bg-kefder-teal-dark transition-all shadow-lg hover:shadow-kefder-teal/20 group"
+                    >
+                      <div className="flex items-center gap-4 text-left">
+                        <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                          <ShieldCheck className="w-6 h-6" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-bold text-lg">{t('about.bylaws.title')}</span>
+                          <span className="text-xs text-white/70 uppercase font-medium">{t('about.bylaws.officialPdf')}</span>
+                        </div>
                       </div>
-                    ))
-                  ) : (
-                    <div className="text-center py-12 border border-dashed border-gray-200 rounded-3xl">
-                      <p className="text-gray-400 italic">{t('about.archive.empty')}</p>
+                      <Download className="w-6 h-6 text-white/40 group-hover:text-white transition-colors" />
+                    </a>
+                  )}
+
+                  {!activityReportUrl && !officialBylawsUrl && (
+                    <div className="p-6 bg-gray-50 border border-dashed border-gray-200 rounded-3xl text-center">
+                      <p className="text-gray-400 italic">{t('about.documents.empty')}</p>
                     </div>
                   )}
                 </div>
-
-                {archive.length > 0 && (
-                  <div className="mt-10 pt-8 border-t border-gray-100">
-                    <Link
-                      href="/activities#archive"
-                      className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-kefder-orange text-kefder-orange rounded-3xl font-bold hover:bg-kefder-orange hover:text-white transition-all shadow-lg hover:shadow-kefder-orange/20 group"
-                    >
-                      <FileText className="w-5 h-5" />
-                      {t('about.archive.all')}
-                      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </ScrollReveal>
-
-            {/* Sidebar Links & AECC Special */}
-            <ScrollReveal direction="right" delay={0.3}>
-              <div className="lg:col-span-1">
-                <SidebarLinks aeccUrl={about?.aeccFacebookUrl} />
               </div>
             </ScrollReveal>
           </div>

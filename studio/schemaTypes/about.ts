@@ -107,6 +107,15 @@ export const aboutType = defineType({
       },
     }),
     defineField({
+      name: 'activityReport',
+      title: 'Faaliyet Raporu Dosyası',
+      type: 'file',
+      description: 'Derneğin güncel faaliyet raporu dökümanı',
+      options: {
+        accept: '.pdf',
+      },
+    }),
+    defineField({
       name: 'aeccFacebookUrl',
       title: 'AECC Facebook Grubu Linki',
       type: 'url',

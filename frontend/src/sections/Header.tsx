@@ -51,7 +51,7 @@ const getNavItems = (t: (key: string) => string) => [
   { label: t('nav.contact'), href: '/contact' },
 ]
 
-const platformIcons: any = {
+const platformIcons: Record<string, any> = {
   facebook: Facebook,
   instagram: Instagram,
   youtube: Youtube,
@@ -70,76 +70,79 @@ export default function Header({ settings }: { settings?: any }) {
   }, [])
 
   const navItems = getNavItems(t)
-  const { socialLinks } = settings || {}
+  const socialLinks = Array.isArray(settings?.socialLinks) ? settings.socialLinks : []
 
   const toggleLanguage = () => {
     setLanguage(language === 'tr' ? 'en' : 'tr')
   }
 
-  // Hydration safety
   const currentLang = mounted ? language : 'tr'
 
   return (
     <header className="sticky top-0 z-50 bg-kefder-teal border-b border-white/10 shadow-lg">
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 lg:h-24">
-          {/* Logo - Left Side */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-0 group">
-              <div className="w-14 h-14 lg:w-16 lg:h-16 flex-shrink-0">
-                <img
-                  src={settings?.logoUrl || "/images/logo.png"}
-                  alt="KEFDER Logo"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="hidden sm:block">
-                <h1 className="text-xl lg:text-2xl font-black text-white leading-tight whitespace-nowrap">KEFDER</h1>
-                <p className="text-xs lg:text-sm text-white/80 font-medium leading-tight whitespace-nowrap">
-                  {t('nav.associationName')}
-                </p>
-              </div>
-            </Link>
-          </div>
+      {/* ── Main bar ── */}
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-2 lg:gap-3 py-3 lg:py-0 lg:h-20 xl:h-24">
 
-          {/* Desktop Navigation - Center */}
-          <nav className="hidden lg:flex flex-1 items-center justify-center h-full mx-6 xl:mx-10">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-1.5 shrink-0 group">
+            <div className="w-12 h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 shrink-0">
+              <img
+                src={settings?.logoUrl || "/images/logo.png"}
+                alt="KEFDER Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div className="hidden sm:flex flex-col leading-none">
+              <span className="text-base lg:text-lg xl:text-xl font-black text-white whitespace-nowrap tracking-tight">KEFDER</span>
+              <span className="hidden xl:block text-[10px] text-white/70 font-medium whitespace-nowrap max-w-[160px] truncate">
+                {t('nav.associationName')}
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Nav – takes all remaining space */}
+          <nav className="hidden lg:flex flex-1 min-w-0 items-center justify-center h-full">
             {mounted && navItems.map((item) => (
               <div key={item.label} className="relative group h-full flex items-center">
                 <Link
                   href={item.href}
-                  className={"px-2 xl:px-4 h-full flex items-center gap-1 xl:gap-1.5 text-sm xl:text-base font-bold transition-colors whitespace-nowrap " + (pathname === item.href ? 'text-white underline underline-offset-8 decoration-2' : 'text-white/80 hover:text-white')}
+                  className={
+                    "px-2 xl:px-3 h-full flex items-center gap-0.5 xl:gap-1 text-[11px] xl:text-sm font-bold transition-colors whitespace-nowrap " +
+                    (pathname === item.href
+                      ? 'text-white underline underline-offset-8 decoration-2'
+                      : 'text-white/80 hover:text-white')
+                  }
                 >
                   {item.label}
-                  {item.dropdown && <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform" />}
+                  {item.dropdown && <ChevronDown className="w-3 h-3 shrink-0 group-hover:rotate-180 transition-transform" />}
                 </Link>
 
-                {/* Desktop Dropdown */}
                 {item.dropdown && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2 z-50 cursor-default">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2 z-50">
                     <div className={"bg-white shadow-xl rounded-xl border border-kefder-gray-light p-2 flex gap-4 " + (item.label === t('nav.activities') ? 'w-[450px] p-4' : 'w-60')}>
                       <div className="flex-1 flex flex-col gap-1">
                         {item.dropdown.map(subItem => (
-                          <Link 
-                            key={subItem.label} 
-                            href={subItem.href} 
-                            className="px-4 py-2.5 text-base text-kefder-gray-dark hover:text-kefder-teal hover:bg-kefder-teal/10 rounded-md transition-colors flex items-center gap-3 whitespace-nowrap group/item"
+                          <Link
+                            key={subItem.label}
+                            href={subItem.href}
+                            className="px-4 py-2.5 text-sm text-kefder-gray-dark hover:text-kefder-teal hover:bg-kefder-teal/10 rounded-md transition-colors flex items-center gap-3 whitespace-nowrap group/item"
                           >
                             {subItem.icon && <subItem.icon className="w-4 h-4 text-kefder-gray/40 group-hover/item:text-kefder-teal transition-colors" />}
                             {subItem.label}
                           </Link>
                         ))}
                       </div>
-
-                      {/* Graphic component for Activities mega-menu */}
                       {item.label === t('nav.activities') && (
                         <div className="w-[180px] bg-kefder-orange/5 rounded-lg p-3 flex flex-col items-center text-center border border-kefder-orange/20">
                           <div className="w-full h-24 mb-3 relative rounded-md overflow-hidden bg-white flex items-center justify-center">
-                            <img src="/images/asset_1.jpg" alt="Calendar Graphic" className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" />
+                            <img src="/images/asset_1.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" />
                             <CalendarDays className="relative z-10 w-8 h-8 text-kefder-orange drop-shadow-md" />
                           </div>
                           <span className="text-xs font-semibold text-kefder-gray-dark">{t('nav.activities.dropdown.title')}</span>
-                          <Link href="/activities#calendar" className="mt-3 text-[11px] font-medium bg-kefder-orange text-white px-3 py-1.5 rounded-full hover:bg-kefder-orange-dark transition-colors w-full">{t('nav.activities.dropdown.button')}</Link>
+                          <Link href="/activities#calendar" className="mt-3 text-[11px] font-medium bg-kefder-orange text-white px-3 py-1.5 rounded-full hover:bg-kefder-orange-dark transition-colors w-full">
+                            {t('nav.activities.dropdown.button')}
+                          </Link>
                         </div>
                       )}
                     </div>
@@ -149,73 +152,81 @@ export default function Header({ settings }: { settings?: any }) {
             ))}
           </nav>
 
-          {/* Right Side - Icons and Toggle */}
-          <div className="flex-shrink-0 flex items-center gap-2 lg:gap-4">
-            {/* Language Toggle */}
+          {/* Right controls – shrink-0 prevents them from ever being squeezed */}
+          <div className="shrink-0 flex items-center gap-1.5 xl:gap-2 ml-auto lg:ml-0">
+            {/* Language toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-4 py-2 text-base font-bold text-white hover:bg-white/20 transition-all border border-white/20 rounded-full bg-white/10"
+              className="flex items-center gap-1 xl:gap-2 px-2.5 xl:px-4 py-2 text-[11px] xl:text-sm font-bold text-white hover:bg-white/20 transition-all border border-white/20 rounded-full bg-white/10 whitespace-nowrap"
             >
-              <Globe className="w-5 h-5" />
-              <span>{currentLang === 'tr' ? 'English' : 'Türkçe'}</span>
+              <Globe className="w-3.5 h-3.5 xl:w-4 xl:h-4 shrink-0" />
+              {/* Küçük ekran: kısaltma */}
+              <span className="hidden sm:inline xl:hidden">{currentLang === 'tr' ? 'EN' : 'TR'}</span>
+              {/* Büyük ekran: tam metin */}
+              <span className="hidden xl:inline">{currentLang === 'tr' ? 'English' : 'Türkçe'}</span>
             </button>
 
-            {/* Social Icons */}
-            <div className="hidden md:flex items-center gap-2">
-              {Array.isArray(socialLinks) && socialLinks.map((social: any, idx: number) => {
-                const Icon = platformIcons[social.platform] || Globe;
-                return (
-                  <a 
-                    key={idx}
-                    href={social.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className={"flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10 " + (social.label ? "px-3 gap-2 h-11" : "w-11 h-11")}
-                    title={social.label || social.platform}
-                  >
-                    <Icon className="w-5 h-5" />
-                    {social.label && <span className="text-[10px] font-black tracking-widest">{social.label}</span>}
-                  </a>
-                )
-              })}
-            </div>
+            {/* Social icons – visible on lg+ (icon only on lg, icon+label on xl+) */}
+            {socialLinks.length > 0 && (
+              <div className="hidden lg:flex items-center gap-1">
+                {socialLinks.map((social: any, idx: number) => {
+                  const Icon = platformIcons[social.platform] || Globe
+                  return (
+                    <a
+                      key={idx}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={social.label || social.platform}
+                      className="w-8 h-8 xl:w-9 xl:h-9 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10 shrink-0"
+                    >
+                      <Icon className="w-4 h-4 shrink-0" />
+                    </a>
+                  )
+                })}
+              </div>
+            )}
 
+            {/* Mobile hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden w-12 h-12 flex items-center justify-center text-white hover:text-kefder-yellow hover:bg-white/10 rounded-lg transition-all"
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 rounded-lg transition-all"
+              aria-label="Menüyü aç/kapat"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile menu ── */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-kefder-teal border-t border-white/10 shadow-xl max-h-[80vh] overflow-y-auto">
-          <nav className="px-4 py-4 flex flex-col gap-2">
+          <nav className="px-4 py-4 flex flex-col gap-1">
             {mounted && navItems.map((item) => (
               <div key={item.label}>
                 <Link
                   href={item.href}
                   onClick={() => !item.dropdown && setMobileMenuOpen(false)}
-                  className={"flex items-center justify-between px-4 py-4 text-base font-bold rounded-lg transition-all " + (pathname === item.href ? 'text-white bg-white/20' : 'text-white hover:bg-white/10')}
+                  className={
+                    "flex items-center justify-between px-4 py-3.5 text-sm font-bold rounded-lg transition-all " +
+                    (pathname === item.href ? 'text-white bg-white/20' : 'text-white hover:bg-white/10')
+                  }
                 >
                   {item.label}
-                  {item.dropdown && <ChevronDown className="w-5 h-5 text-white/60" />}
+                  {item.dropdown && <ChevronDown className="w-4 h-4 text-white/60" />}
                 </Link>
-                
-                {/* Mobile Dropdown Subitems */}
+
                 {item.dropdown && (
-                  <div className="pl-6 pr-4 py-2 flex flex-col gap-1 border-l-2 border-kefder-teal/20 ml-6 mt-1">
+                  <div className="pl-4 pr-2 py-1 flex flex-col gap-0.5 border-l-2 border-white/20 ml-6 mt-0.5 mb-1">
                     {item.dropdown.map(subItem => (
-                      <Link 
-                        key={subItem.label} 
-                        href={subItem.href} 
+                      <Link
+                        key={subItem.label}
+                        href={subItem.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="py-3 text-base text-white hover:text-kefder-yellow flex items-center gap-3"
+                        className="py-2.5 text-sm text-white/80 hover:text-white flex items-center gap-3"
                       >
-                        {subItem.icon && <subItem.icon className="w-5 h-5 text-kefder-gray/40" />}
+                        {subItem.icon && <subItem.icon className="w-4 h-4 text-white/40" />}
                         {subItem.label}
                       </Link>
                     ))}
@@ -224,23 +235,29 @@ export default function Header({ settings }: { settings?: any }) {
               </div>
             ))}
 
-            <div className="flex items-center justify-center gap-4 pt-6 pb-2 border-t border-white/10 mt-4">
-              {Array.isArray(socialLinks) && socialLinks.map((social: any, idx: number) => {
-                const Icon = platformIcons[social.platform] || Globe;
-                return (
-                  <a 
-                    key={idx}
-                    href={social.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className={"flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10 " + (social.label ? "px-4 gap-2 h-12" : "w-12 h-12")}
-                  >
-                    <Icon className="w-6 h-6" />
-                    {social.label && <span className="text-xs font-black tracking-widest">{social.label}</span>}
-                  </a>
-                )
-              })}
-            </div>
+            {/* Social icons in mobile menu */}
+            {socialLinks.length > 0 && (
+              <div className="flex items-center justify-center flex-wrap gap-3 pt-5 pb-2 border-t border-white/10 mt-3">
+                {socialLinks.map((social: any, idx: number) => {
+                  const Icon = platformIcons[social.platform] || Globe
+                  return (
+                    <a
+                      key={idx}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={
+                        "flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10 " +
+                        (social.label ? "px-4 gap-2 h-11" : "w-11 h-11")
+                      }
+                    >
+                      <Icon className="w-5 h-5" />
+                      {social.label && <span className="text-[11px] font-black tracking-widest">{social.label}</span>}
+                    </a>
+                  )
+                })}
+              </div>
+            )}
           </nav>
         </div>
       )}

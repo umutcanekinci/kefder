@@ -38,18 +38,18 @@ export default function SidebarLinks({ aeccUrl }: { aeccUrl?: string }) {
             </div>
             <span className="font-black text-xs uppercase tracking-widest opacity-80">{t('about.aecc.badge')}</span>
           </div>
-          
+
           <h3 className="text-xl font-bold mb-4 leading-tight">
             {t('about.aecc.title')}
           </h3>
-          
+
           <p className="text-white/80 text-sm leading-relaxed mb-8">
             {t('about.aecc.desc')}
           </p>
 
-          <a 
-            href={facebookUrl} 
-            target="_blank" 
+          <a
+            href={facebookUrl}
+            target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white text-kefder-teal px-6 py-3 rounded-2xl font-bold text-sm hover:bg-kefder-yellow hover:text-kefder-teal-dark transition-all group/btn shadow-lg"
           >
@@ -69,19 +69,19 @@ export default function SidebarLinks({ aeccUrl }: { aeccUrl?: string }) {
 
 function ChevronRight({ className }: { className?: string }) {
   return (
-    <svg 
-      className={className} 
-      xmlns="http://www.w3.org/2000/svg" 
-      width="24" 
-      height="24" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="m9 18 6-6-6-6"/>
+      <path d="m9 18 6-6-6-6" />
     </svg>
   )
 }

@@ -33,6 +33,7 @@ export async function getAboutData() {
       activities,
       logoFeatures,
       "officialBylawsUrl": officialBylaws.asset->url,
+      "activityReportUrl": activityReport.asset->url,
       "networks": networks[] {
         description,
         shortDescription,
