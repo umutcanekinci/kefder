@@ -11,10 +11,12 @@ import {documentArchiveType} from './documentArchive'
 import {memoryGalleryType} from './memoryGallery'
 
 import {activityType} from './activity'
+import {pressType} from './press'
 
 export const schemaTypes = [
   eventType,
   newsType,
+  pressType,
   teamMemberType,
   documentType,
   documentArchiveType,
