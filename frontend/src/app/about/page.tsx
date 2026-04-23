@@ -51,11 +51,10 @@ export default function AboutPage() {
         </div>
         <ScrollReveal>
           <div className="max-w-7xl mx-auto text-center relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white text-xs font-bold uppercase tracking-widest mb-6 border border-white/20">
-              <Target className="w-4 h-4" />
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 rounded-full text-white text-base font-bold uppercase tracking-widest mb-8 border border-white/20">
+              <Target className="w-5 h-5" />
               {t('nav.about')}
             </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold mb-8 tracking-tight">{t('nav.about')}</h1>
             <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
               {about?.description?.[language] || about?.description?.tr || t('about.hero.subtitle')}
             </p>

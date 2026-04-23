@@ -1,10 +1,24 @@
 "use client"
 import { useEffect, useState } from 'react'
-import { FaFacebook as Facebook, FaInstagram as Instagram, FaYoutube as Youtube } from 'react-icons/fa';
-import { MapPin, Phone, Mail, Clock3, Send } from 'lucide-react'
+import { 
+  FaFacebook as Facebook, 
+  FaInstagram as Instagram, 
+  FaYoutube as Youtube, 
+  FaXTwitter as Twitter, 
+  FaLinkedin as Linkedin 
+} from 'react-icons/fa6';
+import { MapPin, Phone, Mail, Clock3, Send, Globe } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
 import { getContactData } from './actions'
 import ScrollReveal from '@/components/shared/ScrollReveal'
+
+const platformIcons: any = {
+  facebook: Facebook,
+  instagram: Instagram,
+  youtube: Youtube,
+  twitter: Twitter,
+  linkedin: Linkedin
+}
 
 export default function ContactPage() {
   const { t, language } = useLanguage()
@@ -46,13 +60,10 @@ export default function ContactPage() {
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
         <ScrollReveal>
           <div className="max-w-7xl mx-auto text-center relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white text-xs font-bold uppercase tracking-widest mb-6 border border-white/20">
-              <Mail className="w-4 h-4" />
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 rounded-full text-white text-base font-bold uppercase tracking-widest mb-8 border border-white/20">
+              <Mail className="w-5 h-5" />
               {t('contact.badge')}
             </div>
-            <h1 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
-              {t('contact.title')}
-            </h1>
             <p className="text-white/80 text-lg max-w-2xl mx-auto font-light leading-relaxed">
               {t('contact.desc')}
             </p>
@@ -119,10 +130,18 @@ export default function ContactPage() {
                   <p className="mt-2 text-sm text-gray-500">
                     {t('contact.social.desc')}
                   </p>
-                  <div className="mt-4 flex gap-4">
-                    {socialLinks?.facebook && <SocialButton icon={<Facebook className="w-5 h-5" />} href={socialLinks.facebook} />}
-                    {socialLinks?.instagram && <SocialButton icon={<Instagram className="w-5 h-5" />} href={socialLinks.instagram} />}
-                    {socialLinks?.youtube && <SocialButton icon={<Youtube className="w-5 h-5" />} href={socialLinks.youtube} />}
+                  <div className="mt-4 flex flex-wrap gap-4">
+                    {Array.isArray(socialLinks) && socialLinks.map((social: any, idx: number) => {
+                      const Icon = platformIcons[social.platform] || Globe;
+                      return (
+                        <SocialButton 
+                          key={idx}
+                          icon={<Icon className="w-5 h-5" />} 
+                          href={social.url}
+                          label={social.label}
+                        />
+                      )
+                    })}
                   </div>
                 </div>
               </div>
@@ -240,15 +259,17 @@ function InfoCard({
   )
 }
 
-function SocialButton({ icon, href }: { icon: React.ReactNode; href: string }) {
+function SocialButton({ icon, href, label }: { icon: React.ReactNode; href: string; label?: string }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-gray-400 shadow-sm transition-all hover:-translate-y-1 hover:bg-orange-50 hover:text-orange-600 hover:shadow-md"
+      className={"flex items-center justify-center rounded-xl bg-white text-gray-400 shadow-sm transition-all hover:-translate-y-1 hover:bg-orange-50 hover:text-orange-600 hover:shadow-md " + (label ? "px-4 gap-2 h-11" : "h-11 w-11")}
+      title={label || ""}
     >
       {icon}
+      {label && <span className="text-xs font-bold">{label}</span>}
     </a>
   )
 }
