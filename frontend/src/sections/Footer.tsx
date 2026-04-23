@@ -1,8 +1,24 @@
 "use client"
 import { useState, useEffect } from 'react'
-import { FaFacebook as Facebook, FaInstagram as Instagram } from 'react-icons/fa';
-import { MapPin, Phone, Mail, MoreVertical, Clock } from 'lucide-react'
+import { 
+  MapPin, Phone, Mail, MoreVertical, Clock, Globe
+} from 'lucide-react'
+import { 
+  FaFacebook as Facebook, 
+  FaInstagram as Instagram, 
+  FaYoutube as Youtube, 
+  FaXTwitter as Twitter, 
+  FaLinkedin as Linkedin 
+} from 'react-icons/fa6'
 import { useLanguage } from '../context/LanguageContext'
+
+const platformIcons: any = {
+  facebook: Facebook,
+  instagram: Instagram,
+  youtube: Youtube,
+  twitter: Twitter,
+  linkedin: Linkedin
+}
 
 interface FooterProps {
   onAdminClick: () => void
@@ -61,38 +77,23 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
             </p>
             
             {/* Social Icons */}
-            <div className="flex items-center gap-3 mt-6">
-              {socialLinks?.facebook && (
-                <a
-                  href={socialLinks.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200"
-                >
-                  <Facebook className="w-5 h-5" />
-                </a>
-              )}
-              {socialLinks?.instagram && (
-                <a
-                  href={socialLinks.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200"
-                >
-                  <Instagram className="w-5 h-5" />
-                </a>
-              )}
-              {socialLinks?.aeccFacebook && (
-                <a
-                  href={socialLinks.aeccFacebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 h-10 flex items-center justify-center gap-2 bg-white/10 hover:bg-[#1877F2] rounded-lg transition-all duration-200 group/aecc"
-                >
-                  <Facebook className="w-5 h-5 group-hover/aecc:scale-110 transition-transform" />
-                  <span className="text-[10px] font-black tracking-widest">AECC</span>
-                </a>
-              )}
+            <div className="flex flex-wrap items-center gap-3 mt-6">
+              {Array.isArray(socialLinks) && socialLinks.map((social: any, idx: number) => {
+                const Icon = platformIcons[social.platform] || Globe;
+                return (
+                  <a 
+                    key={idx}
+                    href={social.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={"flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200 " + (social.label ? "px-3 gap-2 h-10" : "w-10 h-10")}
+                    title={social.label || social.platform}
+                  >
+                    <Icon className="w-5 h-5" />
+                    {social.label && <span className="text-[10px] font-black tracking-widest">{social.label}</span>}
+                  </a>
+                )
+              })}
             </div>
           </div>
 

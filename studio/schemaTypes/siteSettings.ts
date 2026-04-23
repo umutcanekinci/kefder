@@ -22,11 +22,41 @@ export const siteSettingsType = defineType({
     defineField({
       name: 'socialLinks',
       title: 'Sosyal Medya Linkleri',
-      type: 'object',
-      fields: [
-        defineField({name: 'facebook', title: 'Facebook URL', type: 'url'}),
-        defineField({name: 'instagram', title: 'Instagram URL', type: 'url'}),
-        defineField({name: 'aeccFacebook', title: 'AECC Facebook URL', type: 'url'}),
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'platform',
+              title: 'Platform',
+              type: 'string',
+              options: {
+                list: [
+                  {title: 'Facebook', value: 'facebook'},
+                  {title: 'Instagram', value: 'instagram'},
+                  {title: 'Youtube', value: 'youtube'},
+                  {title: 'Twitter (X)', value: 'twitter'},
+                  {title: 'LinkedIn', value: 'linkedin'},
+                ],
+              },
+            }),
+            defineField({name: 'url', title: 'URL', type: 'url'}),
+            defineField({name: 'label', title: 'Etiket (Opsiyonel, Örn: AECC)', type: 'string'}),
+          ],
+          preview: {
+            select: {
+              platform: 'platform',
+              label: 'label',
+            },
+            prepare({platform, label}) {
+              return {
+                title: platform ? platform.charAt(0).toUpperCase() + platform.slice(1) : 'Adsız',
+                subtitle: label || '',
+              }
+            },
+          },
+        },
       ],
     }),
     defineField({

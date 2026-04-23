@@ -2,8 +2,18 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { FaFacebook as Facebook, FaInstagram as Instagram } from 'react-icons/fa';
-import { Globe, ChevronDown, Menu, X, CalendarDays, Target, Users, FileText, Scale, Network, History, Archive, Image as ImageIcon, Newspaper, Megaphone, Activity } from 'lucide-react'
+import { 
+  Globe, ChevronDown, Menu, X, CalendarDays, Target, Users, FileText, 
+  Scale, Network, History, Archive, Image as ImageIcon, Newspaper, 
+  Megaphone, Activity 
+} from 'lucide-react'
+import { 
+  FaFacebook as Facebook, 
+  FaInstagram as Instagram, 
+  FaYoutube as Youtube, 
+  FaXTwitter as Twitter, 
+  FaLinkedin as Linkedin 
+} from 'react-icons/fa6'
 import { useLanguage } from '../context/LanguageContext'
 
 const getNavItems = (t: (key: string) => string) => [
@@ -40,6 +50,14 @@ const getNavItems = (t: (key: string) => string) => [
   { label: t('nav.membership'), href: '/volunteer' },
   { label: t('nav.contact'), href: '/contact' },
 ]
+
+const platformIcons: any = {
+  facebook: Facebook,
+  instagram: Instagram,
+  youtube: Youtube,
+  twitter: Twitter,
+  linkedin: Linkedin
+}
 
 export default function Header({ settings }: { settings?: any }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -144,22 +162,22 @@ export default function Header({ settings }: { settings?: any }) {
 
             {/* Social Icons */}
             <div className="hidden md:flex items-center gap-2">
-              {socialLinks?.facebook && (
-                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
-                  <Facebook className="w-5 h-5" />
-                </a>
-              )}
-              {socialLinks?.instagram && (
-                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
-                  <Instagram className="w-5 h-5" />
-                </a>
-              )}
-              {socialLinks?.aeccFacebook && (
-                <a href={socialLinks.aeccFacebook} target="_blank" rel="noopener noreferrer" className="px-3 h-11 flex items-center justify-center gap-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10 group/aecc">
-                  <Facebook className="w-5 h-5 text-[#1877F2] group-hover/aecc:scale-110 transition-transform" />
-                  <span className="text-[10px] font-black tracking-widest">AECC</span>
-                </a>
-              )}
+              {Array.isArray(socialLinks) && socialLinks.map((social: any, idx: number) => {
+                const Icon = platformIcons[social.platform] || Globe;
+                return (
+                  <a 
+                    key={idx}
+                    href={social.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={"flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10 " + (social.label ? "px-3 gap-2 h-11" : "w-11 h-11")}
+                    title={social.label || social.platform}
+                  >
+                    <Icon className="w-5 h-5" />
+                    {social.label && <span className="text-[10px] font-black tracking-widest">{social.label}</span>}
+                  </a>
+                )
+              })}
             </div>
 
             <button
@@ -207,22 +225,21 @@ export default function Header({ settings }: { settings?: any }) {
             ))}
 
             <div className="flex items-center justify-center gap-4 pt-6 pb-2 border-t border-white/10 mt-4">
-              {socialLinks?.facebook && (
-                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
-                  <Facebook className="w-6 h-6" />
-                </a>
-              )}
-              {socialLinks?.instagram && (
-                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
-                  <Instagram className="w-6 h-6" />
-                </a>
-              )}
-              {socialLinks?.aeccFacebook && (
-                <a href={socialLinks.aeccFacebook} target="_blank" rel="noopener noreferrer" className="px-4 h-12 flex items-center justify-center gap-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
-                  <Facebook className="w-6 h-6 text-[#1877F2]" />
-                  <span className="text-xs font-black tracking-widest">AECC</span>
-                </a>
-              )}
+              {Array.isArray(socialLinks) && socialLinks.map((social: any, idx: number) => {
+                const Icon = platformIcons[social.platform] || Globe;
+                return (
+                  <a 
+                    key={idx}
+                    href={social.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={"flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10 " + (social.label ? "px-4 gap-2 h-12" : "w-12 h-12")}
+                  >
+                    <Icon className="w-6 h-6" />
+                    {social.label && <span className="text-xs font-black tracking-widest">{social.label}</span>}
+                  </a>
+                )
+              })}
             </div>
           </nav>
         </div>
