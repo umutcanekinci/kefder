@@ -51,7 +51,6 @@ export async function getAboutData() {
         revalidate: 0 
       } 
     })
-    console.log("SANITY ABOUT DATA:", result.team?.length, "members found");
     return result
   } catch (error) {
     console.error("Sanity fetch error (about):", error)

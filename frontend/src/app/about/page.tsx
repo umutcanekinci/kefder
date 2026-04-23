@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 import { getAboutData } from './actions'
-import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import LogoMeaning from '@/components/LogoMeaning'
 import {
@@ -13,7 +12,6 @@ import {
   CheckCircle2,
   Target,
   Quote,
-  ChevronRight
 } from 'lucide-react'
 // import SidebarLinks removed as per user request
 import ScrollReveal from '@/components/shared/ScrollReveal'
@@ -38,7 +36,6 @@ export default function AboutPage() {
   )
 
   const team = data?.team || []
-  const archive = data?.archive || []
   const about = data?.about || {}
   const officialBylawsUrl = about?.officialBylawsUrl
   const activityReportUrl = about?.activityReportUrl

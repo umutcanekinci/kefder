@@ -19,28 +19,54 @@ export async function generateMetadata(): Promise<Metadata> {
     const about = data?.about;
     const logo = settings?.logoUrl || "/images/logo.png";
     
+    const title = settings?.title?.tr || "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği";
+    const description = about?.description?.tr || "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.";
+
     return {
-      title: settings?.title?.tr || "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği",
-      description: about?.description?.tr || "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.",
-      icons: {
-        icon: logo,
-        apple: logo
-      },
+      title: { default: title, template: `%s | KEFDER` },
+      description,
+      metadataBase: new URL('https://www.kefder.org'),
+      icons: { icon: logo, apple: logo },
       openGraph: {
-        images: [logo]
-      }
+        title,
+        description,
+        url: 'https://www.kefder.org',
+        siteName: 'KEFDER',
+        images: [{ url: logo, width: 1200, height: 630, alt: 'KEFDER' }],
+        locale: 'tr_TR',
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [logo],
+      },
     };
   } catch {
+    const title = "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği";
+    const description = "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.";
+
     return {
-      title: "KEFDER - Kültürel Etkileşim ve Farkındalık Derneği",
-      description: "Kültürel farkındalık, dayanışma ve toplumsal etkileşim için birlikte çalışıyoruz.",
-      icons: {
-        icon: "/images/logo.png",
-        apple: "/images/logo.png"
-      },
+      title: { default: title, template: `%s | KEFDER` },
+      description,
+      metadataBase: new URL('https://www.kefder.org'),
+      icons: { icon: "/images/logo.png", apple: "/images/logo.png" },
       openGraph: {
-        images: ["/images/logo.png"]
-      }
+        title,
+        description,
+        url: 'https://www.kefder.org',
+        siteName: 'KEFDER',
+        images: [{ url: '/images/logo.png', width: 1200, height: 630, alt: 'KEFDER' }],
+        locale: 'tr_TR',
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: ['/images/logo.png'],
+      },
     };
   }
 }

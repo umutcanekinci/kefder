@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { 
-  Globe, ChevronDown, Menu, X, CalendarDays, Target, Users, FileText, 
-  Scale, Network, History, Archive, Image as ImageIcon, Newspaper, 
-  Megaphone, Activity 
+  Globe, ChevronDown, Menu, X, CalendarDays, Target, Users, FileText,
+  Scale, Network, History, Archive, Image as ImageIcon, Newspaper,
+  Megaphone
 } from 'lucide-react'
 import { 
   FaFacebook as Facebook, 

@@ -13,19 +13,17 @@ export async function POST(req: NextRequest) {
 
     // 3. GÜVENLİK KONTROLÜ: İmza eşleşiyor mu?
     if (!isValidSignature(body, signature, secret)) {
-      console.warn('[Webhook] Geçersiz imza! Yetkisiz erişim.');
       return NextResponse.json({ message: 'Geçersiz imza!' }, { status: 401 });
     }
 
     // 4. İmza doğruysa, ham metni JSON'a çevir
     const parsedBody = JSON.parse(body);
-    const type = parsedBody._type; 
-    
+    const type = parsedBody._type;
+
     if (type) {
-      console.log(`[Webhook] Sanity tetikledi. Önbellek temizleniyor: ${type}`);
       revalidateTag(type);
-      
-      return NextResponse.json({ 
+
+      return NextResponse.json({
         revalidated: true, 
         tag: type, 
         message: `${type} başarıyla güncellendi`,

@@ -1,19 +1,9 @@
 'use client'
 
-import { CalendarDays, ChevronLeft, ChevronRight, Clock3, List, MapPin, GraduationCap, Palette, Music, Landmark, Heart, Globe, Activity, Images, X, ChevronRight as ArrowRight, ChevronLeft as ArrowLeft, ZoomIn } from 'lucide-react'
+import { CalendarDays, ChevronLeft, ChevronRight, Clock3, List, MapPin, Activity, Images, X, ChevronRight as ArrowRight, ChevronLeft as ArrowLeft, ZoomIn } from 'lucide-react'
 import { useEffect, useMemo, useState, useCallback } from 'react'
 import { getActivitiesData } from './actions'
 import { FileText, Download } from 'lucide-react'
-
-const iconMap: Record<string, any> = {
-  GraduationCap,
-  Palette,
-  Music,
-  Landmark,
-  Heart,
-  Globe,
-  Activity
-}
 import { useLanguage } from '@/context/LanguageContext'
 import ScrollReveal from '@/components/shared/ScrollReveal'
 
@@ -102,7 +92,6 @@ export default function ActivitiesPage() {
   const [hoveredDate, setHoveredDate] = useState<string | null>(null)
   const [events, setEvents] = useState<EventItem[]>([])
   const [archive, setArchive] = useState<any[]>([])
-  const [categories, setCategories] = useState<any[]>([])
   const [memoryGalleries, setMemoryGalleries] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -148,7 +137,6 @@ export default function ActivitiesPage() {
       .then((data) => {
         setEvents(data.events)
         setArchive(data.archive)
-        setCategories(data.categories)
         setMemoryGalleries(data.memoryGalleries || [])
       })
       .catch((error) => {
