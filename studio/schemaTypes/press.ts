@@ -1,11 +1,11 @@
 import {defineField, defineType} from 'sanity'
-import {MegaphoneIcon} from '@sanity/icons'
+import {EarthGlobeIcon} from '@sanity/icons'
 
 export const pressType = defineType({
   name: 'press',
   title: 'Basında Biz',
   type: 'document',
-  icon: MegaphoneIcon,
+  icon: EarthGlobeIcon,
   fields: [
     defineField({
       name: 'title',
