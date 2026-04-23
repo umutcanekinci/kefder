@@ -5,21 +5,21 @@ import { ExternalLink, MessageCircle, Heart, Users } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
 
 export default function SidebarLinks({ aeccUrl }: { aeccUrl?: string }) {
-  const { language } = useLanguage()
+  const { language, t } = useLanguage()
 
   const links = [
     {
-      title: language === 'tr' ? 'Bize Ulaşın' : 'Contact Us',
+      title: t('sidebar.contact'),
       href: '/contact',
       icon: MessageCircle
     },
     {
-      title: language === 'tr' ? 'Gönüllü Ol' : 'Volunteer',
+      title: t('sidebar.volunteer'),
       href: '/volunteer',
       icon: Heart
     },
     {
-      title: language === 'tr' ? 'Üyelik Başvurusu' : 'Membership',
+      title: t('sidebar.membership'),
       href: '/membership',
       icon: Users
     }
@@ -36,18 +36,15 @@ export default function SidebarLinks({ aeccUrl }: { aeccUrl?: string }) {
             <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md">
               <Facebook className="w-6 h-6" />
             </div>
-            <span className="font-black text-xs uppercase tracking-widest opacity-80">Origin Story</span>
+            <span className="font-black text-xs uppercase tracking-widest opacity-80">{t('about.aecc.badge')}</span>
           </div>
           
           <h3 className="text-xl font-bold mb-4 leading-tight">
-            Amatör İngilizce Konuşma Kulübü (AECC)
+            {t('about.aecc.title')}
           </h3>
           
           <p className="text-white/80 text-sm leading-relaxed mb-8">
-            {language === 'tr' 
-              ? 'KEFDER\'in temelleri, AECC\'nin yarattığı o muazzam kültürel etkileşim enerjisiyle atıldı. Bu topluluk, derneğimizin kuruluş hikayesinin en canlı parçasıdır.'
-              : 'The foundations of KEFDER were laid with the immense energy of cultural interaction created by AECC. This community is the most vibrant part of our story.'
-            }
+            {t('about.aecc.desc')}
           </p>
 
           <a 
@@ -56,7 +53,7 @@ export default function SidebarLinks({ aeccUrl }: { aeccUrl?: string }) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white text-kefder-teal px-6 py-3 rounded-2xl font-bold text-sm hover:bg-kefder-yellow hover:text-kefder-teal-dark transition-all group/btn shadow-lg"
           >
-            AECC Facebook Grubuna Katıl
+            {t('about.aecc.button')}
             <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
           </a>
         </div>
@@ -69,7 +66,7 @@ export default function SidebarLinks({ aeccUrl }: { aeccUrl?: string }) {
       {/* Quick Links */}
       <div className="bg-white rounded-[32px] p-8 border border-gray-100 shadow-sm">
         <h4 className="text-sm font-black uppercase tracking-widest text-kefder-gray/40 mb-6">
-          {language === 'tr' ? 'Hızlı Erişim' : 'Quick Access'}
+          {t('sidebar.quickLinks')}
         </h4>
         <div className="space-y-4">
           {links.map((link, idx) => (

@@ -79,9 +79,7 @@ export default function Header({ settings }: { settings?: any }) {
               <div className="hidden sm:block">
                 <h1 className="text-xl lg:text-2xl font-black text-white leading-tight whitespace-nowrap">KEFDER</h1>
                 <p className="text-xs lg:text-sm text-white/80 font-medium leading-tight whitespace-nowrap">
-                  {currentLang === 'tr'
-                    ? 'Kültürel Etkileşim ve Farkındalık Derneği'
-                    : 'Cultural Interaction and Awareness Association'}
+                  {t('nav.associationName')}
                 </p>
               </div>
             </Link>
@@ -123,8 +121,8 @@ export default function Header({ settings }: { settings?: any }) {
                             <img src="/images/asset_1.jpg" alt="Calendar Graphic" className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" />
                             <CalendarDays className="relative z-10 w-8 h-8 text-kefder-orange drop-shadow-md" />
                           </div>
-                          <span className="text-xs font-semibold text-kefder-gray-dark">Bu ayki etkinliklerimizi kaçırmayın!</span>
-                          <Link href="/activities#calendar" className="mt-3 text-[11px] font-medium bg-kefder-orange text-white px-3 py-1.5 rounded-full hover:bg-kefder-orange-dark transition-colors w-full">Takvime Git</Link>
+                          <span className="text-xs font-semibold text-kefder-gray-dark">{t('nav.activities.dropdown.title')}</span>
+                          <Link href="/activities#calendar" className="mt-3 text-[11px] font-medium bg-kefder-orange text-white px-3 py-1.5 rounded-full hover:bg-kefder-orange-dark transition-colors w-full">{t('nav.activities.dropdown.button')}</Link>
                         </div>
                       )}
                     </div>

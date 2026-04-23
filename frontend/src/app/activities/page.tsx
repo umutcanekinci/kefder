@@ -35,8 +35,8 @@ type EventItem = {
 
 
 
-function formatMonthYear(date: Date) {
-  return new Intl.DateTimeFormat('tr-TR', {
+function formatMonthYear(date: Date, lang: string = 'tr') {
+  return new Intl.DateTimeFormat(lang === 'tr' ? 'tr-TR' : 'en-US', {
     month: 'long',
     year: 'numeric',
   }).format(date)
@@ -64,9 +64,10 @@ function toDateKey(date: Date) {
   return `${year}-${month}-${day}`
 }
 
-function getDayLabel(index: number) {
-  const labels = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz']
-  return labels[index]
+function getDayLabel(index: number, lang: string = 'tr') {
+  const trLabels = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz']
+  const enLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  return lang === 'tr' ? trLabels[index] : enLabels[index]
 }
 
 function formatCardDate(dateStr: string, lang: string = 'tr') {
@@ -95,7 +96,7 @@ function compareByDateDesc(a: EventItem, b: EventItem) {
 }
 
 export default function ActivitiesPage() {
-  const { language } = useLanguage()
+  const { language, t } = useLanguage()
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list')
   const [currentMonth, setCurrentMonth] = useState(() => new Date())
   const [hoveredDate, setHoveredDate] = useState<string | null>(null)
@@ -204,13 +205,13 @@ export default function ActivitiesPage() {
           <div className="max-w-7xl mx-auto text-center relative z-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white text-xs font-bold uppercase tracking-widest mb-6 border border-white/20">
               <Activity className="w-4 h-4" />
-              KEFDER FAALİYETLERİ
+              {t('activities.hero.badge')}
             </div>
             <h1 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
-              Faaliyetlerimiz ve Etkinliklerimiz
+              {t('activities.hero.title')}
             </h1>
             <p className="text-white/80 text-lg max-w-2xl mx-auto font-light leading-relaxed">
-              Toplumsal farkındalık yaratmak ve kültürel etkileşimi güçlendirmek için yürüttüğümüz çalışmaların tamamını burada bulabilirsiniz.
+              {t('activities.hero.desc')}
             </p>
           </div>
         </ScrollReveal>
@@ -222,10 +223,10 @@ export default function ActivitiesPage() {
           <ScrollReveal>
             <div className="text-center mb-16">
               <div className="inline-flex rounded-full bg-kefder-teal/10 px-4 py-1.5 text-sm font-semibold text-kefder-teal mb-4 uppercase tracking-widest">
-                Çalışma Alanlarımız
+                {t('activities.work.badge')}
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">Sürdürdüğümüz Çalışmalar</h2>
-              <p className="text-gray-500 text-lg max-w-2xl mx-auto">Derneğimiz bünyesinde aktif olarak yürüttüğümüz ana faaliyet alanları ve çalışma grupları.</p>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">{t('activities.work.title')}</h2>
+              <p className="text-gray-500 text-lg max-w-2xl mx-auto">{t('activities.work.desc')}</p>
             </div>
           </ScrollReveal>
 
@@ -282,13 +283,13 @@ export default function ActivitiesPage() {
           <ScrollReveal>
             <div className="mx-auto mb-12 max-w-2xl text-center">
               <div className="inline-flex rounded-full bg-orange-100 px-4 py-1.5 text-sm font-semibold text-orange-600">
-                Takvim
+                {t('activities.calendar.badge')}
               </div>
               <h2 className="mt-5 text-4xl font-bold tracking-tight text-[#1F2A44]">
-                Etkinlik Takvimi
+                {t('activities.calendar.title')}
               </h2>
               <p className="mt-4 text-lg leading-8 text-gray-500">
-                Yaklaşan ve geçmiş etkinliklerimizi görüntüleyin.
+                {t('activities.calendar.desc')}
               </p>
 
               <div className="mt-8 flex items-center justify-center gap-3">
@@ -301,7 +302,7 @@ export default function ActivitiesPage() {
                   }`}
                 >
                   <List className="h-4 w-4" />
-                  Liste Görünümü
+                  {t('activities.calendar.list')}
                 </button>
 
                 <button
@@ -313,7 +314,7 @@ export default function ActivitiesPage() {
                   }`}
                 >
                   <CalendarDays className="h-4 w-4" />
-                  Takvim Görünümü
+                  {t('activities.calendar.grid')}
                 </button>
               </div>
             </div>
@@ -321,13 +322,13 @@ export default function ActivitiesPage() {
 
           {loading ? (
             <div className="rounded-3xl bg-white p-10 text-center text-lg text-gray-500 shadow-sm">
-              Etkinlikler yükleniyor...
+              {t('activities.calendar.loading')}
             </div>
           ) : viewMode === 'list' ? (
             <div className="grid gap-10 lg:grid-cols-2">
               <ScrollReveal direction="left" delay={0.1}>
                 <div>
-                  <SectionTitle title="Yaklaşan Etkinlikler" />
+                  <SectionTitle title={t('activities.calendar.upcoming')} />
                   <div className="mt-6 space-y-6">
                     {upcomingEvents.length > 0 ? (
                       upcomingEvents.map((event, index) => (
@@ -336,7 +337,7 @@ export default function ActivitiesPage() {
                         </ScrollReveal>
                       ))
                     ) : (
-                      <EmptyState text="Henüz yaklaşan etkinlik yok." />
+                      <EmptyState text={t('activities.calendar.emptyUpcoming')} />
                     )}
                   </div>
                 </div>
@@ -344,7 +345,7 @@ export default function ActivitiesPage() {
 
               <ScrollReveal direction="right" delay={0.3}>
                 <div>
-                  <SectionTitle title="Geçmiş Etkinlikler" />
+                  <SectionTitle title={t('activities.calendar.completed')} />
                   <div className="mt-6 space-y-6">
                     {completedEvents.length > 0 ? (
                       completedEvents.map((event, index) => (
@@ -353,7 +354,7 @@ export default function ActivitiesPage() {
                         </ScrollReveal>
                       ))
                     ) : (
-                      <EmptyState text="Henüz geçmiş etkinlik yok." />
+                      <EmptyState text={t('activities.calendar.emptyCompleted')} />
                     )}
                   </div>
                 </div>
@@ -364,7 +365,7 @@ export default function ActivitiesPage() {
               <div className="rounded-[28px] bg-white p-5 shadow-[0_10px_40px_rgba(0,0,0,0.06)] md:p-8">
                 <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <h3 className="text-2xl font-bold text-[#1F2A44] md:text-3xl">
-                    {formatMonthYear(currentMonth)}
+                    {formatMonthYear(currentMonth, language)}
                   </h3>
 
                   <div className="flex items-center gap-3">
@@ -390,7 +391,7 @@ export default function ActivitiesPage() {
                       key={i}
                       className="rounded-xl bg-kefder-teal/5 py-3 text-center text-xs font-bold text-kefder-teal uppercase tracking-widest"
                     >
-                      {getDayLabel(i)}
+                      {getDayLabel(i, language)}
                     </div>
                   ))}
 
@@ -445,7 +446,7 @@ export default function ActivitiesPage() {
 
                           {dayEvents.length > 2 && (
                             <div className="text-[11px] font-semibold text-orange-500">
-                              +{dayEvents.length - 2} etkinlik daha
+                              +{dayEvents.length - 2} {t('activities.calendar.more')}
                             </div>
                           )}
                         </div>
@@ -453,7 +454,7 @@ export default function ActivitiesPage() {
                         {hoveredDate === dateKey && dayEvents.length > 0 && (
                           <div className="absolute left-1/2 top-full z-20 mt-2 w-[260px] -translate-x-1/2 rounded-2xl border border-orange-100 bg-white p-4 shadow-[0_18px_40px_rgba(0,0,0,0.12)]">
                             <div className="mb-2 text-sm font-bold text-[#1F2A44]">
-                              {date.toLocaleDateString('tr-TR')}
+                              {date.toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US')}
                             </div>
 
                             <div className="space-y-3">
@@ -498,10 +499,10 @@ export default function ActivitiesPage() {
           <ScrollReveal>
             <div className="text-center mb-16">
               <div className="inline-flex rounded-full bg-orange-100 px-4 py-1.5 text-sm font-semibold text-orange-600 mb-4 uppercase tracking-widest">
-                Anı Defteri
+                {t('activities.memories.badge')}
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">Anılarımız</h2>
-              <p className="text-gray-500 text-lg max-w-2xl mx-auto">Birlikte yaşadığımız güzel anlar, paylaştığımız değerli etkinlikler ve unutulmaz anılarımız.</p>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">{t('activities.memories.title')}</h2>
+              <p className="text-gray-500 text-lg max-w-2xl mx-auto">{t('activities.memories.desc')}</p>
             </div>
           </ScrollReveal>
 
@@ -527,7 +528,7 @@ export default function ActivitiesPage() {
                       {/* Photo Count Badge */}
                       <div className="absolute top-6 right-6 bg-white/20 backdrop-blur-md border border-white/30 px-4 py-1.5 rounded-full text-white text-xs font-bold flex items-center gap-2">
                         <Images className="w-3.5 h-3.5" />
-                        {gallery.images?.length || 0} Fotoğraf
+                        {gallery.images?.length || 0} {t('activities.memories.photoCount')}
                       </div>
 
                       {/* Content Overlay */}
@@ -535,7 +536,7 @@ export default function ActivitiesPage() {
                         {gallery.date && (
                           <div className="text-orange-400 text-xs font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
                             <CalendarDays className="w-3.5 h-3.5" />
-                            {new Date(gallery.date).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long' })}
+                            {new Date(gallery.date).toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US', { year: 'numeric', month: 'long' })}
                           </div>
                         )}
                         <h3 className="text-xl md:text-2xl font-bold text-white mb-2 leading-tight">
@@ -567,7 +568,7 @@ export default function ActivitiesPage() {
               <div className="w-20 h-20 rounded-3xl bg-orange-50 flex items-center justify-center mx-auto mb-6">
                 <Images className="w-10 h-10 text-orange-200" />
               </div>
-              <p className="text-gray-400 text-lg">Henüz anı fotoğrafı eklenmemiş.</p>
+              <p className="text-gray-400 text-lg">{t('activities.memories.empty')}</p>
             </div>
           )}
         </div>
@@ -652,10 +653,10 @@ export default function ActivitiesPage() {
           <ScrollReveal>
             <div className="text-center mb-16">
               <div className="inline-flex rounded-full bg-kefder-teal/10 px-4 py-1.5 text-sm font-semibold text-kefder-teal mb-4 uppercase tracking-widest">
-                Dosya Arşivi
+                {t('activities.archive.badge')}
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">Kurumsal Dökümanlar ve Raporlar</h2>
-              <p className="text-gray-500 text-lg max-w-2xl mx-auto">Derneğimizin faaliyet raporlarına, tüzüğüne ve diğer önemli belgelerine buradan ulaşabilirsiniz.</p>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">{t('activities.archive.title')}</h2>
+              <p className="text-gray-500 text-lg max-w-2xl mx-auto">{t('activities.archive.desc')}</p>
             </div>
           </ScrollReveal>
 
@@ -683,7 +684,7 @@ export default function ActivitiesPage() {
                           {doc.title?.[language] || doc.title?.tr}
                         </span>
                         <span className="text-xs text-gray-400 mt-1 uppercase font-medium tracking-wider">
-                          Dökümanı Görüntüle
+                          {t('activities.archive.view')}
                         </span>
                       </div>
                     </div>
@@ -694,7 +695,7 @@ export default function ActivitiesPage() {
             ) : (
               <div className="col-span-full py-12 text-center bg-gray-50 rounded-3xl border-2 border-dashed border-gray-100">
                 <FileText className="w-12 h-12 text-gray-200 mx-auto mb-4" />
-                <p className="text-gray-400">Henüz arşivlenmiş dosya bulunmamaktadır.</p>
+                <p className="text-gray-400">{t('activities.archive.empty')}</p>
               </div>
             )}
           </div>
@@ -723,7 +724,7 @@ function EventCard({
   event: EventItem
   showRegister?: boolean
 }) {
-  const { language } = useLanguage()
+  const { language, t } = useLanguage()
   const { day, month, time } = formatCardDate(event.date, language)
 
   return (
@@ -748,7 +749,7 @@ function EventCard({
 
             <span className="inline-flex items-center gap-2">
               <MapPin className="h-4 w-4 text-orange-500" />
-              {event.location?.[language] || event.location?.['tr'] || (language === 'tr' ? 'Belirtilmedi' : 'Not specified')}
+              {event.location?.[language] || event.location?.['tr'] || t('activities.event.notSpecified')}
             </span>
           </div>
 
@@ -761,13 +762,13 @@ function EventCard({
               }`}
             >
               {(event.status || 'upcoming') === 'upcoming' 
-                ? (language === 'tr' ? 'Yaklaşan' : 'Upcoming') 
-                : (language === 'tr' ? 'Tamamlandı' : 'Completed')}
+                ? t('activities.event.upcoming') 
+                : t('activities.event.completed')}
             </span>
 
             {showRegister && (
               <button className="rounded-xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(249,115,22,0.25)] transition hover:bg-orange-600">
-                {language === 'tr' ? 'Kayıt Ol' : 'Register Now'}
+                {t('activities.event.register')}
               </button>
             )}
           </div>

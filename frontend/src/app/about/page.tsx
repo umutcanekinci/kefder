@@ -87,14 +87,14 @@ export default function AboutPage() {
             <ScrollReveal direction="left">
               <div className="space-y-6">
                 <div className="inline-block px-4 py-2 bg-orange-50 text-orange-600 rounded-full text-xs font-bold uppercase tracking-widest mb-2">
-                  Felsefemiz
+                  {t('about.philosophy.badge')}
                 </div>
-                <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44]">Derneğimizin Kuruluş Temelleri</h2>
+                <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44]">{t('about.philosophy.title')}</h2>
                 <div className="prose prose-lg text-gray-600 max-w-none">
                   {about?.philosophyText?.[language] ? (
                     <PortableText value={about.philosophyText[language]} />
                   ) : (
-                    <p>Kültürel etkileşim ve farkındalığı artırmak, toplumsal dayanışmayı güçlendirmek amacıyla yola çıktık.</p>
+                    <p>{t('about.philosophy.default')}</p>
                   )}
                 </div>
               </div>
@@ -156,8 +156,8 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto">
             <ScrollReveal>
               <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#1F2A44] mb-4">Hedef Kitlemiz</h2>
-                <p className="text-gray-500">Projelerimizle ulaştığımız ve birlikte büyüdüğümüz topluluklar.</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-[#1F2A44] mb-4">{t('about.target.title')}</h2>
+                <p className="text-gray-500">{t('about.target.desc')}</p>
               </div>
             </ScrollReveal>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -184,8 +184,8 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-[#1F2A44] mb-6">Neler Yapıyoruz?</h2>
-                <p className="text-gray-600 mb-10 text-lg">KEFDER olarak geniş bir yelpazede toplumsal fayda odaklı çalışmalar yürütüyoruz.</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-[#1F2A44] mb-6">{t('about.doing.title')}</h2>
+                <p className="text-gray-600 mb-10 text-lg">{t('about.doing.desc')}</p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {about.activities.map((item: any, idx: number) => (
                     <div key={idx} className="flex items-start gap-3 p-4 bg-white rounded-2xl shadow-sm">
@@ -213,8 +213,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">Yönetim Kurulumuz ve Ekibimiz</h2>
-              <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">Değişim için emek veren, profesyonel ve gönüllü kadromuz ile toplumsal fayda üretiyoruz.</p>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">{t('about.team.title2')}</h2>
+              <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">{t('about.team.subtitle2')}</p>
             </div>
           </ScrollReveal>
 
@@ -264,9 +264,9 @@ export default function AboutPage() {
                 <div className="w-16 h-16 bg-kefder-teal/10 rounded-2xl flex items-center justify-center mb-8">
                   <ShieldCheck className="w-8 h-8 text-kefder-teal" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-kefder-gray-dark mb-4">Dernek Tüzüğü</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-kefder-gray-dark mb-4">{t('about.bylaws.title')}</h3>
                 <p className="text-kefder-gray mb-10 leading-relaxed">
-                  KEFDER'in yasal dayanaklarını, kuruluş amaçlarını ve çalışma prensiplerini barındıran resmi tüzük dökümanı.
+                  {t('about.bylaws.desc')}
                 </p>
 
                 {officialBylawsUrl ? (
@@ -283,13 +283,13 @@ export default function AboutPage() {
                       </div>
                       <div className="flex flex-col">
                         <span className="font-bold text-lg">Kefder_Tüzük_2017</span>
-                        <span className="text-xs text-white/70 uppercase font-medium">Resmi PDF Dökümanı</span>
+                        <span className="text-xs text-white/70 uppercase font-medium">{t('about.bylaws.officialPdf')}</span>
                       </div>
                     </div>
                   </a>
                 ) : (
                   <div className="mt-auto p-6 bg-gray-50 border border-dashed border-gray-200 rounded-3xl text-center">
-                    <p className="text-gray-400 italic">Tüzük dosyası henüz yüklenmemiş.</p>
+                    <p className="text-gray-400 italic">{t('about.documents.empty')}</p>
                   </div>
                 )}
               </div>
@@ -301,9 +301,9 @@ export default function AboutPage() {
                 <div className="w-16 h-16 bg-kefder-orange/10 rounded-2xl flex items-center justify-center mb-8">
                   <FileText className="w-8 h-8 text-kefder-orange" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-kefder-gray-dark mb-4">Dosya Arşivi</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-kefder-gray-dark mb-4">{t('about.archive.title')}</h3>
                 <p className="text-kefder-gray mb-10 leading-relaxed">
-                  Faaliyet raporlarımız, kurumsal dökümanlarımız ve derneğimizle ilgili güncel dosyalara buradan ulaşabilirsiniz.
+                  {t('about.archive.desc')}
                 </p>
 
                 <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
@@ -322,7 +322,7 @@ export default function AboutPage() {
                                   doc.fileType === 'ppt' ? 'bg-orange-50 text-orange-500' :
                                     'bg-gray-100 text-gray-500'
                               }`}>
-                              {doc.fileType || 'Dosya'}
+                              {doc.fileType || t('about.archive.file')}
                             </div>
                             <span className="font-bold text-kefder-gray-dark group-hover:text-kefder-orange transition-colors">
                               {doc.title?.[language] || doc.title?.tr}
@@ -334,7 +334,7 @@ export default function AboutPage() {
                     ))
                   ) : (
                     <div className="text-center py-12 border border-dashed border-gray-200 rounded-3xl">
-                      <p className="text-gray-400 italic">Henüz dosya eklenmemiş.</p>
+                      <p className="text-gray-400 italic">{t('about.archive.empty')}</p>
                     </div>
                   )}
                 </div>
@@ -346,7 +346,7 @@ export default function AboutPage() {
                       className="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-kefder-orange text-kefder-orange rounded-3xl font-bold hover:bg-kefder-orange hover:text-white transition-all shadow-lg hover:shadow-kefder-orange/20 group"
                     >
                       <FileText className="w-5 h-5" />
-                      Tüm Dosya Arşivini Gör
+                      {t('about.archive.all')}
                       <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
