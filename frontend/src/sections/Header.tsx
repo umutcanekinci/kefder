@@ -85,17 +85,17 @@ export default function Header({ settings }: { settings?: any }) {
         <div className="flex items-center gap-2 lg:gap-3 py-3 lg:py-0 lg:h-20 xl:h-24">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-1.5 shrink-0 group">
-            <div className="w-12 h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 shrink-0">
+          <Link href="/" className="flex items-center gap-2 lg:gap-3 shrink-0 group">
+            <div className="w-14 h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 shrink-0 transition-transform duration-300 group-hover:scale-105">
               <img
                 src={settings?.logoUrl || "/images/logo.png"}
                 alt="KEFDER Logo"
                 className="w-full h-full object-contain"
               />
             </div>
-            <div className="hidden sm:flex flex-col leading-none">
-              <span className="text-base lg:text-lg xl:text-xl font-black text-white whitespace-nowrap tracking-tight">KEFDER</span>
-              <span className="hidden xl:block text-[10px] text-white/70 font-medium whitespace-nowrap max-w-[160px] truncate">
+            <div className="hidden sm:flex flex-col leading-tight">
+              <span className="text-lg lg:text-xl xl:text-2xl font-black text-white whitespace-nowrap tracking-tight">KEFDER</span>
+              <span className="hidden lg:block text-[10px] xl:text-[12px] text-white/80 font-medium whitespace-normal leading-tight">
                 {t('nav.associationName')}
               </span>
             </div>

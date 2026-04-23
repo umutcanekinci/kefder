@@ -34,7 +34,7 @@ export default function HomeAbout() {
               <div className="inline-block px-4 py-2 bg-kefder-orange/10 text-kefder-orange-dark rounded-full text-xs font-bold uppercase tracking-widest">
                 {t('home.about.badge')}
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-kefder-gray-dark leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bold text-kefder-gray-dark leading-tight">
                 {t('home.about.title')}
               </h2>
               <p className="text-lg text-kefder-gray leading-relaxed">
