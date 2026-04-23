@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { FaFacebook as Facebook, FaInstagram as Instagram, FaYoutube as Youtube } from 'react-icons/fa';
+import { FaFacebook as Facebook, FaInstagram as Instagram } from 'react-icons/fa';
 import { Globe, ChevronDown, Menu, X, CalendarDays, Target, Users, FileText, Scale, Network, History, Archive, Image as ImageIcon, Newspaper, Megaphone, Activity } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -155,11 +155,6 @@ export default function Header({ settings }: { settings?: any }) {
                   <Instagram className="w-5 h-5" />
                 </a>
               )}
-              {socialLinks?.youtube && (
-                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-11 h-11 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
-                  <Youtube className="w-5 h-5" />
-                </a>
-              )}
             </div>
 
             <button
@@ -215,11 +210,6 @@ export default function Header({ settings }: { settings?: any }) {
               {socialLinks?.instagram && (
                 <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
                   <Instagram className="w-6 h-6" />
-                </a>
-              )}
-              {socialLinks?.youtube && (
-                <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10">
-                  <Youtube className="w-6 h-6" />
                 </a>
               )}
             </div>

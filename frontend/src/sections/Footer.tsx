@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react'
-import { FaFacebook as Facebook, FaInstagram as Instagram, FaYoutube as Youtube } from 'react-icons/fa';
+import { FaFacebook as Facebook, FaInstagram as Instagram } from 'react-icons/fa';
 import { MapPin, Phone, Mail, MoreVertical, Clock } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -81,16 +81,6 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
                   className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200"
                 >
                   <Instagram className="w-5 h-5" />
-                </a>
-              )}
-              {socialLinks?.youtube && (
-                <a
-                  href={socialLinks.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-orange-500 rounded-lg transition-all duration-200"
-                >
-                  <Youtube className="w-5 h-5" />
                 </a>
               )}
             </div>
