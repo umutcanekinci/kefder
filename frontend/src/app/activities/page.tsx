@@ -270,7 +270,7 @@ export default function ActivitiesPage() {
                     {upcomingEvents.length > 0 ? (
                       upcomingEvents.map((event, index) => (
                         <ScrollReveal key={event._id} delay={index * 0.1} direction="up">
-                          <EventCard event={event} showRegister />
+                          <EventCard event={event} showDetails />
                         </ScrollReveal>
                       ))
                     ) : (
@@ -656,10 +656,10 @@ function EmptyState({ text }: { text: string }) {
 
 function EventCard({
   event,
-  showRegister = false,
+  showDetails = false,
 }: {
   event: EventItem
-  showRegister?: boolean
+  showDetails?: boolean
 }) {
   const { language, t } = useLanguage()
   const { day, month, time } = formatCardDate(event.date, language)
@@ -703,9 +703,10 @@ function EventCard({
                 : t('activities.event.completed')}
             </span>
 
-            {showRegister && (
-              <button className="rounded-xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(249,115,22,0.25)] transition hover:bg-orange-600">
-                {t('activities.event.register')}
+            {showDetails && (
+              <button className="flex items-center gap-2 rounded-xl bg-[#FAF7F3] hover:bg-orange-50 px-5 py-3 text-sm font-bold text-orange-600 border border-orange-100 transition duration-300">
+                {t('activities.event.details')}
+                <ArrowRight className="w-4 h-4" />
               </button>
             )}
           </div>

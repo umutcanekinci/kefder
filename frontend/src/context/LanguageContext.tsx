@@ -182,6 +182,7 @@ const translations: Record<Language, Translations> = {
     'activities.event.upcoming': 'Yaklaşan',
     'activities.event.completed': 'Tamamlandı',
     'activities.event.register': 'Kayıt Ol',
+    'activities.event.details': 'Detaylar',
   },
   en: {
     'nav.home': 'Home',
@@ -359,6 +360,7 @@ const translations: Record<Language, Translations> = {
     'activities.event.upcoming': 'Upcoming',
     'activities.event.completed': 'Completed',
     'activities.event.register': 'Register Now',
+    'activities.event.details': 'Details',
   },
 }
 
