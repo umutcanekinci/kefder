@@ -22,7 +22,7 @@ const getNavItems = (t: (key: string) => string) => [
     label: t('nav.about'), 
     href: '/about', 
     dropdown: [
-      { label: t('nav.about.mission'), href: '/about#mission', icon: Target },
+      { label: t('nav.about.mission'), href: '/about#philosophy', icon: Target },
       { label: t('nav.about.team'), href: '/about#team', icon: Users },
       { label: t('nav.about.reports'), href: '/about#documents', icon: FileText },
       { label: t('nav.about.rules'), href: '/about#documents', icon: Scale },

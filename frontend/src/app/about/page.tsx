@@ -62,23 +62,23 @@ export default function AboutPage() {
 
       {/* Motivasyon Sözü Section */}
       {about?.quote?.[language] && (
-        <section className="py-16 px-4 bg-gray-50/50">
+        <section className="py-8 px-4 bg-gray-50/50">
           <ScrollReveal direction="up" delay={0.2}>
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="flex justify-center mb-6">
-                <Quote className="w-12 h-12 text-orange-200" />
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="flex justify-center mb-3">
+                <Quote className="w-7 h-7 text-orange-200" />
               </div>
-              <blockquote className="text-2xl md:text-3xl font-serif italic text-gray-600 leading-relaxed mb-6">
+              <blockquote className="text-base md:text-lg font-serif italic text-gray-500 leading-relaxed mb-3">
                 "{about.quote[language]}"
               </blockquote>
-              <cite className="text-lg font-bold text-[#1F2A44] not-italic">— Mustafa Kemal Atatürk</cite>
+              <cite className="text-sm font-bold text-[#1F2A44] not-italic">— Mustafa Kemal Atatürk</cite>
             </div>
           </ScrollReveal>
         </section>
       )}
 
       {/* Felsefemiz Section */}
-      <section className="py-24 px-4 bg-white">
+      <section id="philosophy" className="scroll-mt-24 py-24 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <ScrollReveal direction="left">
@@ -117,7 +117,7 @@ export default function AboutPage() {
       )}
 
       {/* Misyon & Vizyon Section */}
-      <section id="mission" className="py-24 px-4">
+      <section id="mission" className="scroll-mt-24 py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             <ScrollReveal direction="up" delay={0.1}>
@@ -167,8 +167,55 @@ export default function AboutPage() {
         </section>
       )}
 
+      {/* Ekip */}
+      <section id="team" className="scroll-mt-24 py-24 px-4 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <ScrollReveal>
+            <div className="text-center mb-20">
+              <div className="inline-block px-5 py-2.5 bg-orange-50 text-orange-600 rounded-full text-base font-bold uppercase tracking-widest mb-6">{t('nav.about.team')}</div>
+              <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">{t('about.team.subtitle2')}</p>
+            </div>
+          </ScrollReveal>
+
+          {team.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+              {team.map((member: any, index: number) => (
+                <ScrollReveal key={member._id} delay={index * 0.1}>
+                  <div className="group">
+                    <div className="relative aspect-[4/5] rounded-3xl overflow-hidden mb-6 shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-3">
+                      <img
+                        src={member.imageUrl || "/images/placeholder-user.png"}
+                        alt={member.name}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-kefder-teal/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-8">
+                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                          <p className="text-white font-bold text-lg">{member.name}</p>
+                          <p className="text-orange-400 text-sm font-medium">{member.role?.[language] || member.role?.tr}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <h3 className="text-xl font-bold text-[#1F2A44] group-hover:text-orange-500 transition-colors">{member.name}</h3>
+                      <p className="text-gray-500 text-sm font-medium uppercase tracking-wider mt-1">{member.role?.[language] || member.role?.tr}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          ) : (
+            <ScrollReveal>
+              <div className="text-center p-12 bg-[#FDF6F0] rounded-3xl border border-dashed border-gray-300">
+                <Users className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                <p className="text-gray-400">{t('about.team.empty')}</p>
+              </div>
+            </ScrollReveal>
+          )}
+        </div>
+      </section>
+
       {/* Kurumsal Belgeler */}
-      <section id="documents" className="py-24 px-4">
+      <section id="documents" className="scroll-mt-24 py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal direction="up" delay={0.1}>
             <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-sm border border-gray-100">
@@ -229,55 +276,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Ekip */}
-      <section id="team" className="py-24 px-4 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-20">
-              <div className="inline-block px-5 py-2.5 bg-orange-50 text-orange-600 rounded-full text-base font-bold uppercase tracking-widest mb-6">{t('nav.about.team')}</div>
-              <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">{t('about.team.subtitle2')}</p>
-            </div>
-          </ScrollReveal>
-
-          {team.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-              {team.map((member: any, index: number) => (
-                <ScrollReveal key={member._id} delay={index * 0.1}>
-                  <div className="group">
-                    <div className="relative aspect-[4/5] rounded-3xl overflow-hidden mb-6 shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-3">
-                      <img
-                        src={member.imageUrl || "/images/placeholder-user.png"}
-                        alt={member.name}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-kefder-teal/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-8">
-                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                          <p className="text-white font-bold text-lg">{member.name}</p>
-                          <p className="text-orange-400 text-sm font-medium">{member.role?.[language] || member.role?.tr}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <h3 className="text-xl font-bold text-[#1F2A44] group-hover:text-orange-500 transition-colors">{member.name}</h3>
-                      <p className="text-gray-500 text-sm font-medium uppercase tracking-wider mt-1">{member.role?.[language] || member.role?.tr}</p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          ) : (
-            <ScrollReveal>
-              <div className="text-center p-12 bg-[#FDF6F0] rounded-3xl border border-dashed border-gray-300">
-                <Users className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                <p className="text-gray-400">{t('about.team.empty')}</p>
-              </div>
-            </ScrollReveal>
-          )}
-        </div>
-      </section>
-
       {/* Üyesi Olduğumuz Ağlar */}
-      <section id="networks" className="py-24 px-4 bg-white">
+      <section id="networks" className="scroll-mt-24 py-24 px-4 bg-white">
         <div className="max-w-7xl mx-auto text-center">
           <div className="inline-block px-5 py-2.5 bg-orange-50 text-orange-600 rounded-full text-base font-bold uppercase tracking-widest mb-16">{t('about.networks.badge')}</div>
           <div className="flex flex-wrap justify-center gap-12 items-center transition-all duration-700">
