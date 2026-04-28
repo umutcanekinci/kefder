@@ -52,14 +52,14 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
   return (
     <footer className="bg-[#2D2D2D] text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
           {/* Logo & Description */}
-          <div className="lg:col-span-1">
+          <div>
             <a href="/" className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 flex-shrink-0">
-                <img 
-                  src={settings?.logoUrl || "/images/logo.png"} 
-                  alt="KEFDER Logo" 
+              <div className="w-14 h-14 flex-shrink-0">
+                <img
+                  src={settings?.logoUrl || "/images/logo.png"}
+                  alt="KEFDER Logo"
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -97,38 +97,39 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-base font-semibold text-white mb-4">{mounted ? t('footer.quickLinks') : 'Hızlı Bağlantılar'}</h3>
-            <ul className="space-y-3">
-              {mounted && quickLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-gray-400 hover:text-orange-400 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Quick Links + Explore — grouped */}
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-base font-semibold text-white mb-4">{mounted ? t('footer.quickLinks') : 'Hızlı Bağlantılar'}</h3>
+              <ul className="space-y-3">
+                {mounted && quickLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-gray-400 hover:text-orange-400 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Explore */}
-          <div>
-            <h3 className="text-base font-semibold text-white mb-4">{mounted ? t('footer.explore') : 'Keşfet'}</h3>
-            <ul className="space-y-3">
-              {mounted && exploreLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-gray-400 hover:text-orange-400 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <h3 className="text-base font-semibold text-white mb-4">{mounted ? t('footer.explore') : 'Keşfet'}</h3>
+              <ul className="space-y-3">
+                {mounted && exploreLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-gray-400 hover:text-orange-400 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Contact */}
