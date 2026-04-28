@@ -83,11 +83,10 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <ScrollReveal direction="left">
               <div className="space-y-6">
-                <div className="inline-block px-4 py-2 bg-orange-50 text-orange-600 rounded-full text-xs font-bold uppercase tracking-widest mb-2">
+                <div className="inline-block px-5 py-2.5 bg-orange-50 text-orange-600 rounded-full text-base font-bold uppercase tracking-widest mb-2">
                   {t('about.philosophy.badge')}
                 </div>
-                <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44]">{t('about.philosophy.title')}</h2>
-                <div className="prose prose-lg text-gray-600 max-w-none">
+<div className="prose prose-lg text-gray-600 max-w-none">
                   {about?.philosophyText?.[language] ? (
                     <PortableText value={about.philosophyText[language]} />
                   ) : (
@@ -148,35 +147,87 @@ export default function AboutPage() {
       </section>
 
 
-      {/* Faaliyet Alanlarımız Section */}
+      {/* Neler Yapıyoruz */}
       {about?.activities?.length > 0 && (
         <section className="py-24 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-[#1F2A44] mb-6">{t('about.doing.title')}</h2>
-                <p className="text-gray-600 mb-10 text-lg">{t('about.doing.desc')}</p>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {about.activities.map((item: any, idx: number) => (
-                    <div key={idx} className="flex items-start gap-3 p-4 bg-white rounded-2xl shadow-sm">
-                      <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
-                      <span className="font-semibold text-[#1F2A44]">{item[language] || item.tr}</span>
-                    </div>
-                  ))}
-                </div>
+            <ScrollReveal>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1F2A44] mb-6">{t('about.doing.title')}</h2>
+              <p className="text-gray-600 mb-10 text-lg">{t('about.doing.desc')}</p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {about.activities.map((item: any, idx: number) => (
+                  <div key={idx} className="flex items-start gap-3 p-4 bg-white rounded-2xl shadow-sm">
+                    <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
+                    <span className="font-semibold text-[#1F2A44]">{item[language] || item.tr}</span>
+                  </div>
+                ))}
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="h-64 bg-orange-200 rounded-3xl overflow-hidden mt-8">
-                  <img src="/images/asset_1.jpg" className="w-full h-full object-cover" alt="Faaliyet 1" />
-                </div>
-                <div className="h-64 bg-gray-200 rounded-3xl overflow-hidden">
-                  <img src="/images/hero_img.jpg" className="w-full h-full object-cover" alt="Faaliyet 2" />
-                </div>
-              </div>
-            </div>
+            </ScrollReveal>
           </div>
         </section>
       )}
+
+      {/* Kurumsal Belgeler */}
+      <section id="documents" className="py-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-sm border border-gray-100">
+              <div className="w-16 h-16 bg-kefder-teal/10 rounded-2xl flex items-center justify-center mb-8">
+                <ShieldCheck className="w-8 h-8 text-kefder-teal" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-kefder-gray-dark mb-4">{t('about.documents.title')}</h3>
+              <p className="text-kefder-gray mb-10 leading-relaxed text-lg">
+                {t('about.bylaws.desc')}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                {activityReportUrl && (
+                  <a
+                    href={activityReportUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-6 bg-orange-500 text-white rounded-3xl hover:bg-orange-600 transition-all shadow-lg hover:shadow-orange-500/20 group flex-1"
+                  >
+                    <div className="flex items-center gap-4 text-left">
+                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                        <FileText className="w-6 h-6" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-bold text-lg">{t('about.activityReport.title')}</span>
+                        <span className="text-xs text-white/70 uppercase font-medium">{t('about.activityReport.button')}</span>
+                      </div>
+                    </div>
+                    <Download className="w-6 h-6 text-white/40 group-hover:text-white transition-colors" />
+                  </a>
+                )}
+                {officialBylawsUrl && (
+                  <a
+                    href={officialBylawsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-6 bg-kefder-teal text-white rounded-3xl hover:bg-kefder-teal-dark transition-all shadow-lg hover:shadow-kefder-teal/20 group flex-1"
+                  >
+                    <div className="flex items-center gap-4 text-left">
+                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                        <ShieldCheck className="w-6 h-6" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-bold text-lg">{t('about.bylaws.title')}</span>
+                        <span className="text-xs text-white/70 uppercase font-medium">{t('about.bylaws.officialPdf')}</span>
+                      </div>
+                    </div>
+                    <Download className="w-6 h-6 text-white/40 group-hover:text-white transition-colors" />
+                  </a>
+                )}
+                {!activityReportUrl && !officialBylawsUrl && (
+                  <div className="p-6 bg-gray-50 border border-dashed border-gray-200 rounded-3xl text-center w-full">
+                    <p className="text-gray-400 italic">{t('about.documents.empty')}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
 
       {/* Ekip */}
       <section id="team" className="py-24 px-4 bg-white relative overflow-hidden">
@@ -222,73 +273,6 @@ export default function AboutPage() {
               </div>
             </ScrollReveal>
           )}
-        </div>
-      </section>
-
-      <section id="reports" className="py-24 px-4 bg-kefder-gray-light/30">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 gap-12">
-            {/* Tüzük / Resmi Belgeler */}
-            <ScrollReveal direction="up" delay={0.1}>
-              <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-sm border border-gray-100 flex flex-col h-full">
-                <div className="w-16 h-16 bg-kefder-teal/10 rounded-2xl flex items-center justify-center mb-8">
-                  <ShieldCheck className="w-8 h-8 text-kefder-teal" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-kefder-gray-dark mb-4">{t('about.documents.title')}</h3>
-                <p className="text-kefder-gray mb-10 leading-relaxed text-lg">
-                  {t('about.bylaws.desc')}
-                </p>
-
-                <div className="space-y-4 mt-auto">
-                  {activityReportUrl && (
-                    <a
-                      href={activityReportUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between p-6 bg-orange-500 text-white rounded-3xl hover:bg-orange-600 transition-all shadow-lg hover:shadow-orange-500/20 group"
-                    >
-                      <div className="flex items-center gap-4 text-left">
-                        <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                          <FileText className="w-6 h-6" />
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-bold text-lg">{t('about.activityReport.title')}</span>
-                          <span className="text-xs text-white/70 uppercase font-medium">{t('about.activityReport.button')}</span>
-                        </div>
-                      </div>
-                      <Download className="w-6 h-6 text-white/40 group-hover:text-white transition-colors" />
-                    </a>
-                  )}
-
-                  {officialBylawsUrl && (
-                    <a
-                      href={officialBylawsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between p-6 bg-kefder-teal text-white rounded-3xl hover:bg-kefder-teal-dark transition-all shadow-lg hover:shadow-kefder-teal/20 group"
-                    >
-                      <div className="flex items-center gap-4 text-left">
-                        <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                          <ShieldCheck className="w-6 h-6" />
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-bold text-lg">{t('about.bylaws.title')}</span>
-                          <span className="text-xs text-white/70 uppercase font-medium">{t('about.bylaws.officialPdf')}</span>
-                        </div>
-                      </div>
-                      <Download className="w-6 h-6 text-white/40 group-hover:text-white transition-colors" />
-                    </a>
-                  )}
-
-                  {!activityReportUrl && !officialBylawsUrl && (
-                    <div className="p-6 bg-gray-50 border border-dashed border-gray-200 rounded-3xl text-center">
-                      <p className="text-gray-400 italic">{t('about.documents.empty')}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
         </div>
       </section>
 

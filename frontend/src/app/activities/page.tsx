@@ -207,12 +207,9 @@ export default function ActivitiesPage() {
         <div className="mx-auto max-w-7xl px-4">
           <ScrollReveal>
             <div className="mx-auto mb-12 max-w-2xl text-center">
-              <div className="inline-flex rounded-full bg-orange-100 px-4 py-1.5 text-sm font-semibold text-orange-600">
+              <div className="inline-flex rounded-full bg-orange-100 px-5 py-2.5 text-base font-bold text-orange-600 uppercase tracking-widest">
                 {t('activities.calendar.badge')}
               </div>
-              <h2 className="mt-5 text-4xl font-bold tracking-tight text-[#1F2A44]">
-                {t('activities.calendar.title')}
-              </h2>
               <p className="mt-4 text-lg leading-8 text-gray-500">
                 {t('activities.calendar.desc')}
               </p>
@@ -423,10 +420,9 @@ export default function ActivitiesPage() {
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <div className="inline-flex rounded-full bg-orange-100 px-4 py-1.5 text-sm font-semibold text-orange-600 mb-4 uppercase tracking-widest">
+              <div className="inline-flex rounded-full bg-orange-100 px-5 py-2.5 text-base font-bold text-orange-600 mb-4 uppercase tracking-widest">
                 {t('activities.memories.badge')}
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">{t('activities.memories.title')}</h2>
               <p className="text-gray-500 text-lg max-w-2xl mx-auto">{t('activities.memories.desc')}</p>
             </div>
           </ScrollReveal>
@@ -577,10 +573,9 @@ export default function ActivitiesPage() {
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <div className="inline-flex rounded-full bg-kefder-teal/10 px-4 py-1.5 text-sm font-semibold text-kefder-teal mb-4 uppercase tracking-widest">
+              <div className="inline-flex rounded-full bg-kefder-teal/10 px-5 py-2.5 text-base font-bold text-kefder-teal mb-4 uppercase tracking-widest">
                 {t('activities.archive.badge')}
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">{t('activities.archive.title')}</h2>
               <p className="text-gray-500 text-lg max-w-2xl mx-auto">{t('activities.archive.desc')}</p>
             </div>
           </ScrollReveal>

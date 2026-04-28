@@ -36,10 +36,9 @@ export default function LogoMeaning({ features, language }: LogoMeaningProps) {
     <div className="w-full py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-20">
-          <div className="inline-block px-4 py-2 bg-kefder-teal/10 text-kefder-teal rounded-full text-xs font-bold uppercase tracking-widest mb-4">
-            KURUMSAL KİMLİK
+          <div className="inline-block px-5 py-2.5 bg-kefder-teal/10 text-kefder-teal rounded-full text-base font-bold uppercase tracking-widest mb-4">
+            {language === 'en' ? 'Logo Meaning' : 'Logo Anlamı'}
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-kefder-gray-dark mb-4">Logo Anlamı</h2>
           <p className="text-gray-500 max-w-2xl mx-auto">Logomuzun her detayı, derneğimizin vizyonunu ve değerlerini temsil eden birer semboldür.</p>
         </div>
 

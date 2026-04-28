@@ -24,8 +24,8 @@ const getNavItems = (t: (key: string) => string) => [
     dropdown: [
       { label: t('nav.about.mission'), href: '/about#mission', icon: Target },
       { label: t('nav.about.team'), href: '/about#team', icon: Users },
-      { label: t('nav.about.reports'), href: '/about#reports', icon: FileText },
-      { label: t('nav.about.rules'), href: '/about#rules', icon: Scale },
+      { label: t('nav.about.reports'), href: '/about#documents', icon: FileText },
+      { label: t('nav.about.rules'), href: '/about#documents', icon: Scale },
       { label: t('nav.about.networks'), href: '/about#networks', icon: Network },
     ]
   },
@@ -178,9 +178,15 @@ export default function Header({ settings }: { settings?: any }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       title={social.label || social.platform}
-                      className="w-8 h-8 xl:w-9 xl:h-9 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10 shrink-0"
+                      className={
+                        "flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all border border-white/10 shrink-0 " +
+                        (social.label ? "px-3 gap-1.5 h-8 xl:h-9" : "w-8 h-8 xl:w-9 xl:h-9")
+                      }
                     >
                       <Icon className="w-4 h-4 shrink-0" />
+                      {social.label && (
+                        <span className="text-[10px] font-black tracking-widest">{social.label}</span>
+                      )}
                     </a>
                   )
                 })}

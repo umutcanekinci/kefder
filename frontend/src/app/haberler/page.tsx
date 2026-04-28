@@ -117,10 +117,9 @@ export default function NewsPage() {
         <section id="press" className="mt-32">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <div className="inline-block px-4 py-2 bg-kefder-teal/10 text-kefder-teal rounded-full text-xs font-bold uppercase tracking-widest mb-4">
+              <div className="inline-block px-5 py-2.5 bg-kefder-teal/10 text-kefder-teal rounded-full text-base font-bold uppercase tracking-widest mb-4">
                 {t('about.press.badge')}
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44]">{t('about.press.title')}</h2>
             </div>
           </ScrollReveal>
 

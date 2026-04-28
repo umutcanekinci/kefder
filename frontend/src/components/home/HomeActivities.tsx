@@ -32,12 +32,9 @@ export default function HomeActivities() {
         {/* Header */}
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <div className="inline-block px-4 py-2 bg-kefder-teal/10 text-kefder-teal rounded-full text-xs font-bold uppercase tracking-widest mb-4">
-              {t('nav.activities')}
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-kefder-gray-dark mb-6">
+            <div className="inline-block px-5 py-2.5 bg-kefder-teal/10 text-kefder-teal rounded-full text-base font-bold uppercase tracking-widest mb-4">
               {t('home.activities.title')}
-            </h2>
+            </div>
             <p className="text-kefder-gray text-lg leading-relaxed">
               {t('home.activities.desc')}
             </p>

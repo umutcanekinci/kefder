@@ -29,12 +29,9 @@ export default function MembershipPage() {
         {/* SOL TARAF */}
         <ScrollReveal direction="left">
           <div>
-            <span className="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-xs">
+            <span className="bg-orange-100 text-orange-600 px-5 py-2.5 rounded-full text-base font-bold uppercase tracking-widest">
               {t('volunteer.why.badge')}
             </span>
-            <h2 className="text-3xl font-bold mt-4 mb-4">
-              {t('volunteer.why.title')}
-            </h2>
             <p className="text-gray-600 mb-6">
               {t('volunteer.why.desc')}
             </p>

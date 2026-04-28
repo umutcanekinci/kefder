@@ -31,12 +31,9 @@ export default function HomeAbout() {
           {/* Right: Content */}
           <ScrollReveal direction="right">
             <div className="space-y-8">
-              <div className="inline-block px-4 py-2 bg-kefder-orange/10 text-kefder-orange-dark rounded-full text-xs font-bold uppercase tracking-widest">
+              <div className="inline-block px-5 py-2.5 bg-kefder-orange/10 text-kefder-orange-dark rounded-full text-base font-bold uppercase tracking-widest">
                 {t('home.about.badge')}
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-kefder-gray-dark leading-tight">
-                {t('home.about.title')}
-              </h2>
               <p className="text-lg text-kefder-gray leading-relaxed">
                 {t('home.about.desc')}
               </p>
