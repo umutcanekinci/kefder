@@ -86,7 +86,7 @@ export default function Header({ settings }: { settings?: any }) {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 lg:gap-3 shrink-0 group">
-            <div className="w-14 h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 shrink-0 transition-transform duration-300 group-hover:scale-105">
+            <div className="w-10 h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 shrink-0 transition-transform duration-300 group-hover:scale-105">
               <img
                 src={settings?.logoUrl || "/images/logo.png"}
                 alt="KEFDER Logo"

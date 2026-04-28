@@ -55,16 +55,16 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
           {/* Logo & Description */}
           <div>
-            <a href="/" className="flex items-center gap-3 mb-4">
-              <div className="w-14 h-14 flex-shrink-0">
+            <a href="/" className="flex items-center gap-2 mb-2">
+              <div className="h-16 w-auto flex-shrink-0">
                 <img
                   src={settings?.logoUrl || "/images/logo.png"}
                   alt="KEFDER Logo"
-                  className="w-full h-full object-contain"
+                  className="h-full w-auto object-contain"
                 />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-white">KEFDER</h2>
+                <h2 className="text-2xl font-bold text-white">KEFDER</h2>
                 <p className="text-[10px] text-gray-400">
                   {currentLang === 'tr' ? 'Kültürel Etkileşim ve Farkındalık Derneği' : 'Cultural Interaction and Awareness Association'}
                 </p>
