@@ -120,7 +120,7 @@ export default function Header({ settings }: { settings?: any }) {
 
                 {item.dropdown && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-2 z-50">
-                    <div className={"bg-white shadow-xl rounded-xl border border-kefder-gray-light p-2 flex gap-4 " + (item.label === t('nav.activities') ? 'w-[450px] p-4' : 'w-60')}>
+                    <div className="bg-white shadow-xl rounded-xl border border-kefder-gray-light p-2 flex gap-4 w-60">
                       <div className="flex-1 flex flex-col gap-1">
                         {item.dropdown.map(subItem => (
                           <Link
@@ -133,18 +133,6 @@ export default function Header({ settings }: { settings?: any }) {
                           </Link>
                         ))}
                       </div>
-                      {item.label === t('nav.activities') && (
-                        <div className="w-[180px] bg-kefder-orange/5 rounded-lg p-3 flex flex-col items-center text-center border border-kefder-orange/20">
-                          <div className="w-full h-24 mb-3 relative rounded-md overflow-hidden bg-white flex items-center justify-center">
-                            <img src="/images/asset_1.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" />
-                            <CalendarDays className="relative z-10 w-8 h-8 text-kefder-orange drop-shadow-md" />
-                          </div>
-                          <span className="text-xs font-semibold text-kefder-gray-dark">{t('nav.activities.dropdown.title')}</span>
-                          <Link href="/activities#calendar" className="mt-3 text-[11px] font-medium bg-kefder-orange text-white px-3 py-1.5 rounded-full hover:bg-kefder-orange-dark transition-colors w-full">
-                            {t('nav.activities.dropdown.button')}
-                          </Link>
-                        </div>
-                      )}
                     </div>
                   </div>
                 )}
