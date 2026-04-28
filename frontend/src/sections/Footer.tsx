@@ -167,7 +167,7 @@ export default function Footer({ onAdminClick, settings }: FooterProps) {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-white/10">
+        <div className="mt-8 pt-4 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-500">
               © 2026 KEFDER. {mounted ? t('footer.rights') : 'Tüm hakları saklıdır.'}
