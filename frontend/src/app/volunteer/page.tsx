@@ -29,7 +29,7 @@ export default function MembershipPage() {
         {/* SOL TARAF */}
         <ScrollReveal direction="left">
           <div>
-            <span className="bg-orange-100 text-orange-600 px-5 py-2.5 rounded-full text-base font-bold uppercase tracking-widest">
+            <span className="inline-block bg-orange-100 text-orange-600 px-5 py-2.5 rounded-full text-base font-bold uppercase tracking-widest mb-6">
               {t('volunteer.why.badge')}
             </span>
             <p className="text-gray-600 mb-6">

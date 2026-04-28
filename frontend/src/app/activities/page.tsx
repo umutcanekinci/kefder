@@ -203,7 +203,7 @@ export default function ActivitiesPage() {
       </section>
 
 
-      <section id="calendar" className="py-16 md:py-20">
+      <section id="calendar" className="scroll-mt-24 py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
           <ScrollReveal>
             <div className="mx-auto mb-12 max-w-2xl text-center">
@@ -416,7 +416,7 @@ export default function ActivitiesPage() {
       </section>
 
       {/* Anılarımız Bölümü */}
-      <section id="memories" className="py-24 px-4 bg-[#FDF6F0]">
+      <section id="memories" className="scroll-mt-24 py-24 px-4 bg-[#FDF6F0]">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-16">
@@ -569,7 +569,7 @@ export default function ActivitiesPage() {
       )}
 
       {/* Dosya Arşivi Bölümü */}
-      <section id="archive" className="py-24 px-4 bg-white">
+      <section id="archive" className="scroll-mt-24 py-24 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-16">

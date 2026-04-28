@@ -113,7 +113,29 @@ export default function AboutPage() {
 
       {/* Logo Anlamı Section */}
       {about?.logoFeatures?.length > 0 && (
-        <LogoMeaning features={about.logoFeatures} language={language} />
+        <div id="logo-meaning" className="scroll-mt-24">
+          <LogoMeaning features={about.logoFeatures} language={language} />
+        </div>
+      )}
+
+      {/* Neler Yapıyoruz */}
+      {about?.activities?.length > 0 && (
+        <section id="doing" className="scroll-mt-24 py-24 px-4 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <ScrollReveal>
+              <div className="inline-block px-5 py-2.5 bg-orange-50 text-orange-600 rounded-full text-base font-bold uppercase tracking-widest mb-6">{t('about.doing.title')}</div>
+              <p className="text-gray-600 mb-10 text-lg">{t('about.doing.desc')}</p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {about.activities.map((item: any, idx: number) => (
+                  <div key={idx} className="flex items-center gap-3 p-4 min-h-[72px] bg-white rounded-2xl shadow-sm">
+                    <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
+                    <span className="font-semibold text-[#1F2A44]">{item[language] || item.tr}</span>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
       )}
 
       {/* Misyon & Vizyon Section */}
@@ -145,27 +167,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-
-      {/* Neler Yapıyoruz */}
-      {about?.activities?.length > 0 && (
-        <section className="py-24 px-4 bg-gray-50">
-          <div className="max-w-7xl mx-auto">
-            <ScrollReveal>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1F2A44] mb-6">{t('about.doing.title')}</h2>
-              <p className="text-gray-600 mb-10 text-lg">{t('about.doing.desc')}</p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {about.activities.map((item: any, idx: number) => (
-                  <div key={idx} className="flex items-center gap-3 p-4 min-h-[72px] bg-white rounded-2xl shadow-sm">
-                    <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                    <span className="font-semibold text-[#1F2A44]">{item[language] || item.tr}</span>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
-          </div>
-        </section>
-      )}
 
       {/* Ekip */}
       <section id="team" className="scroll-mt-24 py-24 px-4 bg-white relative overflow-hidden">
@@ -217,12 +218,18 @@ export default function AboutPage() {
       {/* Kurumsal Belgeler */}
       <section id="documents" className="scroll-mt-24 py-24 px-4">
         <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-12">
+              <div className="inline-block px-5 py-2.5 bg-orange-50 text-orange-600 rounded-full text-base font-bold uppercase tracking-widest">
+                {t('nav.about.reports')}
+              </div>
+            </div>
+          </ScrollReveal>
           <ScrollReveal direction="up" delay={0.1}>
             <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-sm border border-gray-100">
               <div className="w-16 h-16 bg-kefder-teal/10 rounded-2xl flex items-center justify-center mb-8">
                 <ShieldCheck className="w-8 h-8 text-kefder-teal" />
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-kefder-gray-dark mb-4">{t('about.documents.title')}</h3>
               <p className="text-kefder-gray mb-10 leading-relaxed text-lg">
                 {t('about.bylaws.desc')}
               </p>

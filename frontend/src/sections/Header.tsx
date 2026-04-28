@@ -4,8 +4,8 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { 
   Globe, ChevronDown, Menu, X, CalendarDays, Target, Users, FileText,
-  Scale, Network, History, Archive, Image as ImageIcon, Newspaper,
-  Megaphone
+  Network, Archive, Image as ImageIcon, Newspaper,
+  Megaphone, Sparkles, ListChecks
 } from 'lucide-react'
 import { 
   FaFacebook as Facebook, 
@@ -23,9 +23,10 @@ const getNavItems = (t: (key: string) => string) => [
     href: '/about', 
     dropdown: [
       { label: t('nav.about.mission'), href: '/about#philosophy', icon: Target },
+      { label: t('nav.about.logo'), href: '/about#logo-meaning', icon: Sparkles },
+      { label: t('nav.about.doing'), href: '/about#doing', icon: ListChecks },
       { label: t('nav.about.team'), href: '/about#team', icon: Users },
       { label: t('nav.about.reports'), href: '/about#documents', icon: FileText },
-      { label: t('nav.about.rules'), href: '/about#documents', icon: Scale },
       { label: t('nav.about.networks'), href: '/about#networks', icon: Network },
     ]
   },
@@ -34,9 +35,8 @@ const getNavItems = (t: (key: string) => string) => [
     href: '/activities', 
     dropdown: [
       { label: t('nav.activities.calendar'), href: '/activities#calendar', icon: CalendarDays },
-      { label: t('nav.activities.past'), href: '/activities#past', icon: History },
+      { label: t('nav.activities.gallery'), href: '/activities#memories', icon: ImageIcon },
       { label: t('nav.activities.archive'), href: '/activities#archive', icon: Archive },
-      { label: t('nav.activities.gallery'), href: '/activities#gallery', icon: ImageIcon },
     ]
   },
   { 
