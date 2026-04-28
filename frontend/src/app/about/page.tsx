@@ -156,8 +156,8 @@ export default function AboutPage() {
               <p className="text-gray-600 mb-10 text-lg">{t('about.doing.desc')}</p>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {about.activities.map((item: any, idx: number) => (
-                  <div key={idx} className="flex items-start gap-3 p-4 bg-white rounded-2xl shadow-sm">
-                    <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
+                  <div key={idx} className="flex items-center gap-3 p-4 min-h-[72px] bg-white rounded-2xl shadow-sm">
+                    <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
                     <span className="font-semibold text-[#1F2A44]">{item[language] || item.tr}</span>
                   </div>
                 ))}
@@ -234,7 +234,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <h2 className="text-3xl md:text-5xl font-bold text-[#1F2A44] mb-6">{t('about.team.title2')}</h2>
+              <div className="inline-block px-5 py-2.5 bg-orange-50 text-orange-600 rounded-full text-base font-bold uppercase tracking-widest mb-6">{t('nav.about.team')}</div>
               <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">{t('about.team.subtitle2')}</p>
             </div>
           </ScrollReveal>
@@ -279,8 +279,7 @@ export default function AboutPage() {
       {/* Üyesi Olduğumuz Ağlar */}
       <section id="networks" className="py-24 px-4 bg-white">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-block px-4 py-2 bg-orange-50 text-orange-600 rounded-full text-xs font-bold uppercase tracking-widest mb-6">{t('about.networks.badge')}</div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1F2A44] mb-16">{t('about.networks.title')}</h2>
+          <div className="inline-block px-5 py-2.5 bg-orange-50 text-orange-600 rounded-full text-base font-bold uppercase tracking-widest mb-16">{t('about.networks.badge')}</div>
           <div className="flex flex-wrap justify-center gap-12 items-center transition-all duration-700">
             {about?.networks?.length > 0 ? (
               about.networks.map((network: any, index: number) => {
